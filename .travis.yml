@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: eG2iKK3ZTDeN/Fg1ecxUaBrhzZgXwH3iI1PrsLO3dEwPFx1nPgsRc/pBE1LMQNYcnZ3f4C2C7QXOsCl1bG8nLVfNmo+op94aNWqYR2399mSq3OfBNeQ1noamYyWA4CfnoRxeeY65eGJMFP9vxda9dX0Ng9m4YyPG7Mw7cS42wQaxpEqV3wsG5NII8FtE/OJ3RLIUYDSzGg6CiupBLm27Bg6V14W7/SOxWDM2+zq0hTg0nTXD/9md3wMDzL/FyD4sgBmNFwpqyTJQnicL0mFkynivbwcuwmUYkoNd52X3NX5fnZ98nLUuQegRviTxG1ro0oBH7i2cKBGal4u+Ar3QbxKXUbamodYOz3My8VrYT2dWht7GIGlwDHlX+qJjqGk4EGaDfBUisuYR0nR/t/v5ZUjR0/QN0/Mx5silNWrS5F7r4oVqSAnTI0E/roj2zTcs4Vi0VNESW4Lzi8MvyLUlLs8NBhzPRWOeZBFf5Bcf0ncAr5OedOm5zqTChAIb1E5BStWyC+FdFAqSTikcjrm6bftbZ7LDA+0LvTry7AXst3KlZmUFLWGluo2eXZcdA/xMdTPVsRF/uTQa0aYOGCDxKsZgndjWIigQwUmBq/8vkP7C6WK6/nd/Bs4c4nEyVGCZ2D8gGRGcLPVMcOlnoQgtarHHtntxkqK9ATAbiGXGUaQ=
+  app: job-tracker-node-capstone
+  on:
+    repo: jes-a/job-tracker-node-capstone
