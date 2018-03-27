@@ -1,30 +1,28 @@
-# Time Tracker App
+# Job Tracker App
 
-> The time tracker app allows a manager to enter job information and assign jobs to workers; 
-> and allows workers to see the jobs assigned to them and track their time while working.
+> The job tracker app allows a manager to enter job information and assign jobs to workers, 
+> and allows workers to see the jobs assigned to them and mark jobs complete when done.
 
 
 ## User Stories: MVP
 
-* As an admin, I want to add jobs so that I have a list of jobs to assign 
-* As an admin, I want to assign jobs to workers so that workers know what to work on 
-* As an admin, I want to view a report of jobs completed by worker so that I can view job details 
-* As an admin, I want to view a report of time logs by worker so that I can track time by worker
-* As a worker, I want to see jobs assigned to me so that I know what to work on 
-* As a worker, I want to check off a completed job so that I know what I worked on 
-* As a worker, I want to start a day timer so that I can track my time 
-* As a worker, I want to stop a day timer so that I can track my time
-* As a worker, I want to submit my time so that I can track my time
+* As an admin, I want to schedule a job so that I can assign workers to a job
+* As an admin, I want to view a list of jobs so that I can see assigned jobs
+* As an admin, I want to view a job report so that I know which jobs are complete
+
+* As a worker, I want to see a list of jobs by day so that I can see jobs I need to do
+* As a worker, I want to see each job so that I know what the job details are
+* As a worker, I want to mark a job complete so that I know which jobs are complete
 
 ## Screens: MVP
 
-* Admin: Screen for adding job details
-* Admin: Screen for assigning jobs
+* Admin: Screen for assigning a job 
+* Admin: Screen for job list
 * Admin: Screen for viewing reports
-* Worker: Screen for viewing jobs
-* Worker: Screen for tracking time
+* Worker: Screen for viewing job list
+* Worker: Screen for view job detail
 
 ## User Flow: MVP 
 
-![User Flow Image](/public/images/user-flow-mvp.pdf)
+![User Flow Image](/screenshots/images/mvp-user-flow.png)
 
