@@ -24,5 +24,5 @@
 
 ## User Flow: MVP 
 
-![User Flow Image](/screenshots/images/mvp-user-flow.png)
+![User Flow Image](/screenshots/mvp-user-flow.png)
 
