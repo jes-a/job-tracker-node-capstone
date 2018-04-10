@@ -1,0 +1,391 @@
+/* -------------------------------------
+CSS reset
+Is a short set of CSS rules that resets the styling of all HTML elements to a consistent baseline so the website will look the same on all browsers
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    /*The box-sizing property is used to tell the browser what the sizing properties (width and height) should include border-box.*/
+    box-sizing: border-box;
+    /*reset Chrome user agent styles*/
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-before: 0px;
+    -webkit-padding-after: 0px;
+    -webkit-padding-start: 0px;
+    -webkit-padding-end: 0px;
+    /*reset Firefox user agent styles*/
+    -moz-margin-before: 0px;
+    -moz-margin-after: 0px;
+    -moz-margin-start: 0px;
+    -moz-margin-end: 0px;
+    -moz-padding-before: 0px;
+    -moz-padding-after: 0px;
+    -moz-padding-start: 0px;
+    -moz-padding-end: 0px;
+    /*reset Internet Explorer user agent styles*/
+    -ms-margin-before: 0px;
+    -ms-margin-after: 0px;
+    -ms-margin-start: 0px;
+    -ms-margin-end: 0px;
+    -ms-padding-before: 0px;
+    -ms-padding-after: 0px;
+    -ms-padding-start: 0px;
+    -ms-padding-end: 0px;
+    /*reset Opera user agent styles*/
+    -o-margin-before: 0px;
+    -o-margin-after: 0px;
+    -o-margin-start: 0px;
+    -o-margin-end: 0px;
+    -o-padding-before: 0px;
+    -o-padding-after: 0px;
+    -o-padding-start: 0px;
+    -o-padding-end: 0px;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color: #5E5E5E;
+    font-size:  16px;
+  }
+
+/* General Styles */
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    text-align: center;
+    color: #002039;
+    padding-bottom: 1.25rem;
+}
+
+h2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+h3 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 1.375rem;
+	color: #002039;
+  padding-bottom: 5px;
+  padding-top: 20px;
+}
+
+h4 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 1.125rem;
+	color: #002039;
+  padding-bottom: 5px;
+  padding-top: 20px;
+}
+
+p {
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	font-size: 1rem;
+	color: #5E5E5E;
+	line-height: 1.25rem;
+}
+
+fa {
+	font-size: 1rem;
+}
+
+header {
+    background: #3B6478;
+    height: 60px;
+}
+
+li {
+    font-family: 'lato', sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #9A9A9A;
+    list-style-type: none;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Form Styles */
+
+form {
+    padding: 0 20px;
+    margin-top: 24px;
+}
+
+label {
+    display: block;
+    padding-bottom: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #5E5E5E;
+    margin-top: 15px;
+}
+
+.checkboxes label {
+    display: inline-block;
+    font-weight: 300;
+    color: #363636;
+    margin: 0;
+}
+
+.radio-label label {
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.125rem;
+    color: #363636;
+    padding-right: 25px;
+}
+
+input {
+    width: 99%;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #BFBFBF;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: #363636;
+    padding-left: 5px;
+    margin-top: 3px;
+}
+
+input[type="radio"] {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    position: relative;
+    top: 2px;
+    *overflow: hidden;
+}
+
+input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    vertical-align: bottom;
+    position: relative;
+    *overflow: hidden;
+}
+
+textarea {
+    width: 99%;
+    height: 150px;
+    background: #FFFFFF;
+    border: 1px solid #BFBFBF;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.125rem;
+    color: #363636;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    resize: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.drop-down {
+    position: relative;
+}
+
+.drop-down:after {
+    content: "▾";
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    z-index: 1;
+    text-align: center;
+    pointer-events: none;
+}
+
+.drop-down select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #BFBFBF;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: #363636;
+    padding-left: 5px;
+    margin-bottom: 15px;
+}
+
+.checkboxes li {
+    padding-bottom: 5px;
+}
+
+.checkboxes li:last-of-type {
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+    background: #002039;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.add-button {
+    display: inline-block;
+    width: 49%;
+    text-transform: uppercase;
+}
+
+.cancel-button {
+    display: inline-block;
+    width: 49%;
+    height: 50px;
+    background: #C2C2C2;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    color: #363636;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+/* Style for Login Screen */
+
+main#login-screen {
+	background: linear-gradient(#667989, #54697a, #002039);
+	padding: 1rem;
+}
+
+#login-section {
+    max-width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    opacity: 0.95;
+}
+
+#ship-login {
+    font-size: 75px;
+    color: #002039;
+    padding-top: 40px;
+}
+
+
+/* Style for Main Headers */
+
+.jt-header h2 {
+    color: #FFFFFF;
+    text-align: left;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.i-inline {
+    padding-right: 3px;
+}
+
+.back-link {
+    font-size: 1.75rem;
+    color: #7F8F9C;
+}
+
+/* Style for Admin: Dashboard Screen */
+
+.dashboard-button {
+    text-align: left;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.dashboard-button h2 {
+	display: inline-block;
+	padding-left: 5px;
+	font-weight: 300;
+}
+
+
+/* Style for Admin: Add a Job Screen */
+
+
+/* Style for Admin: Worker List Screen */
+.worker {
+	padding-left: 20px;
+	border-bottom: 1px solid #9B9B9B;
+}
+
+.worker li:last-of-type {
+	padding-bottom: 20px;
+}
+
+/* Style for Admin: Worker Detail Screen */
+.worker-detail {
+	margin-left: 20px;
+	margin-right: 20px;
+	position: relative;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #979797;
+}
+
+.edit-worker {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+  font-size: 1.125rem;
+  color: #002039;
+} 
+
+.worker-detail li {
+	padding-top: 5px;
+}
+
+.worker-detail label {
+	display: inline-block;
+	padding-right: 5px;
+}
+
+.job-date {
+  font-size: 1.125rem;	
+	color: #777777;
+	margin-top: 10px;
+}
+
+.assigned-jobs {
+	padding-top: 5px;
+	padding-left: 20px;
+}
+
+.assigned-jobs li {
+	padding-top: .5rem;
+	list-style-type: circle;
+	margin-left: 20px;
+}
+
