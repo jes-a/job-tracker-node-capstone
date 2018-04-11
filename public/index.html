@@ -32,6 +32,35 @@
         </div>
     </main>
 
+<!-- Admin: Nav -->
+    <nav class="nav">
+        <div class="menu-btn" id="menu-btn">
+            <i aria-label="Nav button" class="fas fa-bars"></i>
+        </div>
+        <div class="menu" hidden>
+            <ul>
+                <li>
+                    <h3><i class="far fa-home fa-fw i-inline"></i>Home</h3>
+                </li>
+                <li>
+                    <h3><i class="far fa-plus-square fa-fw i-inline"></i>Add Job</h3>
+                </li>
+                <li>
+                    <h3><i class="far fa-calendar-alt fa-fw i-inline"></i>Job List</h3>                
+                </li>
+                <li>
+                    <h3><i class="far fa-list-alt fa-fw i-inline"></i>Job Report</h3>                
+                </li>
+                <li>
+                    <h3><i class="far fa-users fa-fw i-inline"></i>Workers</h3>                
+                </li>
+                <li>
+                    <h3><i class="far fa-sign-out-alt fa-fw i-inline"></i>Sign Out</h3>                 
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 <!-- Admin: Landing Screen -->
     <main role="main" id="admin-dashboard">
         <header role="banner">
@@ -69,7 +98,7 @@
                 </h2>
             </div>
         </header>
-        <form role="form" id="add-a-job" method="post">
+        <form role="form" id="add-job" method="post">
             <div class="drop-down">
                 <label for="job-name">Boat Name</label>
                 <select id="job-name" name="boat-name">
@@ -163,6 +192,175 @@
         </form>
     </main> 
 
+<!-- Admin: Edit Job Screen -->
+    <main role="main" id="edit-job-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a aria-label="Job List" href="#job-list-screen"><i class="far fa-calendar-alt i-inline back-link"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-plus-square i-inline"></i>Edit Job
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="edit-job" method="post">
+            <div class="drop-down">
+                <label for="job-name">Boat Name</label>
+                <select id="job-name" name="boat-name">
+                    <option value="boat1">Boat 1</option>
+                    <option value="boat2">Boat 2</option>
+                    <option value="boat3">Boat 3</option>
+                </select>
+            </div>
+            <div>
+                <label for="services">Service(s)</label>
+                <ul id="services" class="checkboxes">
+                    <li>
+                        <input type="checkbox" id="wash" value="wash" name="services[]">
+                        <label for="wash" class="checkbox">Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hull-wash" value="hull-wash" name="services[]">
+                        <label for="hull-wash" class="checkbox">Hull Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="topside-wax" value="topside-wax" name="services[]">
+                        <label for="topside-wax" class="checkbox">Topside Wax</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hull-wax" value="hull-wax" name="services[]">
+                        <label for="hull-wax" class="checkbox">Hull Wax</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="wash" value="wash" name="services[]">
+                        <label for="wash" class="checkbox">Compounding Service</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="compounding-service" value="compounding-service" name="services[]">
+                        <label for="compounding-service" class="checkbox">Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="interior-cleaning" value="interior-cleaning" name="services[]">
+                        <label for="interior-cleaning" class="checkbox">Interior Cleaning</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="teak-cleaning" value="teak-cleaning" name="services[]">
+                        <label for="teak-cleaning" class="checkbox">Teak Cleaning</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="teak-sealing" value="teak-sealing" name="services[]">
+                        <label for="teak-sealing" class="checkbox">Teak Sealing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="engine-detailing" value="engine-detailing" name="services[]">
+                        <label for="engine-detailing" class="checkbox">Engine Room Detailing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="system-check" value="system-check" name="services[]">
+                        <label for="system-check" class="checkbox">System Check</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="bottom-cleaning" value="bottom-cleaning" name="services[]">
+                        <label for="bottom-cleaning" class="checkbox">Bottom Cleaning</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="date-select">
+                <label for="date-select">Date</label>
+                <input type="date" id="date-select" value="date" name="date">
+            </div>
+            <div>
+                <label for="assign-to">Assign To</label>
+                <ul id="assign-to" class="checkboxes">
+                    <li>
+                        <input type="checkbox" id="worker1" value="worker1" name="workers[]">
+                        <label for="worker1" class="checkbox">Norman H</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="worker2" value="worker2" name="workers[]">
+                        <label for="worker2" class="checkbox">Alex M</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="worker3" value="worker3" name="workers[]">
+                        <label for="worker3" class="checkbox">Elsie F</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textarea">
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" value="notes"></textarea>
+            </div>
+            <button role="button" name="add" id="js-save-job" class="add-button" type="submit" method="post">Save
+            </button>
+            <input type="submit" name="cancel" value="Cancel" onclick="goPrev()" class="cancel-button">
+            </input>
+            <button role="button" name="delete" id="js-delete-job" class="delete-button" type="submit" method="post">Delete this Job
+            </button>
+        </form>
+    </main> 
+
+<!-- Admin: Job List Screen -->
+    <main role="main" id="job-list-screen-admin">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a aria-label="Home" href="#admin-dashboard"><i class="far fa-home i-inline back-link"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-calendar-alt i-inline"></i>
+                    Job List
+                </h2>
+            </div>
+        </header>
+        <div class="date-header">
+            <h3>Monday, March 26</h3>            
+        </div>
+        <div class="job">
+            <a href="#">
+                <i class="far fa-edit edit-btn"></i>
+            </a>
+            <h4 class="js-boat-name boat">Salty Sea</h4>
+            <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+        </div>
+        <div class="job">
+            <a href="#">
+                <i class="far fa-edit edit-btn"></i>
+            </a>
+            <h4 class="js-boat-name">Sea and Sun</h4>
+            <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Teak Cleaning</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <p class="js-job-worker">Elsie F: 449-588-3131</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+        </div>
+        <div class="date-header">
+            <h3>Tuesday, March 27</h3>            
+        </div>
+        <div class="job">
+            <a href="#">
+                <i class="far fa-edit edit-btn"></i>
+            </a>
+            <h4 class="js-boat-name">Dolphin Spotter</h4>
+            <p class="js-job-address">553 Dickinson Mall Apt. 957</br>Wilberbury, FL 33101</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+        </div>
+    </main>  
+
 <!-- Admin: Add Worker Screen -->
     <main role="main" id="add-worker-screen">
         <header role="banner">
@@ -172,6 +370,189 @@
                     <i class="far fa-angle-double-right i-inline back-link"></i>
                     <i class="far fa-user i-inline"></i>
                     Add Worker
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="add-a-worker" method="post">
+            <label for="first-name">First Name
+                <input type="text" name="first-name" id="first-name">
+            </label>
+            <label for="last-name">Last Name
+                <input type="text" name="last-name" id="last-name">
+            </label>
+            <label for="phone-number">Phone Number
+                <input type="tel" name="last-name" id="phone-number">
+            </label>    
+            <label for="address">Address
+                <input type="text" name="address" id="address">
+            </label>
+            <label for="address-2">Address 2
+                <input type="text" name="address-2" id="address-2">
+            </label>
+            <label for="city">City
+                <input type="text" name="city" id="city">
+            </label>
+
+            <div class="drop-down">
+                <label for="state">State</label>
+                <select id="state" name="state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>  
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option selected="selected" value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>  
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>  
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>  
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>          
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>  
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select>
+            </div>
+            <label for="zip-code">Zip Code
+                <input type="text" pattern="[0-9]{5}" name="zip-code" id="zip-code">
+            </label>
+            <label for="email">Email
+                <input type="email" name="email" id="email">
+            </label>
+            <label for="initial-pw">Set Initial Password
+                <input type="password" name="initial-pw" id="initial-pw">
+            </label>
+            <div class="radio-label">
+                <p class="label">Type</p>
+                <input type="radio" name="type" id="type-worker" value="type-worker" checked>
+                <label for="type-worker">Worker</label>
+                <input type="radio" name="type" id="type-admin" value="type-admin">
+                <label for="type-admin">Admin</label>
+            </div>
+            <div class="radio-label">
+                <p class="label">Status</p>
+                <input type="radio" name="status" id="active" value="active" checked>
+                <label for="active">Active</label>
+                <input type="radio" name="status" id="inactive" value="inactive">
+                <label for="inactive">Inactive</label>
+            </div>
+            <button role="button" name="add" id="js-add-worker" class="add-button" type="submit" method="post">ADD</button>
+            <input type="submit" name="cancel" value="Cancel" onclick="goPrev()" class="cancel-button"></input>
+        </form>
+    </main>
+
+<!-- Admin: Worker List Screen -->
+    <main role="main" id="worker-list-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a aria-label="Home" href="#admin-dashboard"><i class="far fa-home i-inline back-link"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-users i-inline"></i>
+                    Worker List
+                </h2>
+            </div>
+        </header>
+        <div class="worker">
+            <ul>
+                <h4 class="js-worker-name">Norman Holloway</h4>
+                <li class="js-worker-phone">543-333-1254</li>
+                <li class="js-worker-email">orion.conn@yahoo.com</li>
+                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
+                <li class="js-worker-address2">Katarinaside, FL 92103</li>
+            </ul>
+        </div>
+        <div class="worker">
+            <ul>
+                <h4 class="js-worker-name">Alex Maxwell</h4>
+                <li class="js-worker-phone">543-333-1254</li>
+                <li class="js-worker-email">orion.conn@yahoo.com</li>
+                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
+                <li class="js-worker-address2">Katarinaside, FL 92103</li>
+            </ul>
+        </div>
+    </main>
+
+<!-- Admin: Worker Detail Screen --> 
+    <main role="main" id="worker-detail-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a aria-label="Users" href="#worker-list-screen">
+                        <i class="far fa-users i-inline back-link"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Worker Detail
+                </h2>
+            </div>
+        </header>
+        <div class="worker-detail">
+            <a href="#">
+                <i class="far fa-edit edit-btn"></i>
+            </a>
+            <ul>
+                <h3 class="js-worker-name">Alex Maxwell</h3>
+                <li class="js-worker-phone">543-333-1254</li>
+                <li class="js-worker-email">orion.conn@yahoo.com</li>
+                <li class="js-worker-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</li>
+                <li class="js-worker-status"><label>Status:</label>Active</li>
+            </ul>
+        </div>
+        <div class="assigned-jobs">
+            <label>Assigned Jobs:</label>
+            <p class="js-assigned-date job-date">Monday, March 26</p>
+            <ul>
+                <li class="js-assigned-job">Boat Name</li>
+                <li class="js-assigned-job">Boat Name</li>   
+            </ul>
+        </div>      
+    </main>
+
+<!-- Admin: Edit Worker Screen -->
+    <main role="main" id="worker-detail-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a aria-label="Worker Detail" href="#worker-detail-screen"><i class="far fa-user i-inline back-link"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Edit Worker
                 </h2>
             </div>
         </header>
@@ -274,80 +655,92 @@
                 <input type="radio" name="status" id="inactive" value="inactive">
                 <label for="inactive">Inactive</label>
             </div>
-            <button role="button" name="add" id="js-add-job" class="add-button" type="submit" method="post">ADD</button>
+            <button role="button" name="save" id="js-save-worker" class="add-button" type="submit" method="post">Save</button>
             <input type="submit" name="cancel" value="Cancel" onclick="goPrev()" class="cancel-button"></input>
         </form>
     </main>
 
-<!-- Admin: Worker List Screen -->
-    <main role="main" id="worker-list-screen">
+<!-- Worker: Job List Screen -->
+    <main role="main" id="job-list-screen-worker">
         <header role="banner">
             <div class="jt-header">
                 <h2>
                     <a aria-label="Home" href="#admin-dashboard"><i class="far fa-home i-inline back-link"></i></a>
                     <i class="far fa-angle-double-right i-inline back-link"></i>
-                    <i class="far fa-users i-inline"></i>
-                    Worker List
+                    <i class="far fa-calendar-alt i-inline"></i>
+                    Job List
                 </h2>
             </div>
         </header>
-        <div class="worker">
-            <ul>
-                <h4 class="js-worker-name">Norman Holloway</h4>
-                <li class="js-worker-phone">543-333-1254</li>
-                <li class="js-worker-email">orion.conn@yahoo.com</li>
-                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
-                <li class="js-worker-address2">Katarinaside, FL 92103</li>
-            </ul>
+        <div class="date-header">
+            <h3>Monday, March 26</h3>            
         </div>
-        <div class="worker">
-            <ul>
-                <h4 class="js-worker-name">Alex Maxwell</h4>
-                <li class="js-worker-phone">543-333-1254</li>
-                <li class="js-worker-email">orion.conn@yahoo.com</li>
-                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
-                <li class="js-worker-address2">Katarinaside, FL 92103</li>
-            </ul>
+        <div class="job">
+            <h4 class="js-boat-name boat">Salty Sea</h4>
+            <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div class="add-notes-button" id="js-add-notes">
+                <i class="fas fa-pen i-inline"></i>Add Notes + Hours
+            </div>
+
+            <!-- Add Notes Section -->
+            <div class="add-notes-section" hidden>
+                <form role="form" id="add-notes-form" method="post">
+                        <h4>Add Notes + Hours</h4>
+                        <div class="textarea">
+                            <label for="worker-notes">Notes</label>
+                            <textarea name="worker-notes" id="worker-notes" value="worker-notes"></textarea>
+                        </div> 
+                        <label for="worker-hours">Hours Worked</label>
+                            <input type="number" name="worker-hours" id="worker-hours">
+                        <div class="radio-label">
+                            <label>Job Completed?</label>
+                            <input type="radio" name="job-complete" id="job-complete" value="yes">
+                            <label for="job-complete">Yes</label>
+                            <input type="radio" name="job-complete" id="job-incomplete" value="job-incomplete">
+                            <label for="type-2">No</label>
+                        </div> 
+                        <button role="button" name="add" id="js-add-worker" class="add-button" type="submit" method="post">ADD</button>
+                        <input type="submit" name="cancel" value="Cancel" onclick="goPrev()" class="cancel-button"></input>
+                </form>
+            </div>
+        </div>
+        
+        <div class="job">
+            <h4 class="js-boat-name">Sea and Sun</h4>
+            <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Teak Cleaning</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <p class="js-job-worker">Elsie F: 449-588-3131</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+        </div>
+        <div class="date-header">
+            <h3>Tuesday, March 27</h3>            
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name">Dolphin Spotter</h4>
+            <p class="js-job-address">553 Dickinson Mall Apt. 957</br>Wilberbury, FL 33101</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
         </div>
     </main>
 
-<!-- Admin: Worker Detail Screen --> 
-    <main role="main" id="worker-detail-screen">
-        <header role="banner">
-            <div class="jt-header">
-                <h2>
-                    <a aria-label="Home" href="#admin-dashboard">
-                        <i class="far fa-home i-inline back-link"></i></a>
-                    <i class="far fa-angle-double-right i-inline back-link"></i>
-                    <a aria-label="Home" href="#admin-dashboard">
-                        <i class="far fa-users i-inline back-link"></i></a>
-                    <i class="far fa-angle-double-right i-inline back-link"></i>
-                    <i class="far fa-user i-inline"></i>
-                    Worker Detail
-                </h2>
-            </div>
-        </header>
-        <div class="worker-detail">
-            <a href="#">
-                <i class="far fa-edit edit-worker"></i>
-            </a>
-            <ul>
-                <h3 class="js-worker-name">Alex Maxwell</h3>
-                <li class="js-worker-phone">543-333-1254</li>
-                <li class="js-worker-email">orion.conn@yahoo.com</li>
-                <li class="js-worker-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</li>
-                <li class="js-worker-status"><label>Status:</label>Active</li>
-            </ul>
-        </div>
-        <div class="assigned-jobs">
-            <label>Assigned Jobs:</label>
-            <p class="js-assigned-date job-date">Monday, March 26</p>
-            <ul>
-                <li class="js-assigned-job">Boat Name</li>
-                <li class="js-assigned-job">Boat Name</li>   
-            </ul>
-        </div>      
-    </main>
 
 <!-- Scripts -->    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

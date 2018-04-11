@@ -77,7 +77,7 @@ h3 {
 	font-size: 1.375rem;
 	color: #002039;
   padding-bottom: 5px;
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
 h4 {
@@ -87,6 +87,15 @@ h4 {
 	color: #002039;
   padding-bottom: 5px;
   padding-top: 20px;
+}
+
+h5 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	color: #363636;
+	padding-top: 8px;
+
 }
 
 p {
@@ -118,11 +127,51 @@ li {
     text-align: center;
 }
 
+/* Style for Main Headers */
+
+.jt-header {
+    position: relative;
+}
+
+.jt-header h2 {
+    color: #FFFFFF;
+    text-align: left;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.i-inline {
+    padding-right: 3px;
+}
+
+.back-link {
+    font-size: 1.75rem;
+    color: #7F8F9C;
+}
+
+/* Nav Style */
+
+nav li {
+	color: #002039;
+	font-size: 1.375rem;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #979797;
+}
+
+.menu-btn {
+	font-size: 1.5rem;
+	color: #FFFFFF;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+}
+
 /* Form Styles */
 
 form {
     padding: 0 20px;
-    margin-top: 24px;
+    margin-top: 10px;
 }
 
 label {
@@ -192,7 +241,6 @@ textarea {
     font-family: 'Lato', sans-serif;
     font-size: 1.125rem;
     color: #363636;
-    margin-bottom: 15px;
     padding-left: 5px;
     resize: none;
 }
@@ -246,7 +294,7 @@ button {
     background: #002039;
     border-radius: 5px;
     border: none;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     margin-top: 20px;
     font-family: 'Lato', sans-serif;
     font-size: 1.5rem;
@@ -258,7 +306,6 @@ button {
 .add-button {
     display: inline-block;
     width: 49%;
-    text-transform: uppercase;
 }
 
 .cancel-button {
@@ -268,8 +315,6 @@ button {
     background: #C2C2C2;
     border-radius: 5px;
     border: none;
-    margin-bottom: 40px;
-    margin-top: 20px;
     font-family: 'Lato', sans-serif;
     font-size: 1.5rem;
     color: #363636;
@@ -277,10 +322,15 @@ button {
     cursor: pointer;
 }
 
+.delete-button {
+	background: #D0021B;
+	margin-top: 0;
+}
+
 /* Style for Login Screen */
 
 main#login-screen {
-	background: linear-gradient(#667989, #54697a, #002039);
+	background: linear-gradient(#C6DDE5, #3B6478);
 	padding: 1rem;
 }
 
@@ -298,32 +348,16 @@ main#login-screen {
     padding-top: 40px;
 }
 
-
-/* Style for Main Headers */
-
-.jt-header h2 {
-    color: #FFFFFF;
-    text-align: left;
-    padding-top: 15px;
-    padding-left: 15px;
-}
-
-.i-inline {
-    padding-right: 3px;
-}
-
-.back-link {
-    font-size: 1.75rem;
-    color: #7F8F9C;
-}
-
 /* Style for Admin: Dashboard Screen */
 
 .dashboard-button {
     text-align: left;
     padding-left: 20px;
-    margin-top: 20px;
     margin-bottom: 0;
+}
+
+.dashboard-button:last-of-type {
+	margin-bottom: 24px;
 }
 
 .dashboard-button h2 {
@@ -333,7 +367,7 @@ main#login-screen {
 }
 
 
-/* Style for Admin: Add a Job Screen */
+/* Style for Admin: Add Job Screen */
 
 
 /* Style for Admin: Worker List Screen */
@@ -355,10 +389,10 @@ main#login-screen {
 	border-bottom: 1px solid #979797;
 }
 
-.edit-worker {
+.edit-btn {
 	position: absolute;
 	top: 1rem;
-	right: 1rem;
+	right: 0;
   font-size: 1.125rem;
   color: #002039;
 } 
@@ -389,3 +423,69 @@ main#login-screen {
 	margin-left: 20px;
 }
 
+/* Style for Admin: Job List Screen */
+.date-header {
+	color: #363636;
+	background: #93C0D1;
+	height: 40px;
+}
+
+.date-header h3 {
+	font-family: 'lato', sans-serif;
+	font-weight: 400;
+	font-size: 1.25rem;
+	color: #363636;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+
+.job {
+	position: relative;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-bottom: 1px solid #9B9B9B;
+	padding-bottom: 20px;
+}
+
+.job .edit-btn {
+	right: 20px;
+}
+
+.job h4 {
+	font-weight: 700;
+	font-size: 1.175rem;
+	color: #002039;
+
+}
+
+
+/* Style for Worker: Job List Screen */
+.add-notes-button {
+	background: #FFFFFF;
+	border: 1px solid #002039;
+	border-radius: 5px;
+	height: 25px;
+	width: 180px;
+	color: #002039;
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	margin-top: 15px;
+	margin-bottom: 0;
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 2px;
+}
+
+.add-notes-section {
+	background: #FFFFFF;
+	border: 1px solid #002039;
+	border-radius: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.add-notes-section form {
+	padding: 0;
+	margin: 0;
+}
