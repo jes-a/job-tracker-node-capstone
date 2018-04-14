@@ -8,6 +8,7 @@ const expect = chai.expect;
 const {app, runServer, closeServer} = require('../server');
 
 chai.use(chaiHttp);
+app.use(morgan('common'));
 
 
 describe('baseTest', function() {

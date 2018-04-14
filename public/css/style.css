@@ -51,8 +51,9 @@ Is a short set of CSS rules that resets the styling of all HTML elements to a co
 body {
     font-family: 'Lato', sans-serif;
     color: #5E5E5E;
-    font-size:  16px;
-  }
+    font-size: 16px;
+}
+
 
 /* General Styles */
 
@@ -72,42 +73,41 @@ h2 {
 }
 
 h3 {
-	font-family: 'Lato', sans-serif;
-	font-weight: 400;
-	font-size: 1.375rem;
-	color: #002039;
-  padding-bottom: 5px;
-  padding-top: 15px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1.375rem;
+    color: #002039;
+    padding-bottom: 5px;
+    padding-top: 15px;
 }
 
 h4 {
-	font-family: 'Lato', sans-serif;
-	font-weight: 400;
-	font-size: 1.125rem;
-	color: #002039;
-  padding-bottom: 5px;
-  padding-top: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #002039;
+    padding-bottom: 5px;
+    padding-top: 20px;
 }
 
 h5 {
-	font-family: 'Lato', sans-serif;
-	font-weight: 400;
-	font-size: 1rem;
-	color: #363636;
-	padding-top: 8px;
-
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #363636;
+    padding-top: 8px;
 }
 
 p {
-	font-family: 'Lato', sans-serif;
-	font-weight: 300;
-	font-size: 1rem;
-	color: #5E5E5E;
-	line-height: 1.25rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    color: #5E5E5E;
+    line-height: 1.25rem;
 }
 
 fa {
-	font-size: 1rem;
+    font-size: 1rem;
 }
 
 header {
@@ -123,9 +123,15 @@ li {
     list-style-type: none;
 }
 
+a {
+	text-decoration: none;
+	color: #002039;
+}
+
 .center {
     text-align: center;
 }
+
 
 /* Style for Main Headers */
 
@@ -134,10 +140,14 @@ li {
 }
 
 .jt-header h2 {
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: left;
     padding-top: 15px;
     padding-left: 15px;
+}
+
+.jt-header a {
+	color: #ffffff;
 }
 
 .i-inline {
@@ -149,22 +159,36 @@ li {
     color: #7F8F9C;
 }
 
+
 /* Nav Style */
 
+.menu {
+		background-color: #ffffff;
+		position: absolute;
+		top: 60px;
+		right: 0;
+		border: 1px solid #979797;
+		width: 225px;
+}
+
 nav li {
-	color: #002039;
-	font-size: 1.375rem;
-	padding-left: 20px;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #979797;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    color: #002039;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 1.375rem;
+    border-bottom: 1px solid #979797;
+    cursor: pointer;
 }
 
 .menu-btn {
-	font-size: 1.5rem;
-	color: #FFFFFF;
-	position: absolute;
-	top: 16px;
-	right: 16px;
+    font-size: 1.5rem;
+    color: #ffffff;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
 }
 
 /* Form Styles */
@@ -323,15 +347,16 @@ button {
 }
 
 .delete-button {
-	background: #D0021B;
-	margin-top: 0;
+    background: #D0021B;
+    margin-top: 0;
 }
+
 
 /* Style for Login Screen */
 
 main#login-screen {
-	background: linear-gradient(#C6DDE5, #3B6478);
-	padding: 1rem;
+    background: linear-gradient(#C6DDE5, #3B6478);
+    padding: 1rem;
 }
 
 #login-section {
@@ -348,144 +373,171 @@ main#login-screen {
     padding-top: 40px;
 }
 
+
 /* Style for Admin: Dashboard Screen */
 
+#dashboard-buttons {
+    padding: 0 20px;
+    margin-top: 10px;
+}
+
 .dashboard-button {
+    width: 100%;
+    height: 50px;
+    background: #002039;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    font-weight: 400;
+    cursor: pointer;
     text-align: left;
     padding-left: 20px;
     margin-bottom: 0;
 }
 
 .dashboard-button:last-of-type {
-	margin-bottom: 24px;
+    margin-bottom: 24px;
 }
 
 .dashboard-button h2 {
-	display: inline-block;
-	padding-left: 5px;
-	font-weight: 300;
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 5px;
+    font-weight: 300;
 }
+
 
 
 /* Style for Admin: Add Job Screen */
 
 
 /* Style for Admin: Worker List Screen */
+
 .worker {
-	padding-left: 20px;
-	border-bottom: 1px solid #9B9B9B;
+    padding-left: 20px;
+    border-bottom: 1px solid #9B9B9B;
+}
+
+.worker h4 {
+	cursor: pointer;
 }
 
 .worker li:last-of-type {
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
+
 /* Style for Admin: Worker Detail Screen */
+
 .worker-detail {
-	margin-left: 20px;
-	margin-right: 20px;
-	position: relative;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #979797;
+    margin-left: 20px;
+    margin-right: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #979797;
 }
 
 .edit-btn {
-	position: absolute;
-	top: 1rem;
-	right: 0;
-  font-size: 1.125rem;
-  color: #002039;
-} 
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    font-size: 1.125rem;
+    color: #002039;
+}
 
 .worker-detail li {
-	padding-top: 5px;
+    padding-top: 5px;
 }
 
 .worker-detail label {
-	display: inline-block;
-	padding-right: 5px;
+    display: inline-block;
+    padding-right: 5px;
 }
 
 .job-date {
-  font-size: 1.125rem;	
-	color: #777777;
-	margin-top: 10px;
+    font-size: 1.125rem;
+    color: #777777;
+    margin-top: 10px;
 }
 
 .assigned-jobs {
-	padding-top: 5px;
-	padding-left: 20px;
+    padding-top: 5px;
+    padding-left: 20px;
 }
 
 .assigned-jobs li {
-	padding-top: .5rem;
-	list-style-type: circle;
-	margin-left: 20px;
+    padding-top: .5rem;
+    list-style-type: circle;
+    margin-left: 20px;
 }
 
+
 /* Style for Admin: Job List Screen */
+
 .date-header {
-	color: #363636;
-	background: #93C0D1;
-	height: 40px;
+    color: #363636;
+    background: #93C0D1;
+    height: 40px;
 }
 
 .date-header h3 {
-	font-family: 'lato', sans-serif;
-	font-weight: 400;
-	font-size: 1.25rem;
-	color: #363636;
-	padding-top: 10px;
-	padding-left: 20px;
+    font-family: 'lato', sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #363636;
+    padding-top: 10px;
+    padding-left: 20px;
 }
 
 .job {
-	position: relative;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-bottom: 1px solid #9B9B9B;
-	padding-bottom: 20px;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid #9B9B9B;
+    padding-bottom: 20px;
 }
 
 .job .edit-btn {
-	right: 20px;
+    right: 20px;
 }
 
 .job h4 {
-	font-weight: 700;
-	font-size: 1.175rem;
-	color: #002039;
-
+    font-weight: 700;
+    font-size: 1.175rem;
+    color: #002039;
 }
 
-
 /* Style for Worker: Job List Screen */
+
 .add-notes-button {
-	background: #FFFFFF;
-	border: 1px solid #002039;
-	border-radius: 5px;
-	height: 25px;
-	width: 180px;
-	color: #002039;
-	font-family: 'Lato', sans-serif;
-	font-weight: 400;
-	font-size: 1rem;
-	margin-top: 15px;
-	margin-bottom: 0;
-	text-align: left;
-	padding-left: 10px;
-	padding-top: 2px;
+    background: #FFFFFF;
+    border: 1px solid #002039;
+    border-radius: 5px;
+    height: 25px;
+    width: 180px;
+    color: #002039;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-bottom: 0;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 2px;
 }
 
 .add-notes-section {
-	background: #FFFFFF;
-	border: 1px solid #002039;
-	border-radius: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
+    background: #FFFFFF;
+    border: 1px solid #002039;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .add-notes-section form {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }

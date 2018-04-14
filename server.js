@@ -7,13 +7,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 app.use(express.static('public'));
-//app.use(morgan('common'));
 
 mongoose.Promise = global.Promise;
 
 app.get('/', function(req, res) {
 	res.sendFile(_dirname + '/public/index.html');	
 });
+
 
 
 
