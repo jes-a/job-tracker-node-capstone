@@ -110,6 +110,112 @@
         </div>
     </main>
 
+<!-- Worker Profile Screen -->
+ <main role="main" id="worker-profile-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-worker-home" aria-label="Job List"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Profile
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="worker-profile">
+            <label for="first-name">First Name
+                <input type="text" name="first-name" id="first-name">
+            </label>
+            <label for="last-name">Last Name
+                <input type="text" name="last-name" id="last-name">
+            </label>
+            <label for="phone-number">Phone Number
+                <input type="tel" name="last-name" id="phone-number">
+            </label>
+            <label for="address">Address
+                <input type="text" name="address" id="address">
+            </label>
+            <label for="address-2">Address 2
+                <input type="text" name="address-2" id="address-2">
+            </label>
+            <label for="city">City
+                <input type="text" name="city" id="city">
+            </label>
+            <div class="drop-down">
+                <label for="state">State</label>
+                <select id="state" name="state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option selected="selected" value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select>
+            </div>
+            <label for="zip-code">Zip Code
+                <input type="text" pattern="[0-9]{5}" name="zip-code" id="zip-code">
+            </label>
+            <label for="email">Email
+                <input type="email" name="email" id="email">
+            </label>
+            <label for="change-pw">Change Password
+                <input type="password" name="change-pw" id="change-pw">
+            </label>
+            <label for="retype-pw">Re-type Password
+                <input type="password" name="retype-pw" id="retype-pw">
+            </label>
+            <button role="button" name="add" id="js-save-worker-profile-button" class="add-button" type="submit">Save</button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-worker-cancel-button">
+            </input>
+        </form>
+    </main>
+
+
 <!-- Worker: Nav -->
     <nav class="nav">
         <div class="menu-btn js-menu-btn">
@@ -117,6 +223,9 @@
         </div>
         <div class="menu js-worker-menu">
             <ul>
+                <li class="js-profile-link">
+                    <i class="far fa-user fa-fw i-inline"></i>Profile
+                </li>
                 <li class="js-logout-link">
                     <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
                 </li>
