@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Job Tracker</title>
+    <!-- Responsive Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Oswald:700" rel="stylesheet">
+    <script defer src="js/fontawesome-all.js"></script>
+</head>
+
+<body>
+<!-- Login Screen -->
+    <main role="main" id="login-screen">
+        <div id="login-section">
+            <div class="center"><i class="far fa-ship" id="ship-login"></i></div>
+            <h1>Job Tracker</h1>
+            <form role="form" id="login-form">
+                <span id="login-error"></span>
+                <label for="email">Email</label>
+                    <input type="email" id="email" name="user_name">
+                <label for="password">Password</label>
+                    <input type="password" id="password" name="user_password">
+                <button role="button" name="login" class="login-button" id="js-login-button" type="submit">Sign In</button>
+            </form>
+        </div>
+    </main>
+<!-- Worker: Job List Screen -->
+    <main role="main" id="job-list-screen-worker">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-calendar-alt i-inline"></i>
+                    Job List
+                </h2>
+            </div>
+        </header>
+        <div class="date-header">
+            <h3>Monday, March 26</h3>
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name boat">Salty Sea</h4>
+            <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div class="add-notes-button" id="js-add-notes">
+                <i class="fas fa-pen i-inline"></i>Add Notes + Hours
+            </div>
+        <!-- Add Notes Section -->
+            <div class="add-notes-section">
+                <form role="form" id="add-notes-form">
+                    <h4>Add Notes + Hours</h4>
+                    <div class="textarea">
+                        <label for="worker-notes">Notes</label>
+                        <textarea name="worker-notes" id="worker-notes" value="worker-notes"></textarea>
+                    </div>
+                    <label for="worker-hours">Hours Worked</label>
+                    <input type="number" name="worker-hours" id="worker-hours">
+                    <div class="radio-label">
+                        <label>Job Completed?</label>
+                        <input type="radio" name="job-complete" id="job-complete" value="yes">
+                        <label for="job-complete">Yes</label>
+                        <input type="radio" name="job-complete" id="job-incomplete" value="job-incomplete">
+                        <label for="type-2">No</label>
+                    </div>
+                    <button role="button" name="add" id="js-add-worker" class="add-button" type="submit">ADD</button>
+                    <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+                    </input>
+                </form>
+            </div>
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name">Sea and Sun</h4>
+            <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Teak Cleaning</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <p class="js-job-worker">Elsie F: 449-588-3131</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+        </div>
+        <div class="date-header">
+            <h3>Tuesday, March 27</h3>
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name">Dolphin Spotter</h4>
+            <p class="js-job-address">553 Dickinson Mall Apt. 957</br>Wilberbury, FL 33101</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+        </div>
+    </main>
+
+<!-- Worker: Nav -->
+    <nav class="nav">
+        <div class="menu-btn js-menu-btn">
+            <i aria-label="Nav button" class="fas fa-bars"></i>
+        </div>
+        <div class="menu js-worker-menu">
+            <ul>
+                <li class="js-logout-link">
+                    <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="client.js" type="text/javascript"></script>
+</body>
+
+</html>

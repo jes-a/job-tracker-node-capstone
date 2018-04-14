@@ -3,7 +3,7 @@
 
 function showAdminLandingScreen() {
 	$('#login-screen').hide();
-	$('.menu-btn').show();
+	$('.js-menu-btn').show();
 	$('.js-menu').hide();
 	$('#admin-home').show();
 	$('#add-job-screen').hide();
@@ -13,14 +13,13 @@ function showAdminLandingScreen() {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 }
 
 // Triggers
 
 $(document).ready(function() {
 	$('#login-screen').show();
-	$('.menu-btn').hide();
+	$('.js-menu-btn').hide();
 	$('.js-menu').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
@@ -30,7 +29,6 @@ $(document).ready(function() {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 });
 
 // Handle log in information
@@ -67,7 +65,7 @@ $('.js-cancel-button').on('click', function(event) {
 $('.js-add-job').on('click', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').hide();
+	$('.js-menu-btn').hide();
 	$('.menu').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').show();
@@ -77,7 +75,6 @@ $('.js-add-job').on('click', function(event) {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 });
 
 
@@ -85,7 +82,7 @@ $('.js-add-job').on('click', function(event) {
 $('.js-job-list-admin').on('click', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').show();
+	$('.js-menu-btn').show();
 	$('.menu').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
@@ -95,7 +92,6 @@ $('.js-job-list-admin').on('click', function(event) {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 	console.log('openJobListScreen ran');
 });
 
@@ -104,7 +100,7 @@ $('.js-job-list-admin').on('click', function(event) {
 $(document).on('click', '.js-add-worker', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').hide();
+	$('.js-menu-btn').hide();
 	$('.menu').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
@@ -114,7 +110,6 @@ $(document).on('click', '.js-add-worker', function(event) {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 	console.log('openAddWorkerScreen ran');
 });
 
@@ -123,7 +118,7 @@ $(document).on('click', '.js-add-worker', function(event) {
 $('.js-workers-screen').on('click', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').show();
+	$('.js-menu-btn').show();
 	$('.menu').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
@@ -133,7 +128,6 @@ $('.js-workers-screen').on('click', function(event) {
 	$('#worker-list-screen').show();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 	console.log('openWorkersScreen ran');
 });	
 
@@ -141,7 +135,7 @@ $('.js-workers-screen').on('click', function(event) {
 $('.js-worker-name').on('click', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').show();
+	$('.js-menu-btn').show();
 	$('.menu').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
@@ -151,7 +145,6 @@ $('.js-worker-name').on('click', function(event) {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').show();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 	console.log('worker name clicked');
 });
 
@@ -159,7 +152,7 @@ $('.js-worker-name').on('click', function(event) {
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').hide();
+	$('.js-menu-btn').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
 	$('#edit-job-screen').hide();
@@ -168,16 +161,13 @@ $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').show();
-	$('#job-list-screen-worker').hide();
 });
-
-
 
 // Open edit job screen from edit button and fill in relevant fields
 $('.js-job-list').on('click', '.js-edit-job-link', function(event) {
 	$('*').scrollTop(0);
 	$('#login-screen').hide();
-	$('.menu-btn').hide();
+	$('.js-menu-btn').hide();
 	$('#admin-home').hide();
 	$('#add-job-screen').hide();
 	$('#edit-job-screen').show();
@@ -186,7 +176,6 @@ $('.js-job-list').on('click', '.js-edit-job-link', function(event) {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
-	$('#job-list-screen-worker').hide();
 	console.log('edit job link clicked');
 });
 
@@ -219,6 +208,6 @@ $('#js-save-job-button').on('click', function(event) {
 // Open Job List Screen for Worker on Login
 	// $('*').scrollTop(0);
 	// $('#login-screen').hide();
-	// $('.menu-btn').show();
-	// $('.menu').hide();
+	// $('.js-menu-btn').show();
+	// $('#js-worker-menu').hide();
 	// $('#job-list-screen-worker').show();
