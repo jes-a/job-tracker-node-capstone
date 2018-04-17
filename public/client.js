@@ -15,6 +15,19 @@ function showAdminLandingScreen() {
 	$('#edit-worker-screen').hide();
 }
 
+
+// Open Job List Screen for Worker on Login
+function showWorkerLandingScreen() {
+	$('*').scrollTop(0);
+	$('#login-screen').hide();
+	$('.js-menu-btn').show();
+	$('.js-worker-menu').hide();
+	$('#job-list-screen-worker').show();
+	$('.js-add-note-section').hide();
+	$('#worker-profile-screen').hide();
+}
+
+
 // Triggers
 
 $(document).ready(function() {
@@ -29,12 +42,17 @@ $(document).ready(function() {
 	$('#worker-list-screen').hide();
 	$('#worker-detail-screen').hide();
 	$('#edit-worker-screen').hide();
+	$('.js-menu-btn').hide();
+	$('.js-worker-menu').hide();
+	$('#job-list-screen-worker').hide();
+	$('.js-add-note-section').hide();
+	$('#worker-profile-screen').hide();
 });
 
 // Handle log in information
 $('#js-login-button').on('click', function(event) {
 	event.preventDefault();
-	showAdminLandingScreen();
+	showWorkerLandingScreen();
 });
 
 // Sign out and refresh page
@@ -205,9 +223,3 @@ $('#js-save-job-button').on('click', function(event) {
 });
 
 
-// Open Job List Screen for Worker on Login
-	// $('*').scrollTop(0);
-	// $('#login-screen').hide();
-	// $('.js-menu-btn').show();
-	// $('#js-worker-menu').hide();
-	// $('#job-list-screen-worker').show();
