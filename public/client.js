@@ -1,5 +1,8 @@
 "use strict";
 
+const ADMIN_URL = "/admin.html";
+const WORKER_URL = "/jobs.html";
+
 
 function showAdminLandingScreen() {
 	$('#login-screen').hide();

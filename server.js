@@ -1,45 +1,44 @@
 'use strict'; 
 
 const express = require('express');
+const morgan = require('morgan');
+
 const app = express();
-const config = require('./config');
+
+const { DATABASE_URL, PORT } = require('./config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-app.use(express.static('public'));
-
 mongoose.Promise = global.Promise;
 
+app.use(morgan('common'));   
+app.use(express.static('public'));
+
 app.get('/', function(req, res) {
-	res.sendFile(_dirname + '/public/index.html');	
+	res.sendFile(_dirname + './public/');	
 });
 
 
 
-
-
  // ---------------- RUN/CLOSE SERVER -----------------------------------------------------
-let server = undefined;
+let server;
 
-function runServer(urlToUse) {
+function runServer(databaseUrl, port=PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(urlToUse, err => {
+        mongoose.connect(databaseUrl, err => {
             if(err) {
                 return reject(err);
             }
-            server = app.listen(config.PORT, () => {
-                console.log(`Listening on localhost:${config.PORT}`);
+            server = app.listen(port, () => {
+                console.log(`Listening on localhost:${port}`);
                 resolve();
-            }).on('error', err => {
+            })
+            .on('error', err => {
                 mongoose.disconnect();
                 reject(err);
             });
         });
     });
-}
-
-if (require.main === module) {
-    runServer(config.DATABASE_URL).catch(err => console.error(err));
 }
 
 function closeServer() {
@@ -54,6 +53,10 @@ function closeServer() {
     }));
 }
 
+if (require.main === module) {
+    runServer(DATABASE_URL).catch(err => console.error(err));
+}
+
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use('*', (req, res) => {
     res.status(404).json({
@@ -61,4 +64,4 @@ app.use('*', (req, res) => {
     });
 });
 
-module.exports = {app, runServer, closeServer};
+module.exports = { app, runServer, closeServer };
