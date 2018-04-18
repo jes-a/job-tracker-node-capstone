@@ -722,14 +722,12 @@
         <header role="banner">
             <div class="jt-header">
                 <h2>
-                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
-                    <i class="far fa-angle-double-right i-inline back-link"></i>
                     <i class="far fa-calendar-alt i-inline"></i>
                     Job List
                 </h2>
             </div>
             <nav class="nav">
-                <div class="menu-btn js-menu-btn">
+                <div class="menu-btn js-worker-menu-btn">
                     <i aria-label="Nav button" class="fas fa-bars"></i>
                 </div>
                 <div class="menu js-worker-menu">
@@ -747,7 +745,7 @@
         <div class="date-header">
             <h3>Monday, March 26</h3>
         </div>
-        <div class="job">
+        <div class="job js-job-detail">
             <h4 class="js-boat-name boat">Salty Sea</h4>
             <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
             <h5>Service(s):</h5>
@@ -757,32 +755,33 @@
             <p class="js-job-worker">Glen W: 310-217-7848</p>
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
-            <div class="add-notes-button" id="js-add-notes">
+            <div class="add-notes-button js-add-notes-btn">
                 <i class="fas fa-pen i-inline"></i>Add Notes + Hours
             </div>
-        <!-- Add Notes Section -->
-            <div class="add-notes-section js-add-note-section">
-                <form role="form" id="add-notes-form">
-                    <h4>Add Notes + Hours</h4>
-                    <div class="textarea">
-                        <label for="worker-notes">Notes</label>
-                        <textarea name="worker-notes" id="worker-notes" value="worker-notes"></textarea>
-                    </div>
-                    <label for="worker-hours">Hours Worked</label>
-                    <input type="number" name="worker-hours" id="worker-hours">
-                    <div class="radio-label">
-                        <label>Job Completed?</label>
-                        <input type="radio" name="job-complete" id="job-complete" value="yes">
-                        <label for="job-complete">Yes</label>
-                        <input type="radio" name="job-complete" id="job-incomplete" value="job-incomplete">
-                        <label for="type-2">No</label>
-                    </div>
-                    <button role="button" name="add" id="js-add-worker" class="add-button" type="submit">ADD</button>
-                    <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
-                    </input>
-                </form>
-            </div>
-        </div>
+                <!-- Add Notes Section -->
+                <div class="add-notes-section js-add-note-section">
+                    <form role="form" class="add-notes-form">
+                        <h4>Add Notes + Hours</h4>
+                        <div class="textarea">
+                            <label for="worker-notes">Notes</label>
+                            <textarea name="worker-notes" class="worker-notes" value="worker-notes"></textarea>
+                        </div>
+                        <label for="worker-hours">Hours Worked</label>
+                        <input type="number" name="worker-hours" class="worker-hours">
+                        <label>Job Completed?
+                            <div class="radio-label">
+                            <input type="radio" name="job-complete" class="job-complete" value="yes">
+                            <label for="job-complete">Yes</label>
+                            <input type="radio" name="job-complete" class="job-complete" value="no">
+                            <label for="type-2">No</label>
+                            </div>
+                        </label>
+                        <button role="button" name="add" class="add-button js-add-notes-btn" type="submit">ADD</button>
+                        <input type="button" name="cancel" value="Cancel" class="cancel-button js-notes-cancel-button">
+                        </input>
+                    </form>
+                </div>
+        </div> 
         <div class="job">
             <h4 class="js-boat-name">Sea and Sun</h4>
             <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
@@ -793,7 +792,32 @@
             <p class="js-job-worker">Elsie F: 449-588-3131</p>
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
-            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+            <div class="add-notes-button js-add-notes-btn">
+                <i class="fas fa-pen i-inline"></i>Add Notes + Hours
+            </div>
+            <!-- Add Notes Section -->
+            <div class="add-notes-section js-add-note-section">
+                <form role="form" class="add-notes-form">
+                    <h4>Add Notes + Hours</h4>
+                    <div class="textarea">
+                        <label for="worker-notes">Notes</label>
+                        <textarea name="worker-notes" class="worker-notes" value="worker-notes"></textarea>
+                    </div>
+                    <label for="worker-hours">Hours Worked</label>
+                    <input type="number" name="worker-hours" class="worker-hours">
+                    <label>Job Completed?
+                        <div class="radio-label">
+                        <input type="radio" name="job-complete" class="job-complete" value="yes">
+                        <label for="job-complete">Yes</label>
+                        <input type="radio" name="job-complete" class="job-complete" value="no">
+                        <label for="type-2">No</label>
+                        </div>
+                    </label>
+                    <button role="button" name="add" class="add-button js-add-notes-btn" type="submit">ADD</button>
+                    <input type="button" name="cancel" value="Cancel" class="cancel-button js-notes-cancel-button">
+                    </input>
+                </form>
+            </div>
         </div>
         <div class="date-header">
             <h3>Tuesday, March 27</h3>
@@ -808,7 +832,32 @@
             <p class="js-job-worker">Glen W: 310-217-7848</p>
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
-            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+            <div class="add-notes-button js-add-notes-btn">
+                <i class="fas fa-pen i-inline"></i>Add Notes + Hours
+            </div>
+            <!-- Add Notes Section -->
+            <div class="add-notes-section js-add-note-section">
+                <form role="form" class="add-notes-form">
+                    <h4>Add Notes + Hours</h4>
+                    <div class="textarea">
+                        <label for="worker-notes">Notes</label>
+                        <textarea name="worker-notes" class="worker-notes" value="worker-notes"></textarea>
+                    </div>
+                    <label for="worker-hours">Hours Worked</label>
+                    <input type="number" name="worker-hours" class="worker-hours">
+                    <label>Job Completed?
+                        <div class="radio-label">
+                        <input type="radio" name="job-complete" class="job-complete" value="yes">
+                        <label for="job-complete">Yes</label>
+                        <input type="radio" name="job-complete" class="job-complete" value="no">
+                        <label for="type-2">No</label>
+                        </div>
+                    </label>
+                    <button role="button" name="add" class="add-button js-add-notes-btn" type="submit">ADD</button>
+                    <input type="button" name="cancel" value="Cancel" class="cancel-button js-notes-cancel-button">
+                    </input>
+                </form>
+            </div>
         </div>
     </main>
 <!-- Worker Profile Screen -->
@@ -823,7 +872,7 @@
                 </h2>
             </div>
         <nav class="nav">
-            <div class="menu-btn js-menu-btn">
+            <div class="menu-btn js-worker-menu-btn">
                 <i aria-label="Nav button" class="fas fa-bars"></i>
             </div>
             <div class="menu js-worker-menu">
@@ -838,27 +887,27 @@
             </div>
         </nav>
         </header>
-        <form role="form" id="worker-profile">
-            <label for="first-name">First Name
+        <form role="form" id="worker-profile-form">
+            <label for="profile-first-name">First Name
                 <input type="text" name="first-name" id="profile-first-name">
             </label>
-            <label for="last-name">Last Name
+            <label for="profile-last-name">Last Name
                 <input type="text" name="last-name" id="profile-last-name">
             </label>
-            <label for="phone-number">Phone Number
+            <label for="profile-phone-number">Phone Number
                 <input type="tel" name="last-name" id="profile-phone-number">
             </label>
-            <label for="address">Address
+            <label for="profile-address">Address
                 <input type="text" name="address" id="profile-address">
             </label>
-            <label for="address-2">Address 2
+            <label for="profile-address-2">Address 2
                 <input type="text" name="address-2" id="profile-address-2">
             </label>
-            <label for="city">City
+            <label for="profile-city">City
                 <input type="text" name="city" id="profile-city">
             </label>
             <div class="drop-down">
-                <label for="state">State</label>
+                <label for="profile-state">State</label>
                 <select id="profile-state" name="state">
                     <option value="AL">AL</option>
                     <option value="AK">AK</option>
@@ -913,20 +962,20 @@
                     <option value="WY">WY</option>
                 </select>
             </div>
-            <label for="zip-code">Zip Code
+            <label for="profile-zip-code">Zip Code
                 <input type="text" pattern="[0-9]{5}" name="zip-code" id="profile-zip-code">
             </label>
-            <label for="email">Email
+            <label for="profile-email">Email
                 <input type="email" name="email" id="profile-email">
             </label>
-            <label for="change-pw">Change Password
-                <input type="password" name="change-pw" id="change-pw">
+            <label for="profile-change-pw">Change Password
+                <input type="password" name="change-pw" id="profile-change-pw">
             </label>
-            <label for="retype-pw">Re-type Password
-                <input type="password" name="retype-pw" id="retype-pw">
+            <label for="profile-retype-pw">Re-type Password
+                <input type="password" name="retype-pw" id="profile-retype-pw">
             </label>
             <button role="button" name="add" id="js-save-worker-profile-button" class="add-button" type="submit">Save</button>
-            <input type="button" name="cancel" value="Cancel" class="cancel-button js-worker-cancel-button">
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-profile-cancel-button">
             </input>
         </form>
     </main>

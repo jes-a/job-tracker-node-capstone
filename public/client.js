@@ -14,27 +14,15 @@ function showAdminLandingScreen() {
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
     $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
 }
 
-
-// Open Job List Screen for Worker on Login
-function showWorkerLandingScreen() {
+function showWorkerJobListScreen() {
     $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('.js-menu-btn').show();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').show();
-    $('.js-add-note-section').hide();
-    $('#worker-profile-screen').hide();
-}
-
-
-// Triggers
-
-$(document).ready(function() {
     $('#login-screen').hide();
     $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
@@ -43,7 +31,29 @@ $(document).ready(function() {
     $('#add-job-screen').hide();
     $('#edit-job-screen').hide();
     $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').show();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('.js-worker-menu-btn').show();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').show();
+    $('.js-add-note-section').hide();
+    $('#worker-profile-screen').hide();
+}
+
+// ----------- DOCUMENT READY FUNCTION ---------------------
+
+$(document).ready(function() {
+    $('#login-screen').show();
+    $('html').removeClass('white-bg');
+    $('.js-menu-btn').hide();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
@@ -54,6 +64,29 @@ $(document).ready(function() {
     $('#worker-profile-screen').hide();
 });
 
+// for testing purposes
+// $(document).ready(function() {
+//     $('#login-screen').hide();
+//     $('html').addClass('white-bg');
+//     $('.js-menu-btn').hide();
+//     $('.js-menu').hide();
+//     $('#admin-home').hide();
+//     $('#add-job-screen').hide();
+//     $('#edit-job-screen').hide();
+//     $('#job-list-screen-admin').hide();
+//     $('#add-worker-screen').hide();
+//     $('#worker-list-screen').hide();
+//     $('#worker-detail-screen').hide();
+//     $('#edit-worker-screen').hide();
+//     $('.js-worker-menu-btn').show();
+//     $('.js-worker-menu').hide();
+//     $('#job-list-screen-worker').show();
+//     $('.js-add-note-section').hide();
+//     $('#worker-profile-screen').hide();
+// });
+
+// ----------- ADMIN SCREEN TRIGGERS ---------------------
+
 // Handle log in information
 $('#js-login-button').on('click', function(event) {
     event.preventDefault();
@@ -61,7 +94,7 @@ $('#js-login-button').on('click', function(event) {
 
 // Sign out and refresh page
 $('.js-logout-link').on('click', function(event) {
-    event.preventDefault();
+    location.reload();
 });
 
 
@@ -76,7 +109,6 @@ $('.js-menu-btn').on('click', function(event) {
     $('.js-menu').toggle();
     console.log('menu button clicked');
 });
-
 
 // go to Admin Landing Screen when cancel is clicked
 $('.js-cancel-button').on('click', function(event) {
@@ -292,4 +324,51 @@ $('#js-add-job-button').on('click', function(event) {
 $('#js-save-job-button').on('click', function(event) {
     event.preventDefault();
     console.log('Edited job ran');
+});
+
+
+// -------------- WORKERS SCREEN TRIGGERS ---------------
+
+// Open worker nav menu from headers
+$('.js-worker-menu-btn').on('click', function(event) {
+    $('.js-worker-menu').toggle();
+    console.log('worker menu button clicked');
+});
+
+// Open Notes section when Add Notes + Hours is clicked
+// **** HOW TO TOGGLE OPEN ONLY CLOSEST NOTE SECTION??
+$('.js-add-notes-btn').on('click', function(event) {
+    $('.js-add-note-section').toggle();
+});
+
+// Hide notes section when cancel is clicked
+$('.js-notes-cancel-button').on('click', function(event) {
+    $('.js-add-note-section').hide();
+})
+
+// Open profile screen
+$('.js-profile-link').on('click', function(event) {
+    $('*').scrollTop(0);
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').hide();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('.js-worker-menu-btn').show();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('.js-add-note-section').hide();
+    $('#worker-profile-screen').show();
+});
+
+// Go to Job List Screen when cancel is clicked
+$('.js-profile-cancel-button').on('click', function(event) {
+    showWorkerJobListScreen();
 });
