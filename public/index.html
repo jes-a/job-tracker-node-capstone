@@ -31,6 +31,905 @@
             </form>
         </div>
     </main>
+<!-- Admin: Landing Screen -->
+    <main role="main" id="admin-home">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <i class="far fa-home i-inline"></i>Job Tracker
+                </h2>
+            </div>
+            <nav class="nav">
+                <div class="menu-btn js-menu-btn">
+                    <i aria-label="Nav button" class="fas fa-bars"></i>
+                </div>
+                <div class="menu js-menu">
+                    <ul>
+                        <li class="js-admin-home">
+                            <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i>Home</a>
+                        </li>
+                        <li class="js-add-job">
+                            <i class="far fa-plus-square fa-fw i-inline"></i>Add Job
+                        </li>
+                        <li class="js-job-list-admin">
+                            <i class="far fa-calendar-alt fa-fw i-inline"></i>Job List
+                        </li>
+                        <li class="js-add-worker">
+                            <i class="far fa-user fa-fw i-inline"></i>Add Worker
+                        </li>
+                        <li class="js-workers-screen">
+                            <i class="far fa-users fa-fw i-inline"></i>Workers
+                        </li>
+                        <li class="js-logout-link">
+                            <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div id="dashboard-buttons">
+            <div class="dashboard-button js-add-job">
+                <i class="far fa-plus-square fa-fw i-inline"></i>
+                <h2>Add Job</h2>
+            </div>
+            <div class="dashboard-button js-job-list-admin">
+                <i class="far fa-calendar-alt fa-fw i-inline"></i>
+                <h2>Job List</h2>
+            </div>
+            <div class="dashboard-button js-add-worker">
+                <i class="far fa-user fa-fw i-inline"></i>
+                <h2>Add Worker</h2>
+            </div>
+            <div class="dashboard-button js-workers-screen">
+                <i class="far fa-users fa-fw i-inline"></i>
+                <h2>Workers</h2>
+            </div>
+        </div>
+    </main>
+<!-- Admin: Add Job Screen -->
+    <main role="main" id="add-job-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-plus-square i-inline"></i>Add Job
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="add-job-form">
+            <div class="drop-down">
+                <label for="add-job-name">Boat Name</label>
+                <select id="add-job-name" name="boat-name">
+                    <option value="boat1">Boat 1</option>
+                    <option value="boat2">Boat 2</option>
+                    <option value="boat3">Boat 3</option>
+                </select>
+            </div>
+            <div>
+                <label for="add-services">Service(s)</label>
+                <ul id="add-services" class="checkboxes">
+                    <li>
+                        <input type="checkbox" id="add-wash" value="wash" name="services[]">
+                        <label for="add-wash" class="checkbox">Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-hull-wash" value="hull-wash" name="services[]">
+                        <label for="add-hull-wash" class="checkbox">Hull Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-topside-wax" value="topside-wax" name="services[]">
+                        <label for="add-topside-wax" class="checkbox">Topside Wax</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-hull-wax" value="hull-wax" name="services[]">
+                        <label for="add-hull-wax" class="checkbox">Hull Wax</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-compounding-service" value="compounding-service" name="services[]">
+                        <label for="add-compounding-service" class="checkbox">Compounding Service</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-interior-cleaning" value="interior-cleaning" name="services[]">
+                        <label for="add-interior-cleaning" class="checkbox">Interior Cleaning</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-teak-cleaning" value="teak-cleaning" name="services[]">
+                        <label for="add-teak-cleaning" class="checkbox">Teak Cleaning</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-teak-sealing" value="teak-sealing" name="services[]">
+                        <label for="add-teak-sealing" class="checkbox">Teak Sealing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-engine-detailing" value="engine-detailing" name="services[]">
+                        <label for="add-engine-detailing" class="checkbox">Engine Room Detailing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-system-check" value="system-check" name="services[]">
+                        <label for="add-system-check" class="checkbox">System Check</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-bottom-cleaning" value="bottom-cleaning" name="services[]">
+                        <label for="add-bottom-cleaning" class="checkbox">Bottom Cleaning</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="date-select">
+                <label for="date-select">Date</label>
+                <input type="date" id="date-select" value="date" name="date">
+            </div>
+            <div>
+                <label for="add-assign-to">Assign To</label>
+                <ul id="add-assign-to" class="checkboxes">
+                    <li>
+                        <input type="checkbox" id="add-worker1" value="worker1" name="workers[]">
+                        <label for="add-worker1" class="checkbox">Norman H</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-worker2" value="worker2" name="workers[]">
+                        <label for="add-worker2" class="checkbox">Alex M</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="add-worker3" value="worker3" name="workers[]">
+                        <label for="add-worker3" class="checkbox">Elsie F</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textarea">
+                <label for="add-notes">Notes</label>
+                <textarea name="notes" id="add-notes" value="notes"></textarea>
+            </div>
+            <button role="button" name="add" id="js-add-job-button" class="add-button" type="submit">ADD
+            </button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+            </input>
+        </form>
+    </main>
+<!-- Admin: Edit Job Screen -->
+    <main role="main" id="edit-job-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a aria-label="Job List" href="#job-list-screen"><i class="far fa-calendar-alt i-inline back-link"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-plus-square i-inline"></i>Edit Job
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="edit-job-form">
+            <div class="drop-down">
+                <label for="edit-job-name">Boat Name</label>
+                <select id="edit-job-name" name="boat-name">
+                    <option value="boat1">Boat 1</option>
+                    <option value="boat2">Boat 2</option>
+                    <option value="boat3">Boat 3</option>
+                </select>
+            </div>
+            <div>
+                <label for="edit-services">Service(s)</label>
+                <ul id="edit-services" class="checkboxes">
+                    <li>
+                        <input type="checkbox" id="edit-wash" value="wash" name="services[]">
+                        <label for="edit-wash" class="checkbox">Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-hull-wash" value="hull-wash" name="services[]">
+                        <label for="edit-hull-wash" class="checkbox">Hull Wash</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-topside-wax" value="topside-wax" name="services[]">
+                        <label for="edit-topside-wax" class="checkbox">Topside Wax</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-hull-wax" value="hull-wax" name="services[]">
+                        <label for="edit-hull-wax" class="checkbox">Hull Wax</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-compounding-service" value="compounding-service" name="services[]">
+                        <label for="edit-compounding-service" class="checkbox">Compounding Service</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-interior-cleaning" value="interior-cleaning" name="services[]">
+                        <label for="edit-interior-cleaning" class="checkbox">Interior Cleaning</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-teak-cleaning" value="teak-cleaning" name="services[]">
+                        <label for="edit-teak-cleaning" class="checkbox">Teak Cleaning</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-teak-sealing" value="teak-sealing" name="services[]">
+                        <label for="edit-teak-sealing" class="checkbox">Teak Sealing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-engine-detailing" value="engine-detailing" name="services[]">
+                        <label for="edit-engine-detailing" class="checkbox">Engine Room Detailing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-system-check" value="system-check" name="services[]">
+                        <label for="edit-system-check" class="checkbox">System Check</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-bottom-cleaning" value="bottom-cleaning" name="services[]">
+                        <label for="edit-bottom-cleaning" class="checkbox">Bottom Cleaning</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="date-select">
+                <label for="edit-date-select">Date</label>
+                <input type="date" id="edit-date-select" value="date" name="date">
+            </div>
+            <div>
+                <label for="edit-assign-to">Assign To</label>
+                <ul id="edit-assign-to" class="checkboxes">
+                    <li>
+                        <input type="checkbox" id="edit-worker1" value="worker1" name="workers[]">
+                        <label for="edit-worker1" class="checkbox">Norman H</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-worker2" value="worker2" name="workers[]">
+                        <label for="edit-worker2" class="checkbox">Alex M</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="edit-worker3" value="worker3" name="workers[]">
+                        <label for="edit-worker3" class="checkbox">Elsie F</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textarea">
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="edit-notes" value="notes"></textarea>
+            </div>
+            <button role="button" name="add" id="js-save-job-button" class="add-button" type="submit">Save
+            </button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+            </input>
+            <button role="button" name="delete" id="js-delete-job" class="delete-button" type="submit">Delete this Job
+            </button>
+        </form>
+    </main>
+<!-- Admin: Job List Screen -->
+    <main role="main" id="job-list-screen-admin">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-calendar-alt i-inline"></i>
+                    Job List
+                </h2>
+            </div>
+            <nav class="nav">
+                <div class="menu-btn js-menu-btn">
+                    <i aria-label="Nav button" class="fas fa-bars"></i>
+                </div>
+                <div class="menu js-menu">
+                    <ul>
+                        <li class="js-admin-home">
+                            <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i>Home</a>
+                        </li>
+                        <li class="js-add-job">
+                            <i class="far fa-plus-square fa-fw i-inline"></i>Add Job
+                        </li>
+                        <li class="js-job-list-admin">
+                            <i class="far fa-calendar-alt fa-fw i-inline"></i>Job List
+                        </li>
+                        <li class="js-add-worker">
+                            <i class="far fa-user fa-fw i-inline"></i>Add Worker
+                        </li>
+                        <li class="js-workers-screen">
+                            <i class="far fa-users fa-fw i-inline"></i>Workers
+                        </li>
+                        <li class="js-logout-link">
+                            <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="date-header">
+            <h3>Monday, March 26</h3>
+        </div>
+        <div class="job js-job-list">
+            <i class="far fa-edit edit-btn js-edit-job-link"></i>
+            <h4 class="js-boat-name boat">Salty Sea</h4>
+            <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+        </div>
+        <div class="job js-job-list">
+            <i class="far fa-edit edit-btn js-edit-job-link"></i>
+            <h4 class="js-boat-name">Sea and Sun</h4>
+            <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Teak Cleaning</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <p class="js-job-worker">Elsie F: 449-588-3131</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+        </div>
+        <div class="date-header">
+            <h3>Tuesday, March 27</h3>
+        </div>
+        <div class="job js-job-list">
+            <i class="far fa-edit edit-btn js-edit-job-link"></i>
+            <h4 class="js-boat-name">Dolphin Spotter</h4>
+            <p class="js-job-address">553 Dickinson Mall Apt. 957</br>Wilberbury, FL 33101</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+        </div>
+    </main>
+<!-- Admin: Add Worker Screen -->
+    <main role="main" id="add-worker-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Add Worker
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="add-worker-form">
+            <label for="first-name">First Name
+                <input type="text" name="first-name" id="add-first-name" value="Johnny">
+            </label>
+            <label for="last-name">Last Name
+                <input type="text" name="last-name" id="add-last-name" value="Appleseed">
+            </label>
+            <label for="phone-number">Phone Number
+                <input type="tel" name="last-name" id="add-phone-number" value="555-555-5555">
+            </label>
+            <label for="address">Address
+                <input type="text" name="address" id="add-address" value="123 Main St">
+            </label>
+            <label for="address-2">Address 2
+                <input type="text" name="address-2" id="add-address-2" value="Apt 2">
+            </label>
+            <label for="city">City
+                <input type="text" name="city" id="add-city" value="Town">
+            </label>
+            <div class="drop-down">
+                <label for="state">State</label>
+                <select id="add-state" name="state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option selected="selected" value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select>
+            </div>
+            <label for="zip-code">Zip Code
+                <input type="text" pattern="[0-9]{5}" name="zip-code" id="add-zip-code" value="33333">
+            </label>
+            <label for="email">Email
+                <input type="email" name="email" id="add-email" value="johnny@email.com">
+            </label>
+            <label for="initial-pw">Set Initial Password
+                <input type="password" name="initial-pw" id="add-initial-pw" value="12345">
+            </label>
+            <div class="radio-label">
+                <p class="label">Type</p>
+                <input type="radio" name="type" class="add-type" value="type-worker" checked>
+                <label for="type-worker">Worker</label>
+                <input type="radio" name="type" class="add-type" value="type-admin">
+                <label for="type-admin">Admin</label>
+            </div>
+            <div class="radio-label">
+                <p class="label">Status</p>
+                <input type="radio" name="status" class="add-status" value="active" checked>
+                <label for="active">Active</label>
+                <input type="radio" name="status" class="add-status" value="inactive">
+                <label for="inactive">Inactive</label>
+            </div>
+            <button role="button" name="add" id="js-add-worker-button" class="add-button" type="submit">ADD</button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+            </input>
+        </form>
+    </main>
+<!-- Admin: Worker List Screen -->
+    <main role="main" id="worker-list-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-users i-inline"></i>
+                    Worker List
+                </h2>
+            </div>
+            <nav class="nav">
+                    <div class="menu-btn js-menu-btn">
+                        <i aria-label="Nav button" class="fas fa-bars"></i>
+                    </div>
+                    <div class="menu js-menu">
+                        <ul>
+                            <li class="js-admin-home">
+                                <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i>Home</a>
+                            </li>
+                            <li class="js-add-job">
+                                <i class="far fa-plus-square fa-fw i-inline"></i>Add Job
+                            </li>
+                            <li class="js-job-list-admin">
+                                <i class="far fa-calendar-alt fa-fw i-inline"></i>Job List
+                            </li>
+                            <li class="js-add-worker">
+                                <i class="far fa-user fa-fw i-inline"></i>Add Worker
+                            </li>
+                            <li class="js-workers-screen">
+                                <i class="far fa-users fa-fw i-inline"></i>Workers
+                            </li>
+                            <li class="js-logout-link">
+                                <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+        </header>
+        <div class="worker">
+            <ul class="js-worker-list-details">
+                <li class="js-worker-name"><h4>Norman Holloway</h4></li>
+                <li class="js-worker-phone">543-333-1254</li>
+                <li class="js-worker-email">orion.conn@yahoo.com</li>
+                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
+                <li class="js-worker-address2">Katarinaside, FL 92103</li>
+            </ul>
+        </div>
+        <div class="worker">
+            <ul class="js-worker-list-details">
+                <li class="js-worker-name"><h4>Alex Maxwell</h4></li>
+                <li class="js-worker-phone">543-333-1254</li>
+                <li class="js-worker-email">orion.conn@yahoo.com</li>
+                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
+                <li class="js-worker-address2">Katarinaside, FL 92103</li>
+            </ul>
+        </div>
+    </main>
+<!-- Admin: Worker Detail Screen -->
+    <main role="main" id="worker-detail-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <i class="far fa-users i-inline back-link js-workers-screen" aria-label="Workers"></i>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Worker Detail
+                </h2>
+            </div>
+            <nav class="nav">
+                <div class="menu-btn js-menu-btn">
+                    <i aria-label="Nav button" class="fas fa-bars"></i>
+                </div>
+                <div class="menu js-menu">
+                    <ul>
+                        <li class="js-admin-home">
+                            <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i>Home</a>
+                        </li>
+                        <li class="js-add-job">
+                            <i class="far fa-plus-square fa-fw i-inline"></i>Add Job
+                        </li>
+                        <li class="js-job-list-admin">
+                            <i class="far fa-calendar-alt fa-fw i-inline"></i>Job List
+                        </li>
+                        <li class="js-add-worker">
+                            <i class="far fa-user fa-fw i-inline"></i>Add Worker
+                        </li>
+                        <li class="js-workers-screen">
+                            <i class="far fa-users fa-fw i-inline"></i>Workers
+                        </li>
+                        <li class="js-logout-link">
+                            <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="worker-detail js-worker-detail">
+            <i class="far fa-edit edit-btn js-edit-worker-button"></i>
+            <ul>
+                <li><h3 class="js-worker-name">Alex Maxwell</h3></li>
+                <li class="js-worker-phone">543-333-1254</li>
+                <li class="js-worker-email">orion.conn@yahoo.com</li>
+                <li class="js-worker-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</li>
+                <li class="js-worker-status">
+                    <span>Status:</span>Active</li>
+            </ul>
+        </div>
+        <div class="assigned-jobs">
+            <span>Assigned Jobs:</span>
+            <p class="js-assigned-date job-date">Monday, March 26</p>
+            <ul>
+                <li class="js-assigned-job">Boat Name</li>
+                <li class="js-assigned-job">Boat Name</li>
+            </ul>
+        </div>
+    </main>
+<!-- Admin: Edit Worker Screen -->
+    <main role="main" id="edit-worker-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <i class="far fa-user i-inline back-link js-worker-detail-screen"></i>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Edit Worker
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="edit-worker">
+            <label for="first-name">First Name
+                <input type="text" name="first-name" id="edit-first-name">
+            </label>
+            <label for="last-name">Last Name
+                <input type="text" name="last-name" id="edit-last-name">
+            </label>
+            <label for="phone-number">Phone Number
+                <input type="tel" name="last-name" id="edit-phone-number">
+            </label>
+            <label for="address">Address
+                <input type="text" name="address" id="edit-address">
+            </label>
+            <label for="address-2">Address 2
+                <input type="text" name="address-2" id="edit-address-2">
+            </label>
+            <label for="city">City
+                <input type="text" name="city" id="edit-city">
+            </label>
+            <div class="drop-down">
+                <label for="state">State</label>
+                <select id="edit-state" name="state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option selected="selected" value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select>
+            </div>
+            <label for="zip-code">Zip Code
+                <input type="text" pattern="[0-9]{5}" name="zip-code" id="edit-zip-code">
+            </label>
+            <label for="email">Email
+                <input type="email" name="email" id="edit-email">
+            </label>
+            <label for="initial-pw">Set Initial Password
+                <input type="password" name="initial-pw" id="edit-initial-pw">
+            </label>
+            <div class="radio-label">
+                <p class="label">Type</p>
+                <input type="radio" name="type-1" class="edit-type" id="type-1" value="type-worker" checked>
+                <label for="type-1">Worker</label>
+                <input type="radio" name="type-2" class="edit-type" id="type-2" value="type-admin">
+                <label for="type-2">Admin</label>
+            </div>
+            <div class="radio-label">
+                <p class="label">Status</p>
+                <input type="radio" name="status" class="edit-status" id="active" value="active" checked>
+                <label for="active">Active</label>
+                <input type="radio" name="status" class="edit-status" id="inactive" value="inactive">
+                <label for="inactive">Inactive</label>
+            </div>
+            <button role="button" name="save" id="js-save-worker-button" class="add-button" type="submit">Save</button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+            </input>
+        </form>
+    </main>
+<!-- Worker: Job List Screen -->
+    <main role="main" id="job-list-screen-worker">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-admin-home" aria-label="Home"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-calendar-alt i-inline"></i>
+                    Job List
+                </h2>
+            </div>
+            <nav class="nav">
+                <div class="menu-btn js-menu-btn">
+                    <i aria-label="Nav button" class="fas fa-bars"></i>
+                </div>
+                <div class="menu js-worker-menu">
+                    <ul>
+                        <li class="js-profile-link">
+                            <i class="far fa-user fa-fw i-inline"></i>Profile
+                        </li>
+                        <li class="js-logout-link">
+                            <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="date-header">
+            <h3>Monday, March 26</h3>
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name boat">Salty Sea</h4>
+            <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div class="add-notes-button" id="js-add-notes">
+                <i class="fas fa-pen i-inline"></i>Add Notes + Hours
+            </div>
+        <!-- Add Notes Section -->
+            <div class="add-notes-section js-add-note-section">
+                <form role="form" id="add-notes-form">
+                    <h4>Add Notes + Hours</h4>
+                    <div class="textarea">
+                        <label for="worker-notes">Notes</label>
+                        <textarea name="worker-notes" id="worker-notes" value="worker-notes"></textarea>
+                    </div>
+                    <label for="worker-hours">Hours Worked</label>
+                    <input type="number" name="worker-hours" id="worker-hours">
+                    <div class="radio-label">
+                        <label>Job Completed?</label>
+                        <input type="radio" name="job-complete" id="job-complete" value="yes">
+                        <label for="job-complete">Yes</label>
+                        <input type="radio" name="job-complete" id="job-incomplete" value="job-incomplete">
+                        <label for="type-2">No</label>
+                    </div>
+                    <button role="button" name="add" id="js-add-worker" class="add-button" type="submit">ADD</button>
+                    <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+                    </input>
+                </form>
+            </div>
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name">Sea and Sun</h4>
+            <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Teak Cleaning</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <p class="js-job-worker">Elsie F: 449-588-3131</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+        </div>
+        <div class="date-header">
+            <h3>Tuesday, March 27</h3>
+        </div>
+        <div class="job">
+            <h4 class="js-boat-name">Dolphin Spotter</h4>
+            <p class="js-job-address">553 Dickinson Mall Apt. 957</br>Wilberbury, FL 33101</p>
+            <h5>Service(s):</h5>
+            <p class="js-job-service">Wash, Wax</p>
+            <h5>Workers</h5>
+            <p class="js-job-worker">Norman H: 543-333-1254</p>
+            <p class="js-job-worker">Glen W: 310-217-7848</p>
+            <h5>Notes</h5>
+            <p class="js-job-notes">Marina Code is 1234</p>
+            <div name="add-notes" class="add-notes-button"><i class="fas fa-pen i-inline"></i>Add Notes + Hours</div>
+        </div>
+    </main>
+<!-- Worker Profile Screen -->
+ <main role="main" id="worker-profile-screen">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <a href="/"><i class="far fa-home fa-fw i-inline js-worker-home" aria-label="Job List"></i></a>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-user i-inline"></i>
+                    Profile
+                </h2>
+            </div>
+        <nav class="nav">
+            <div class="menu-btn js-menu-btn">
+                <i aria-label="Nav button" class="fas fa-bars"></i>
+            </div>
+            <div class="menu js-worker-menu">
+                <ul>
+                    <li class="js-profile-link">
+                        <i class="far fa-user fa-fw i-inline"></i>Profile
+                    </li>
+                    <li class="js-logout-link">
+                        <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        </header>
+        <form role="form" id="worker-profile">
+            <label for="first-name">First Name
+                <input type="text" name="first-name" id="profile-first-name">
+            </label>
+            <label for="last-name">Last Name
+                <input type="text" name="last-name" id="profile-last-name">
+            </label>
+            <label for="phone-number">Phone Number
+                <input type="tel" name="last-name" id="profile-phone-number">
+            </label>
+            <label for="address">Address
+                <input type="text" name="address" id="profile-address">
+            </label>
+            <label for="address-2">Address 2
+                <input type="text" name="address-2" id="profile-address-2">
+            </label>
+            <label for="city">City
+                <input type="text" name="city" id="profile-city">
+            </label>
+            <div class="drop-down">
+                <label for="state">State</label>
+                <select id="profile-state" name="state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option selected="selected" value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select>
+            </div>
+            <label for="zip-code">Zip Code
+                <input type="text" pattern="[0-9]{5}" name="zip-code" id="profile-zip-code">
+            </label>
+            <label for="email">Email
+                <input type="email" name="email" id="profile-email">
+            </label>
+            <label for="change-pw">Change Password
+                <input type="password" name="change-pw" id="change-pw">
+            </label>
+            <label for="retype-pw">Re-type Password
+                <input type="password" name="retype-pw" id="retype-pw">
+            </label>
+            <button role="button" name="add" id="js-save-worker-profile-button" class="add-button" type="submit">Save</button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-worker-cancel-button">
+            </input>
+        </form>
+    </main>
 <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="client.js" type="text/javascript"></script>

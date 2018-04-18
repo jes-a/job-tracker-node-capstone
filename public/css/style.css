@@ -48,12 +48,25 @@ Is a short set of CSS rules that resets the styling of all HTML elements to a co
     -o-padding-end: 0px;
 }
 
+html {
+	height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: linear-gradient(#C6DDE5, #3B6478);
+    background-repeat:no-repeat;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     color: #5E5E5E;
     font-size: 16px;
+    /* padding-top: 30px; */
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 
 /* General Styles */
 
@@ -353,11 +366,6 @@ button {
 
 
 /* Style for Login Screen */
-
-main#login-screen {
-    background: linear-gradient(#C6DDE5, #3B6478);
-    padding: 1rem;
-}
 
 #login-section {
     max-width: 90%;
