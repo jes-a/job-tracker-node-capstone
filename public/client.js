@@ -3,6 +3,7 @@
 
 function showAdminLandingScreen() {
     $('#login-screen').hide();
+    $('html').addClass('white-bg');
     $('.js-menu-btn').show();
     $('.js-menu').hide();
     $('#admin-home').show();
@@ -13,6 +14,9 @@ function showAdminLandingScreen() {
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
+    $('#job-list-screen-worker').hide();
+    $('.js-add-note-section').hide();
+    $('#worker-profile-screen').hide();
 }
 
 
@@ -32,6 +36,7 @@ function showWorkerLandingScreen() {
 
 $(document).ready(function() {
     $('#login-screen').hide();
+    $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
     $('.js-menu').hide();
     $('#admin-home').hide();
@@ -175,7 +180,7 @@ $('#add-worker-form').on('submit', function(event) {
             })
             .done(function(result) {
                 console.log(result);
-                alert('Thanks for signing up! You may now sign in with your username and password.');
+                alert('You successfully added a new user');
                 // showSignInPage();
             })
             .fail(function(jqXHR, error, errorThrown) {

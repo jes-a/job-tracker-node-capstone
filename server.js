@@ -1,7 +1,6 @@
 'use strict';
 
-// const User = require('./models/user.js');
-
+const User = require('./models/users');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -15,11 +14,12 @@ const bcrypt = require('bcryptjs');
 mongoose.Promise = global.Promise;
 
 app.use(morgan('common'));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// app.get('/', function(req, res) {
-//     res.sendFile(_dirname + '/public/index');
-// });
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 
 
@@ -77,20 +77,19 @@ app.post('/users/create', (req, res) => {
     let type = req.body.type;
     let status = req.body.status;
     let email = req.body.email;
-    email = email.trim();
     let password = req.body.password;
     password = password.trim();
     bcrypt.genSalt(10, (err, salt) => {
         if (err) {
             return res.status(500).json({
-                message: 'Internal server error'
+                message: 'Internal server error on genSalt'
             });
         }
 
         bcrypt.hash(password, salt, (err, hash) => {
             if (err) {
                 return res.status(500).json({
-                    message: 'Internal server error'
+                    message: 'Internal server error on hash'
                 });
             }
 
@@ -110,7 +109,7 @@ app.post('/users/create', (req, res) => {
             }, (err, item) => {
                 if (err) {
                     return res.status(500).json({
-                        message: 'Internal Server Error'
+                        message: 'Internal Server Error on user.create'
                     });
                 }
                 if (item) {

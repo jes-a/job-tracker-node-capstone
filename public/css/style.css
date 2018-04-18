@@ -49,24 +49,32 @@ Is a short set of CSS rules that resets the styling of all HTML elements to a co
 }
 
 html {
-	height: 100%;
+    height: 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background: linear-gradient(#C6DDE5, #3B6478);
-    background-repeat:no-repeat;
+    background: linear-gradient(#f6f9fa, #C6DDE5, #3B6478);
+    background-repeat: no-repeat;
+}
+
+.white-bg {
+	background: #ffffff;
 }
 
 body {
     font-family: 'Lato', sans-serif;
     color: #5E5E5E;
     font-size: 16px;
-    /* padding-top: 30px; */
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
 }
+
+main {
+	height: 100%;
+}
+
 
 /* General Styles */
 
@@ -137,12 +145,8 @@ li {
 }
 
 a {
-	text-decoration: none;
-	color: #002039;
-}
-
-.center {
-    text-align: center;
+    text-decoration: none;
+    color: #002039;
 }
 
 
@@ -160,7 +164,7 @@ a {
 }
 
 .jt-header a {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .i-inline {
@@ -176,12 +180,12 @@ a {
 /* Nav Style */
 
 .menu {
-		background-color: #ffffff;
-		position: absolute;
-		top: 60px;
-		right: 0;
-		border: 1px solid #979797;
-		width: 225px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    border: 1px solid #979797;
+    width: 225px;
 }
 
 nav li {
@@ -203,6 +207,7 @@ nav li {
     right: 16px;
     cursor: pointer;
 }
+
 
 /* Form Styles */
 
@@ -331,7 +336,7 @@ button {
     background: #002039;
     border-radius: 5px;
     border: none;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     margin-top: 20px;
     font-family: 'Lato', sans-serif;
     font-size: 1.5rem;
@@ -365,7 +370,12 @@ button {
 }
 
 
+
 /* Style for Login Screen */
+
+#login-screen {
+	margin-top: 70px;
+}
 
 #login-section {
     max-width: 90%;
@@ -375,6 +385,10 @@ button {
     opacity: 0.95;
 }
 
+.center {
+    text-align: center;
+}
+
 #ship-login {
     font-size: 75px;
     color: #002039;
@@ -382,7 +396,7 @@ button {
 }
 
 
-/* Style for Admin: Dashboard Screen */
+/* Style for Admin: Landing Screen */
 
 #dashboard-buttons {
     padding: 0 20px;
@@ -407,7 +421,7 @@ button {
 }
 
 .dashboard-button:last-of-type {
-    margin-bottom: 24px;
+    padding-bottom: 24px;
 }
 
 .dashboard-button h2 {
@@ -418,8 +432,16 @@ button {
 }
 
 
-
 /* Style for Admin: Add Job Screen */
+
+
+
+/* Style for Admin: Edit Job Screen */
+
+
+
+/* Style for Admin: Add Worker Screen */
+
 
 
 /* Style for Admin: Worker List Screen */
@@ -430,12 +452,13 @@ button {
 }
 
 .worker h4 {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .worker li:last-of-type {
     padding-bottom: 20px;
 }
+
 
 
 /* Style for Admin: Worker Detail Screen */
@@ -483,6 +506,12 @@ button {
 }
 
 
+
+/* Style for Admin: Add Job Screen */
+
+
+
+
 /* Style for Admin: Job List Screen */
 
 .date-header {
@@ -517,6 +546,7 @@ button {
     font-size: 1.175rem;
     color: #002039;
 }
+
 
 /* Style for Worker: Job List Screen */
 
