@@ -530,11 +530,11 @@ button {
 }
 
 .job {
-    position: relative;
     padding-left: 20px;
     padding-right: 20px;
     border-bottom: 1px solid #9B9B9B;
     padding-bottom: 20px;
+    position: relative;
 }
 
 .job .edit-btn {
@@ -550,7 +550,7 @@ button {
 
 /* Style for Worker: Job List Screen */
 
-.add-notes-button {
+.alt-button {
     background: #FFFFFF;
     border: 1px solid #002039;
     border-radius: 5px;
@@ -568,15 +568,29 @@ button {
     cursor: pointer;
 }
 
-.add-notes-section {
+.toggle-section {
     background: #FFFFFF;
     border: 1px solid #002039;
     border-radius: 5px;
     padding-left: 20px;
-    padding-right: 20px;
+    margin-right: 20px;
+    position: relative;
+    top: -25px;
 }
 
-.add-notes-section form {
-    padding: 0;
+.toggle-section form {
+    padding-left: 0;
     margin: 0;
+}
+
+/* Style for Worker: Profile Screen */
+
+.profile-section {
+    margin-right: 20px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.profile-section form {
+    padding-left: 0;
 }

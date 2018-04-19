@@ -60,11 +60,10 @@ $(document).ready(function() {
     $('.js-menu-btn').hide();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
-    $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
 });
 
-// for testing purposes
+// // for testing purposes
 // $(document).ready(function() {
 //     $('#login-screen').hide();
 //     $('html').addClass('white-bg');
@@ -73,7 +72,7 @@ $(document).ready(function() {
 //     $('#admin-home').hide();
 //     $('#add-job-screen').hide();
 //     $('#edit-job-screen').hide();
-//     $('#job-list-screen-admin').hide();
+//     $('#job-list-screen-admin').show();
 //     $('#add-worker-screen').hide();
 //     $('#worker-list-screen').hide();
 //     $('#worker-detail-screen').hide();
@@ -82,7 +81,8 @@ $(document).ready(function() {
 //     $('.js-worker-menu').hide();
 //     $('#job-list-screen-worker').show();
 //     $('.js-add-note-section').hide();
-//     $('#worker-profile-screen').hide();
+//     $('#worker-profile-screen').show();
+//     $('.js-change-pw-section').hide();
 // });
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
@@ -327,7 +327,7 @@ $('#js-save-job-button').on('click', function(event) {
 });
 
 
-// -------------- WORKERS SCREEN TRIGGERS ---------------
+// -------------- WORKER SCREEN TRIGGERS ---------------
 
 // Open worker nav menu from headers
 $('.js-worker-menu-btn').on('click', function(event) {
@@ -335,18 +335,12 @@ $('.js-worker-menu-btn').on('click', function(event) {
     console.log('worker menu button clicked');
 });
 
-// Open Notes section when Add Notes + Hours is clicked
-// **** HOW TO TOGGLE OPEN ONLY CLOSEST NOTE SECTION??
-$('.js-add-notes-btn').on('click', function(event) {
-    $('.js-add-note-section').toggle();
+// Open Job List Screen from nav
+$('.js-job-list-link').on('click', function(event) {
+    showWorkerJobListScreen();
 });
 
-// Hide notes section when cancel is clicked
-$('.js-notes-cancel-button').on('click', function(event) {
-    $('.js-add-note-section').hide();
-})
-
-// Open profile screen
+// Open Profile screen from nav
 $('.js-profile-link').on('click', function(event) {
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -366,9 +360,28 @@ $('.js-profile-link').on('click', function(event) {
     $('#job-list-screen-worker').hide();
     $('.js-add-note-section').hide();
     $('#worker-profile-screen').show();
+    $('.js-change-pw-section').hide();
 });
 
-// Go to Job List Screen when cancel is clicked
-$('.js-profile-cancel-button').on('click', function(event) {
-    showWorkerJobListScreen();
+// Open Notes section in Job List when Add Notes + Hours is clicked
+// **** HOW TO TOGGLE OPEN ONLY CLOSEST NOTE SECTION??
+$('.js-add-notes-btn').on('click', function(event) {
+    $('.js-add-note-section').show();
 });
+
+// Hide Notes section when cancel is clicked
+$('.js-notes-cancel-button').on('click', function(event) {
+    $('.js-add-note-section').hide();
+})
+
+// Open Change Password section in Profile
+$('.js-change-password-btn').on('click', function(event) {
+    $('.js-change-pw-section').show();
+});
+
+// Hide Change Password section when cancel is clicked
+$('.js-profile-cancel-button').on('click', function(event) {
+    $('.js-change-pw-section').hide();
+})
+
+
