@@ -102,7 +102,7 @@
                 <label for="add-job-name">Boat Name</label>
                 <select id="add-job-name" name="boat-name">
                     <option value="boat1">Boat 1</option>
-                    <option value="boat2">Boat 2</option>
+                    <option value="boat2" selected>Boat 2</option>
                     <option value="boat3">Boat 3</option>
                 </select>
             </div>
@@ -110,75 +110,75 @@
                 <label for="add-services">Service(s)</label>
                 <ul id="add-services" class="checkboxes">
                     <li>
-                        <input type="checkbox" id="add-wash" value="wash" name="services[]">
+                        <input type="checkbox" id="add-wash" value="wash" name="add-service" checked>
                         <label for="add-wash" class="checkbox">Wash</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-hull-wash" value="hull-wash" name="services[]">
+                        <input type="checkbox" id="add-hull-wash" value="hull-wash" name="add-service">
                         <label for="add-hull-wash" class="checkbox">Hull Wash</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-topside-wax" value="topside-wax" name="services[]">
+                        <input type="checkbox" id="add-topside-wax" value="topside-wax" name="add-service">
                         <label for="add-topside-wax" class="checkbox">Topside Wax</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-hull-wax" value="hull-wax" name="services[]">
+                        <input type="checkbox" id="add-hull-wax" value="hull-wax" name="add-service" checked>
                         <label for="add-hull-wax" class="checkbox">Hull Wax</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-compounding-service" value="compounding-service" name="services[]">
+                        <input type="checkbox" id="add-compounding-service" value="compounding-service" name="add-service">
                         <label for="add-compounding-service" class="checkbox">Compounding Service</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-interior-cleaning" value="interior-cleaning" name="services[]">
+                        <input type="checkbox" id="add-interior-cleaning" value="interior-cleaning" name="add-service">
                         <label for="add-interior-cleaning" class="checkbox">Interior Cleaning</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-teak-cleaning" value="teak-cleaning" name="services[]">
+                        <input type="checkbox" id="add-teak-cleaning" value="teak-cleaning" name="add-service">
                         <label for="add-teak-cleaning" class="checkbox">Teak Cleaning</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-teak-sealing" value="teak-sealing" name="services[]">
+                        <input type="checkbox" id="add-teak-sealing" value="teak-sealing" name="add-service">
                         <label for="add-teak-sealing" class="checkbox">Teak Sealing</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-engine-detailing" value="engine-detailing" name="services[]">
+                        <input type="checkbox" id="add-engine-detailing" value="engine-detailing" name="add-service">
                         <label for="add-engine-detailing" class="checkbox">Engine Room Detailing</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-system-check" value="system-check" name="services[]">
+                        <input type="checkbox" id="add-system-check" value="system-check" name="add-service">
                         <label for="add-system-check" class="checkbox">System Check</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-bottom-cleaning" value="bottom-cleaning" name="services[]">
+                        <input type="checkbox" id="add-bottom-cleaning" value="bottom-cleaning" name="add-service">
                         <label for="add-bottom-cleaning" class="checkbox">Bottom Cleaning</label>
                     </li>
                 </ul>
             </div>
             <div class="date-select">
                 <label for="date-select">Date</label>
-                <input type="date" id="date-select" value="date" name="date">
+                <input type="date" id="date-select" value="2018-03-22" name="serviceDate">
             </div>
             <div>
                 <label for="add-assign-to">Assign To</label>
                 <ul id="add-assign-to" class="checkboxes">
                     <li>
-                        <input type="checkbox" id="add-worker1" value="worker1" name="workers[]">
+                        <input type="checkbox" id="add-worker1" value="worker1" name="assign-to" checked>
                         <label for="add-worker1" class="checkbox">Norman H</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-worker2" value="worker2" name="workers[]">
+                        <input type="checkbox" id="add-worker2" value="worker2" name="assign-to" checked>
                         <label for="add-worker2" class="checkbox">Alex M</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="add-worker3" value="worker3" name="workers[]">
+                        <input type="checkbox" id="add-worker3" value="worker3" name="assign-to">
                         <label for="add-worker3" class="checkbox">Elsie F</label>
                     </li>
                 </ul>
             </div>
             <div class="textarea">
                 <label for="add-notes">Notes</label>
-                <textarea name="notes" id="add-notes" value="notes"></textarea>
+                <textarea name="notes" id="add-notes" value="notes">Marina code is 1234</textarea>
             </div>
             <button role="button" name="add" id="js-add-job-button" class="add-button" type="submit">ADD
             </button>
@@ -209,47 +209,47 @@
                 <label for="edit-services">Service(s)</label>
                 <ul id="edit-services" class="checkboxes">
                     <li>
-                        <input type="checkbox" id="edit-wash" value="wash" name="services[]">
+                        <input type="checkbox" id="edit-wash" value="wash" name="add-service">
                         <label for="edit-wash" class="checkbox">Wash</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-hull-wash" value="hull-wash" name="services[]">
+                        <input type="checkbox" id="edit-hull-wash" value="hull-wash" name="add-service">
                         <label for="edit-hull-wash" class="checkbox">Hull Wash</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-topside-wax" value="topside-wax" name="services[]">
+                        <input type="checkbox" id="edit-topside-wax" value="topside-wax" name="add-service">
                         <label for="edit-topside-wax" class="checkbox">Topside Wax</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-hull-wax" value="hull-wax" name="services[]">
+                        <input type="checkbox" id="edit-hull-wax" value="hull-wax" name="add-service">
                         <label for="edit-hull-wax" class="checkbox">Hull Wax</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-compounding-service" value="compounding-service" name="services[]">
+                        <input type="checkbox" id="edit-compounding-service" value="compounding-service" name="add-service">
                         <label for="edit-compounding-service" class="checkbox">Compounding Service</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-interior-cleaning" value="interior-cleaning" name="services[]">
+                        <input type="checkbox" id="edit-interior-cleaning" value="interior-cleaning" name="add-service">
                         <label for="edit-interior-cleaning" class="checkbox">Interior Cleaning</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-teak-cleaning" value="teak-cleaning" name="services[]">
+                        <input type="checkbox" id="edit-teak-cleaning" value="teak-cleaning" name="add-service">
                         <label for="edit-teak-cleaning" class="checkbox">Teak Cleaning</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-teak-sealing" value="teak-sealing" name="services[]">
+                        <input type="checkbox" id="edit-teak-sealing" value="teak-sealing" name="add-service">
                         <label for="edit-teak-sealing" class="checkbox">Teak Sealing</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-engine-detailing" value="engine-detailing" name="services[]">
+                        <input type="checkbox" id="edit-engine-detailing" value="engine-detailing" name="add-service">
                         <label for="edit-engine-detailing" class="checkbox">Engine Room Detailing</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-system-check" value="system-check" name="services[]">
+                        <input type="checkbox" id="edit-system-check" value="system-check" name="add-service">
                         <label for="edit-system-check" class="checkbox">System Check</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-bottom-cleaning" value="bottom-cleaning" name="services[]">
+                        <input type="checkbox" id="edit-bottom-cleaning" value="bottom-cleaning" name="add-service">
                         <label for="edit-bottom-cleaning" class="checkbox">Bottom Cleaning</label>
                     </li>
                 </ul>
@@ -262,15 +262,15 @@
                 <label for="edit-assign-to">Assign To</label>
                 <ul id="edit-assign-to" class="checkboxes">
                     <li>
-                        <input type="checkbox" id="edit-worker1" value="worker1" name="workers[]">
+                        <input type="checkbox" id="edit-worker1" value="worker1" name="assign-to">
                         <label for="edit-worker1" class="checkbox">Norman H</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-worker2" value="worker2" name="workers[]">
+                        <input type="checkbox" id="edit-worker2" value="worker2" name="assign-to">
                         <label for="edit-worker2" class="checkbox">Alex M</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="edit-worker3" value="worker3" name="workers[]">
+                        <input type="checkbox" id="edit-worker3" value="worker3" name="assign-to">
                         <label for="edit-worker3" class="checkbox">Elsie F</label>
                     </li>
                 </ul>

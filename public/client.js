@@ -44,46 +44,46 @@ function showWorkerJobListScreen() {
 
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
+// $(document).ready(function() {
+//     $('#login-screen').show();
+//     $('html').removeClass('white-bg');
+//     $('.js-menu-btn').hide();
+//     $('.js-menu').hide();
+//     $('#admin-home').hide();
+//     $('#add-job-screen').hide();
+//     $('#edit-job-screen').hide();
+//     $('#job-list-screen-admin').hide();
+//     $('#add-worker-screen').hide();
+//     $('#worker-list-screen').hide();
+//     $('#worker-detail-screen').hide();
+//     $('#edit-worker-screen').hide();
+//     $('.js-menu-btn').hide();
+//     $('.js-worker-menu').hide();
+//     $('#job-list-screen-worker').hide();
+//     $('#worker-profile-screen').hide();
+// });
+
+// // for testing purposes
 $(document).ready(function() {
-    $('#login-screen').show();
-    $('html').removeClass('white-bg');
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
     $('.js-menu').hide();
     $('#admin-home').hide();
-    $('#add-job-screen').hide();
+    $('#add-job-screen').show();
     $('#edit-job-screen').hide();
     $('#job-list-screen-admin').hide();
     $('#add-worker-screen').hide();
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
-    $('.js-menu-btn').hide();
+    $('.js-worker-menu-btn').hide();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
+    $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
+    $('.js-change-pw-section').hide();
 });
-
-// // for testing purposes
-// $(document).ready(function() {
-//     $('#login-screen').hide();
-//     $('html').addClass('white-bg');
-//     $('.js-menu-btn').hide();
-//     $('.js-menu').hide();
-//     $('#admin-home').hide();
-//     $('#add-job-screen').hide();
-//     $('#edit-job-screen').hide();
-//     $('#job-list-screen-admin').show();
-//     $('#add-worker-screen').hide();
-//     $('#worker-list-screen').hide();
-//     $('#worker-detail-screen').hide();
-//     $('#edit-worker-screen').hide();
-//     $('.js-worker-menu-btn').show();
-//     $('.js-worker-menu').hide();
-//     $('#job-list-screen-worker').show();
-//     $('.js-add-note-section').hide();
-//     $('#worker-profile-screen').show();
-//     $('.js-change-pw-section').hide();
-// });
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -132,6 +132,57 @@ $('.js-add-job').on('click', function(event) {
 });
 
 
+//Add Job Data to database
+$('#add-job-form').on('submit', function(event) {
+    event.preventDefault();
+    const jobName = $('#add-job-name option:selected').text();
+    const services = [];
+    $('input[name="add-service"]:checked').each(function(i,e){
+        services.push( $(e).attr('value') )
+    })
+    const serviceDate = $('#date-select').val();
+    const assignTo = [];
+    $('input[name="assign-to"]:checked').each(function(i,e){
+        assignTo.push( $(e).attr('value') )
+    })
+    const jobNotes = $('#add-notes').val();
+    if (jobName == "") {
+        alert('Please select boat');
+    } else if (services == "") {
+        alert('Please select service');
+    } else if (serviceDate == "") {
+        alert('Please select service date');
+    } else if (assignTo == "") {
+        alert('Please select workers');
+    } else {
+        const newJobObject = {
+           jobName, 
+           services, 
+           serviceDate, 
+           assignTo, 
+           jobNotes 
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/jobs/create',
+            dataType: 'json',
+            data: JSON.stringify(newJobObject),
+            contentType: 'application/json'
+        })
+        .done(function(result) {
+            console.log(result);
+            alert('You successfully added a new job');
+            showAdminLandingScreen();
+        })
+        .fail(function(jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+    }
+});
+
+
 // Open job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
     $('*').scrollTop(0);
@@ -149,6 +200,8 @@ $('.js-job-list-admin').on('click', function(event) {
     console.log('openJobListScreen ran');
 });
 
+
+// Add worker data to database
 $('#add-worker-form').on('submit', function(event) {
     event.preventDefault();
     const firstName = $('#add-first-name').val();
@@ -163,7 +216,6 @@ $('#add-worker-form').on('submit', function(event) {
     const password = $('#add-initial-pw').val();
     const type = $('input[class="add-type"]:checked').val();
     const status = $('input[class="add-status"]:checked').val();
-    console.log(firstName, lastName, phoneNumber, address, address2, city, state, zipCode, email, password, type, status);
     if (firstName == "") {
         alert('Please input first name');
     } else if (lastName == "") {
@@ -213,7 +265,7 @@ $('#add-worker-form').on('submit', function(event) {
             .done(function(result) {
                 console.log(result);
                 alert('You successfully added a new user');
-                // showSignInPage();
+                showAdminLandingScreen();
             })
             .fail(function(jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -305,25 +357,6 @@ $('.js-job-list').on('click', '.js-edit-job-link', function(event) {
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
     console.log('edit job link clicked');
-});
-
-// Save worker to server
-$('#js-save-worker-button').on('submit', function(event) {
-    event.preventDefault();
-    console.log('Edited worker ran');
-});
-
-// Add job to server
-$('#js-add-job-button').on('click', function(event) {
-    event.preventDefault();
-    console.log('Added job ran');
-    // add job to server
-});
-
-// Save edited job to server
-$('#js-save-job-button').on('click', function(event) {
-    event.preventDefault();
-    console.log('Edited job ran');
 });
 
 

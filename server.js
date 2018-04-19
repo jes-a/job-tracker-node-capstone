@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('./models/users');
+const Job = require('./models/jobs');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -119,6 +120,35 @@ app.post('/users/create', (req, res) => {
             });
         });
     });
+});
+
+// POST
+// Create a new job
+
+app.post('/jobs/create', (req, res) => {
+    let jobName = req.body.jobName;
+    let services = req.body.services;
+    let serviceDate = req.body.serviceDate;
+    let assignTo = req.body.assignTo;
+    let jobNotes = req.body.jobNotes;
+
+        Job.create({
+            jobName, 
+            services, 
+            serviceDate, 
+            assignTo, 
+            jobNotes,
+        }, (err, item) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error on job.create'
+                });
+            }
+            if (item) {
+                console.log(`Job \`${jobName}\` created.`);
+                return res.json(item);
+            }
+        });
 });
 
 // catch-all endpoint if client makes request to non-existent endpoint
