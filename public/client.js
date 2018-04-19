@@ -70,16 +70,16 @@ $(document).ready(function() {
     $('.js-menu-btn').hide();
     $('.js-menu').hide();
     $('#admin-home').hide();
-    $('#add-job-screen').show();
+    $('#add-job-screen').hide();
     $('#edit-job-screen').hide();
     $('#job-list-screen-admin').hide();
     $('#add-worker-screen').hide();
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
-    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu-btn').show();
     $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').hide();
+    $('#job-list-screen-worker').show();
     $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
     $('.js-change-pw-section').hide();
@@ -90,6 +90,42 @@ $(document).ready(function() {
 // Handle log in information
 $('#js-login-button').on('click', function(event) {
     event.preventDefault();
+    const inputEmail = $('input[name="js-userName"]').val();
+    const inputPw = $('input[name="js-userPw"]').val();
+    // check for spaces, undefined
+    if((!inputEmail) || (inputEmail.length < 1) || (inputEmail.indexOf(' ') > 0)) {
+        alert('Invalid Email')
+    } 
+    else if ((!inputPw) || (inputPw.length < 1) || (inputPw.indexOf(' ') > 0)) {
+        alert('Invalid password')
+    } else {
+        const loginObject = {
+            email: inputEmail,
+            password: inputPw
+        };
+        console.log(loginObject);
+        $.ajax({
+            type: 'POST',
+            url: '/signin',
+            dataType: 'json',
+            data: JSON.stringify(loginObject),
+            contentType: 'application/json'
+        })
+        .done(function (result) {
+            console.log(result.type);
+            if (result.type == 'type-worker') {
+                showWorkerJobListScreen();
+            } else {
+                showAdminLandingScreen();
+            }
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                    alert('Invalid username and password combination. Pleae check your username and password and try again.');
+        });
+    }
 });
 
 // Sign out and refresh page
@@ -399,7 +435,8 @@ $('.js-profile-link').on('click', function(event) {
 // Open Notes section in Job List when Add Notes + Hours is clicked
 // **** HOW TO TOGGLE OPEN ONLY CLOSEST NOTE SECTION??
 $('.js-add-notes-btn').on('click', function(event) {
-    $('.js-add-note-section').show();
+    event.preventDefault();
+    $(this).parent().find('.js-add-note-section').show();
 });
 
 // Hide Notes section when cancel is clicked

@@ -8,7 +8,7 @@ const jobSchema = new mongoose.Schema({
         required: false
     },
     services: {
-        type: String,
+        type: [String],
         required: false
     },
     serviceDate: {
@@ -16,7 +16,7 @@ const jobSchema = new mongoose.Schema({
         required: false
     },
     assignTo: {
-        type: String,
+        type: [String],
         required: false
     },
     jobNotes: {

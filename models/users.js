@@ -64,6 +64,17 @@ userSchema.methods.validatePassword = function(password, callback) {
     });
 };
 
+userSchema.virtual('fullName').
+    get(function () {
+        return this.firstName + ' ' + this.lastName;
+    });
+
+userSchema.virtual('fullAddress').
+    get(function () {
+        return this.address + ' ' + this.address2 + '\n' +
+        this.city + ',' + this.state + ' ' + this.zipCode;
+    });
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <!-- Login Screen -->
+<!-- Login Screen -->
     <main role="main" id="login-screen">
         <div id="login-section">
             <div class="center"><i class="far fa-ship" id="ship-login"></i></div>
@@ -24,14 +24,14 @@
             <form role="form" id="login-form">
                 <span id="login-error"></span>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="user_name">
+                <input type="email" id="email" name="js-userName" value="johnny@email.com">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="user_password">
+                <input type="password" id="password" name="js-userPw" value="12345">
                 <button role="button" name="login" class="login-button" id="js-login-button" type="submit">Sign In</button>
             </form>
         </div>
     </main>
-    <!-- Admin: Landing Screen -->
+<!-- Admin: Landing Screen -->
     <main role="main" id="admin-home">
         <header role="banner">
             <div class="jt-header">
@@ -86,7 +86,7 @@
             </div>
         </div>
     </main>
-    <!-- Admin: Add Job Screen -->
+<!-- Admin: Add Job Screen -->
     <main role="main" id="add-job-screen">
         <header role="banner">
             <div class="jt-header">
@@ -185,7 +185,7 @@
             <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
         </form>
     </main>
-    <!-- Admin: Edit Job Screen -->
+<!-- Admin: Edit Job Screen -->
     <main role="main" id="edit-job-screen">
         <header role="banner">
             <div class="jt-header">
@@ -286,7 +286,7 @@
             </button>
         </form>
     </main>
-    <!-- Admin: Job List Screen -->
+<!-- Admin: Job List Screen -->
     <main role="main" id="job-list-screen-admin">
         <header role="banner">
             <div class="jt-header">
@@ -368,7 +368,7 @@
             <p class="js-job-notes">Marina Code is 1234</p>
         </div>
     </main>
-    <!-- Admin: Add Worker Screen -->
+<!-- Admin: Add Worker Screen -->
     <main role="main" id="add-worker-screen">
         <header role="banner">
             <div class="jt-header">
@@ -466,9 +466,9 @@
             </label>
             <div class="radio-label">
                 <p class="label">Type</p>
-                <input type="radio" name="type" class="add-type" value="type-worker" checked>
+                <input type="radio" name="type" class="add-type" value="worker" checked>
                 <label for="type-worker">Worker</label>
-                <input type="radio" name="type" class="add-type" value="type-admin">
+                <input type="radio" name="type" class="add-type" value="admin">
                 <label for="type-admin">Admin</label>
             </div>
             <div class="radio-label">
@@ -482,7 +482,7 @@
             <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
         </form>
     </main>
-    <!-- Admin: Worker List Screen -->
+<!-- Admin: Worker List Screen -->
     <main role="main" id="worker-list-screen">
         <header role="banner">
             <div class="jt-header">
@@ -602,7 +602,7 @@
             </ul>
         </div>
     </main>
-    <!-- Admin: Edit Worker Screen -->
+<!-- Admin: Edit Worker Screen -->
     <main role="main" id="edit-worker-screen">
         <header role="banner">
             <div class="jt-header">
@@ -716,7 +716,7 @@
             <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
         </form>
     </main>
-    <!-- Worker: Job List Screen -->
+<!-- Worker: Job List Screen -->
     <main role="main" id="job-list-screen-worker">
         <header role="banner">
             <div class="jt-header">
@@ -758,9 +758,9 @@
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
             <div class="notes-section js-notes-section">
-                <div class="alt-button js-add-notes-btn">
+                <button class="alt-button js-add-notes-btn">
                     <i class="fas fa-pen i-inline"></i>Add Notes + Hours
-                </div>
+                </button>
                 <!-- Add Notes Section -->
                 <div class="toggle-section js-add-note-section">
                     <form role="form" class="add-notes-form">
@@ -796,9 +796,9 @@
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
             <div class="notes-section js-notes-section">
-                <div class="alt-button js-add-notes-btn">
+                <button class="alt-button js-add-notes-btn">
                     <i class="fas fa-pen i-inline"></i>Add Notes + Hours
-                </div>
+                </button>
                 <!-- Add Notes Section -->
                 <div class="toggle-section js-add-note-section">
                     <form role="form" class="add-notes-form">
@@ -838,9 +838,9 @@
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
             <div class="notes-section js-notes-section">
-                <div class="alt-button js-add-notes-btn">
+                <button class="alt-button js-add-notes-btn">
                     <i class="fas fa-pen i-inline"></i>Add Notes + Hours
-                </div>
+                </button>
                 <!-- Add Notes Section -->
                 <div class="toggle-section js-add-note-section">
                     <form role="form" class="add-notes-form">
@@ -866,7 +866,7 @@
             </div>
         </div>
     </main>
-    <!-- Worker: Profile Screen -->
+<!-- Worker: Profile Screen -->
     <main role="main" id="worker-profile-screen">
         <header role="banner">
             <div class="jt-header">
@@ -920,7 +920,7 @@
             </div>
         </div>
     </main>
-    <!-- Scripts -->
+<!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="client.js" type="text/javascript"></script>
 </body>
