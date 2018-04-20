@@ -8,21 +8,58 @@ function showAdminLandingScreen() {
     $('.js-menu').hide();
     $('#admin-home').show();
     $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
     $('#job-list-screen-admin').hide();
     $('#add-worker-screen').hide();
     $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
     $('.js-worker-menu-btn').hide();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
-    $('.js-add-note-section').hide();
-    $('#worker-profile-screen').hide();
 }
 
 function showWorkerJobListScreen() {
     $('*').scrollTop(0);
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').hide();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').show();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').show();
+    $('.js-add-note-section').hide();
+    $('#worker-profile-screen').hide();
+}
+
+// ----------- DOCUMENT READY FUNCTION ---------------------
+
+// $(document).ready(function() {
+//     $('#login-screen').show();
+//     $('html').removeClass('white-bg');
+//     $('.js-menu-btn').hide();
+//     $('.js-menu').hide();
+//     $('#admin-home').hide();
+//     $('#add-job-screen').hide();
+//     $('#edit-job-screen').hide();
+//     $('#job-list-screen-admin').hide();
+//     $('#add-worker-screen').hide();
+//     $('#worker-list-screen').hide();
+//     $('#worker-detail-screen').hide();
+//     $('#edit-worker-screen').hide();
+//     $('#add-boat-details').hide();
+//     $('.js-menu-btn').hide();
+//     $('.js-worker-menu').hide();
+//     $('#job-list-screen-worker').hide();
+//     $('#worker-profile-screen').hide();
+// });
+
+// // for testing purposes
+$(document).ready(function() {
     $('#login-screen').hide();
     $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
@@ -35,58 +72,15 @@ function showWorkerJobListScreen() {
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
-    $('.js-worker-menu-btn').show();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').show();
-    $('.js-add-note-section').hide();
-    $('#worker-profile-screen').hide();
-}
-
-// ----------- DOCUMENT READY FUNCTION ---------------------
-
-$(document).ready(function() {
-    $('#login-screen').show();
-    $('html').removeClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('#add-boat-details').hide();
-    $('.js-menu-btn').hide();
+    $('#add-boat-details').show();
+    $('#js-customer-address').hide();
+    $('.js-worker-menu-btn').hide();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
+    $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
+    $('.js-change-pw-section').hide();
 });
-
-// // for testing purposes
-// $(document).ready(function() {
-//     $('#login-screen').hide();
-//     $('html').addClass('white-bg');
-//     $('.js-menu-btn').show();
-//     $('.js-menu').hide();
-//     $('#admin-home').hide();
-//     $('#add-job-screen').hide();
-//     $('#edit-job-screen').hide();
-//     $('#job-list-screen-admin').hide();
-//     $('#add-worker-screen').hide();
-//     $('#worker-list-screen').hide();
-//     $('#worker-detail-screen').hide();
-//     $('#edit-worker-screen').hide();
-//     $('#add-boat-details').show();
-//     $('#js-customer-address').hide();
-//     $('.js-worker-menu-btn').hide();
-//     $('.js-worker-menu').hide();
-//     $('#job-list-screen-worker').hide();
-//     $('.js-add-note-section').hide();
-//     $('#worker-profile-screen').hide();
-//     $('.js-change-pw-section').hide();
-// });
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -138,7 +132,7 @@ $('.js-logout-link').on('click', function(event) {
 
 
 // Open admin landing screen when home is clicked on
-$('.js-admin-home a').on('click', function(event) {
+$('.js-admin-home').on('click', function(event) {
     showAdminLandingScreen();
     console.log('home button clicked');
 });
@@ -152,6 +146,7 @@ $('.js-menu-btn').on('click', function(event) {
 $(document).on('click', function() {
     $('.js-menu').hide();
 })
+
 
 // go to Admin Landing Screen when cancel is clicked
 $('.js-cancel-button').on('click', function(event) {
@@ -408,11 +403,99 @@ $('.js-add-boat').click(function(event) {
     event.preventDefault();
     $('#admin-home').hide();
     $('#add-boat-details').show();
+    $('#js-customer-address').hide();
 });
 
 // Open Customer Address section when checkbox unchecked
 $('#customer-address-same').on('click', function() {
     $('#js-customer-address').toggle();
+});
+
+// Add boat data to database
+$('#add-boat-details-form').on('submit', function(event) {
+    event.preventDefault();
+    console.log('Add boat form submitted');
+    let boatName = $('#add-boat-name').val();
+    let boatMake = $('#add-boat-make').val();
+    let boatLength = $('#add-boat-length').val();
+    let boatAddress = $('#add-boat-address').val();
+    let boatAddress2 = $('#add-boat-address-2').val();
+    let boatCity = $('#add-boat-city').val();
+    let boatState = $('#add-boat-state').val();
+    let boatZipCode = $('#add-boat-zip-code').val();
+    let boatNotes = $('#add-boat-notes').val();
+    let custFirstName = $('#add-customer-first-name').val();
+    let custLastName = $('#add-customer-last-name').val();  
+    let custEmail = $('#add-customer-email').val(); 
+    let custPhone = $('#add-customer-phone-number').val();
+    let sameAddress = $('#customer-address-same').is(':checked');
+    let custAddress = $('#add-customer-address').val();
+    let custAddress2 = $('#add-customer-address-2').val();
+    let custCity = $('#add-customer-city').val();
+    let custState = $('#add-customer-state').val();
+    let custZipCode = $('#add-customer-zip-code').val();
+    if (boatName == "") {
+        alert('Please input boat name');
+    } else if (boatMake == "") {
+        alert('Please input boat make');
+    } else if (boatLength == "") {
+        alert('Please input boat length');
+    } else if (boatAddress == "") {
+        alert('Please input boat address');
+    } else if (boatCity == "") {
+        alert('Please input boat city');
+    } else if (boatState == "") {
+        alert('Please input boat state');
+    } else if (boatZipCode == "") {
+        alert('Please input boat zip code');
+    } else if (custFirstName == "") {
+        alert('Please input customer first name');
+    } else if (custLastName == "") {
+        alert('Please input customer last name');
+    } else if (custEmail == "") {
+        alert('Please input customer email');
+    } else if (custPhone == "") {
+        alert('Please input customer phone number');
+    } else {
+        const newBoatObject = {
+            boatName, 
+            boatMake, 
+            boatLength, 
+            boatAddress, 
+            boatAddress2, 
+            boatCity, 
+            boatState, 
+            boatZipCode, 
+            boatNotes, 
+            custFirstName, 
+            custLastName, 
+            custEmail,
+            custPhone,
+            custAddress,
+            custAddress2,
+            custCity,
+            custState,
+            custZipCode
+        };
+        console.log(boatName, boatMake, boatLength, boatAddress, boatAddress2, boatCity, boatState, boatZipCode, boatNotes, custFirstName, custLastName, custEmail, custPhone, custAddress, custAddress2, custCity, custState, custZipCode);
+        $.ajax({
+                type: 'POST',
+                url: '/boats/create',
+                dataType: 'json',
+                data: JSON.stringify(newBoatObject),
+                contentType: 'application/json'
+            })
+            .done(function(result) {
+                console.log(result);
+                alert('You successfully added a new boat');
+                showAdminLandingScreen();
+            })
+            .fail(function(jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    }
 });
 
 

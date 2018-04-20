@@ -2,6 +2,7 @@
 
 const User = require('./models/users');
 const Job = require('./models/jobs');
+const Boat = require('./models/boats')
 const express = require('express');
 const morgan = require('morgan');
 
@@ -64,7 +65,6 @@ if (require.main === module) {
 // ---------------USER ENDPOINTS------------------------------
 // POST
 // Create a new user
-
 app.post('/users/create', (req, res) => {
 
     let firstName = req.body.firstName;
@@ -156,13 +156,61 @@ app.post('/signin', function (req, res) {
         });
 });
 
+// Create a new boat
+app.post('/boats/create', (req, res) => {
 
+    let boatName = req.body.boatName;
+    let boatMake = req.body.boatMake;
+    let boatLength = req.body.boatLength;
+    let boatAddress = req.body.boatAddress;
+    let boatAddress2 = req.body.boatAddress2;
+    let boatCity = req.body.boatCity;
+    let boatState = req.body.boatState;
+    let boatZipCode = req.body.boatZipCode;
+    let boatNotes = req.body.boatNotes;
+    let custFirstName = req.body.custFirstName;
+    let custLastName = req.body.custLastName;
+    let custEmail = req.body.custEmail;
+    let custPhone = req.body.custPhone;
+    let custAddress = req.body.custAddress;
+    let custAddress2 = req.body.custAddress2;
+    let custCity = req.body.custCity;
+    let custState = req.body.custState;
+    let custZipCode = req.body.custZipCode;
 
+            Boat.create({
+                boatName, 
+                boatMake, 
+                boatLength, 
+                boatAddress, 
+                boatAddress2, 
+                boatCity, 
+                boatState, 
+                boatZipCode, 
+                boatNotes, 
+                custFirstName, 
+                custLastName, 
+                custEmail,
+                custPhone,
+                custAddress,
+                custAddress2,
+                custCity,
+                custState,
+                custZipCode,
+            }, (err, item) => {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Internal Server Error on boat.create'
+                    });
+                }
+                if (item) {
+                    console.log(`Boat \`${boatName}\` created.`);
+                    return res.json(item);
+                }
+            });
+});
 
-
-// POST
 // Create a new job
-
 app.post('/jobs/create', (req, res) => {
     let jobName = req.body.jobName;
     let services = req.body.services;
