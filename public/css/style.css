@@ -270,22 +270,20 @@ input[type="radio"] {
 }
 
 input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
+    width: 21px;
+    height: 21px;
     padding: 0;
-    margin: 0;
-    vertical-align: bottom;
-    position: relative;
-    *overflow: hidden;
+    margin-top: 0;
+    margin-right: 5px;
+    vertical-align: top;
 }
 
 .input-span {
+    display: block;
     font-family: 'Lato', sans-serif;
-    font-size: 1.125rem;
+    font-size: 1.15rem;
     font-weight: 300;
-    color: #363636;
-    position: relative;
-    top: -2px;
+    color: #363636
 }
 
 textarea {

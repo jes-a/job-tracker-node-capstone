@@ -2,22 +2,22 @@
 
 const User = require('./models/users');
 const Job = require('./models/jobs');
-const Boat = require('./models/boats')
+const Boat = require('./models/boats');
 const express = require('express');
 const morgan = require('morgan');
-
-const app = express();
-
-const { DATABASE_URL, PORT } = require('./config');
+const config = require('./config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const app = express();
 
-mongoose.Promise = global.Promise;
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+mongoose.Promise = global.Promise;
+
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
@@ -28,14 +28,14 @@ app.get('/', function(req, res) {
 // ---------------- RUN/CLOSE SERVER -----------------------------------------------------
 let server;
 
-function runServer(databaseUrl, port = PORT) {
+function runServer(databaseUrl) {
     return new Promise((resolve, reject) => {
         mongoose.connect(databaseUrl, err => {
             if (err) {
                 return reject(err);
             }
-            server = app.listen(port, () => {
-                    console.log(`Listening on localhost:${port}`);
+            server = app.listen(config.PORT, () => {
+                    console.log(`Listening on localhost:${config.PORT}`);
                     resolve();
                 })
                 .on('error', err => {
@@ -45,6 +45,12 @@ function runServer(databaseUrl, port = PORT) {
         });
     });
 }
+
+
+if (require.main === module) {
+    runServer(config.DATABASE_URL).catch(err => console.error(err));
+}
+
 
 function closeServer() {
     return mongoose.disconnect().then(() => new Promise((resolve, reject) => {
@@ -56,10 +62,6 @@ function closeServer() {
             resolve();
         });
     }));
-}
-
-if (require.main === module) {
-    runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
 // ---------------USER ENDPOINTS------------------------------
@@ -156,6 +158,8 @@ app.post('/signin', function (req, res) {
         });
 });
 
+// ---------------BOAT ENDPOINTS------------------------------
+//POST 
 // Create a new boat
 app.post('/boats/create', (req, res) => {
 
@@ -210,6 +214,17 @@ app.post('/boats/create', (req, res) => {
             });
 });
 
+// GET
+// Get boat names for Create Job drop-down
+
+// app.get('/boats', function (req, res) {
+//     Boat
+//         .find()
+//         .then()
+// });
+
+
+// ---------------JOB ENDPOINTS------------------------------
 // Create a new job
 app.post('/jobs/create', (req, res) => {
     let jobName = req.body.jobName;
@@ -237,6 +252,8 @@ app.post('/jobs/create', (req, res) => {
         });
 });
 
+
+// ---------------MISC------------------------------
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use('*', (req, res) => {
     res.status(404).json({
