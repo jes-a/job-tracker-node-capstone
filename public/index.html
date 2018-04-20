@@ -466,16 +466,16 @@
             </label>
             <div class="radio-label">
                 <p class="label">Type</p>
-                <input type="radio" name="type" class="add-type" value="worker" checked>
-                <label for="type-worker">Worker</label>
-                <input type="radio" name="type" class="add-type" value="admin">
-                <label for="type-admin">Admin</label>
+                <input type="radio" name="type" class="add-type" id="worker" value="worker" checked>
+                <label for="worker">Worker</label>
+                <input type="radio" name="type" class="add-type" id="admin" value="admin">
+                <label for="admin">Admin</label>
             </div>
             <div class="radio-label">
                 <p class="label">Status</p>
-                <input type="radio" name="status" class="add-status" value="active" checked>
+                <input type="radio" name="status" class="add-status" id="active" value="active" checked>
                 <label for="active">Active</label>
-                <input type="radio" name="status" class="add-status" value="inactive">
+                <input type="radio" name="status" class="add-status" id="inactive" value="inactive">
                 <label for="inactive">Inactive</label>
             </div>
             <button role="button" name="add" id="js-add-worker-button" class="add-button" type="submit">ADD</button>
@@ -897,24 +897,99 @@
             </nav>
         </header>
         <div class="profile-section js-profile">
-            <i class="far fa-edit edit-btn js-edit-worker-profile-link"></i>
             <h4 class="js-profile-name">Alex Maxwell</h4>
-            <p class="js-profile-phone">543-333-1254</p>
-            <p class="js-profile-email">orion.conn@yahoo.com</p>
-            <p class="js-profile-address">9075 Crooks Corner Apt. 659</p>
-            <p class="js-profile-cityStateZip">Katarinaside, FL 92103</p>
-            <div class="alt-button js-change-password-btn">
-                <i class="far fa-edit i-inline"></i>Change Password
+            <div id="js-profile">
+                <p class="js-profile-phone">543-333-1254</p>
+                <p class="js-profile-email">orion.conn@yahoo.com</p>
+                <p class="js-profile-address">9075 Crooks Corner Apt. 659</p>
+                <p class="js-profile-cityStateZip">Katarinaside, FL 92103</p>
             </div>
-            <div class="toggle-section js-change-pw-section">
-                <form role="form" class="js-change-pw-form">
+            <button class="alt-button js-edit-profile-btn">
+                <i class="far fa-edit i-inline"></i>Edit Profile
+            </button>
+            <div class="toggle-section" id="js-edit-profile-section">
+                <form role="form" class="js-edit-profile-form">
+                    <label for="phone-number">Phone Number
+                        <input type="tel" name="last-name" id="edit-profile-phone-number">
+                    </label>
+                    <label for="email">Email
+                        <input type="email" name="email" id="edit-profile-email">
+                    </label>
+                    <label for="address">Address
+                        <input type="text" name="address" id="edit-profile-address">
+                    </label>
+                    <label for="address-2">Address 2
+                        <input type="text" name="address-2" id="edit-profile-address-2">
+                    </label>
+                    <label for="city">City
+                        <input type="text" name="city" id="edit-profile-city">
+                    </label>
+                    <div class="drop-down">
+                        <label for="state">State</label>
+                        <select id="edit-profile-state" name="state">
+                            <option value="AL">AL</option>
+                            <option value="AK">AK</option>
+                            <option value="AR">AR</option>
+                            <option value="AZ">AZ</option>
+                            <option value="CA">CA</option>
+                            <option value="CO">CO</option>
+                            <option value="CT">CT</option>
+                            <option value="DC">DC</option>
+                            <option value="DE">DE</option>
+                            <option selected="selected" value="FL">FL</option>
+                            <option value="GA">GA</option>
+                            <option value="HI">HI</option>
+                            <option value="IA">IA</option>
+                            <option value="ID">ID</option>
+                            <option value="IL">IL</option>
+                            <option value="IN">IN</option>
+                            <option value="KS">KS</option>
+                            <option value="KY">KY</option>
+                            <option value="LA">LA</option>
+                            <option value="MA">MA</option>
+                            <option value="MD">MD</option>
+                            <option value="ME">ME</option>
+                            <option value="MI">MI</option>
+                            <option value="MN">MN</option>
+                            <option value="MO">MO</option>
+                            <option value="MS">MS</option>
+                            <option value="MT">MT</option>
+                            <option value="NC">NC</option>
+                            <option value="NE">NE</option>
+                            <option value="NH">NH</option>
+                            <option value="NJ">NJ</option>
+                            <option value="NM">NM</option>
+                            <option value="NV">NV</option>
+                            <option value="NY">NY</option>
+                            <option value="ND">ND</option>
+                            <option value="OH">OH</option>
+                            <option value="OK">OK</option>
+                            <option value="OR">OR</option>
+                            <option value="PA">PA</option>
+                            <option value="RI">RI</option>
+                            <option value="SC">SC</option>
+                            <option value="SD">SD</option>
+                            <option value="TN">TN</option>
+                            <option value="TX">TX</option>
+                            <option value="UT">UT</option>
+                            <option value="VT">VT</option>
+                            <option value="VA">VA</option>
+                            <option value="WA">WA</option>
+                            <option value="WI">WI</option>
+                            <option value="WV">WV</option>
+                            <option value="WY">WY</option>
+                        </select>
+                    </div>
+                    <label for="zip-code">Zip Code
+                        <input type="text" pattern="[0-9]{5}" name="zip-code" id="edit-profile-zip-code">
+                    </label>
                     <label for="profile-change-pw">Change Password
                         <input type="password" name="change-pw" id="profile-change-pw">
                     </label>
                     <label for="profile-retype-pw">Re-type Password
                         <input type="password" name="retype-pw" id="profile-retype-pw">
                     </label>
-                    <button role="button" name="add" id="js-change-worker-pw" class="add-button" type="submit">Save</button>
+                    <button role="button" name="add" id="js-edit-profile" class="add-button" type="submit">Save</button>
                     <input type="button" name="cancel" value="Cancel" class="cancel-button js-profile-cancel-button">
                 </form>
             </div>
