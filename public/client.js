@@ -142,9 +142,13 @@ $('.js-admin-home a').on('click', function(event) {
 
 // Open nav menu from headers
 $('.js-menu-btn').on('click', function(event) {
+    event.stopPropagation();
     $('.js-menu').toggle();
-    console.log('menu button clicked');
 });
+
+$(document).on('click', function() {
+    $('.js-menu').hide();
+})
 
 // go to Admin Landing Screen when cancel is clicked
 $('.js-cancel-button').on('click', function(event) {
@@ -400,12 +404,18 @@ $('.js-job-list').on('click', '.js-edit-job-link', function(event) {
 
 // Open worker nav menu from headers
 $('.js-worker-menu-btn').on('click', function(event) {
+    event.stopPropagation();
     $('.js-worker-menu').toggle();
-    console.log('worker menu button clicked');
 });
 
-// Open Job List Screen from nav
+$(document).on('click', function() {
+    $('.js-worker-menu').hide();
+})
+
+// Open Job List Screen from nav or header
 $('.js-job-list-link').on('click', function(event) {
+    event.preventDefault();
+    console.log('home nav clicked');
     showWorkerJobListScreen();
 });
 
