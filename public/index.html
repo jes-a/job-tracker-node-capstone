@@ -84,6 +84,10 @@
                 <i class="far fa-users fa-fw i-inline"></i>
                 <h2>Workers</h2>
             </div>
+            <div class="dashboard-button js-add-boat">
+                <i class="far fa-ship fa-fw i-inline"></i>
+                <h2>Add Boat</h2>
+            </div>
         </div>
     </main>
 <!-- Admin: Add Job Screen -->
@@ -713,6 +717,187 @@
                 <label for="edit-inactive">Inactive</label>
             </div>
             <button role="button" name="save" id="js-save-worker-button" class="add-button" type="submit">Save</button>
+            <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
+        </form>
+    </main>
+<!-- Admin: Add Boat Details Screen -->
+    <main role="main" id="add-boat-details">
+        <header role="banner">
+            <div class="jt-header">
+                <h2>
+                    <span class="icon-link js-admin-home"><i class="far fa-home fa-fw i-inline back-link" aria-label="Home"></i></span>
+                    <i class="far fa-angle-double-right i-inline back-link"></i>
+                    <i class="far fa-ship i-inline"></i>
+                    Add Boat Details
+                </h2>
+            </div>
+        </header>
+        <form role="form" id="add-boat-details-form">
+            <label for="boat-name">Boat Name
+                <input type="text" name="boat-name" id="add-boat-name" value="Salty Sea">
+            </label>
+            <label for="boat-make">Boat Make
+                <input type="text" name="boat-make" id="add-boat-make" value="Sea-Ray">
+            </label>
+            <label for="boat-length">Boat Length
+                <input type="number" name="boat-length" id="add-boat-length" value="55">
+            </label>
+            <label for="add-boat-address">Address
+                <input type="text" name="boat-address" id="add-boat-address" value="123 Marina St">
+            </label>
+            <label for="add-boat-address-2">Address 2
+                <input type="text" name="boat-address-2" id="add-boat-address-2" value="Apt 2">
+            </label>
+            <label for="boat-city">City
+                <input type="text" name="boat-city" id="add-boat-city" value="Town">
+            </label>
+            <div class="drop-down">
+                <label for="boat-state">State</label>
+                <select id="add-boat-state" name="boat-state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option selected="selected" value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select>
+            </div>
+            <label for="boat-zip-code">Zip Code
+                <input type="text" pattern="[0-9]{5}" name="boat-zip-code" id="add-boat-zip-code" value="33333">
+            </label>
+            <div class="textarea">
+                <label for="add-boat-notes">Notes</label>
+                <textarea name="notes" id="add-boat-notes" value="boat-notes">Marina code is 1234</textarea>
+            </div>
+            <!-- Customer Details -->
+            <label for="customer-first-name">Customer First Name
+                <input type="text" name="customer-first-name" id="add-customer-first-name" value="Bob">
+            </label>
+            <label for="customer-last-name">Customer Last Name
+                <input type="text" name="customer-last-name" id="add-customer-last-name" value="Bob">
+            </label>
+            <label for="customer-email">Email
+                <input type="email" name="customer-email" id="add-customer-email" value="bob@email.com">
+            </label>
+            <label for="customer-phone-number">Phone Number
+                <input type="tel" name="customer-phone-number-name" id="add-customer-phone-number" value="555-555-5555">
+            </label>
+            <label for="add-customer-address">Customer Address</label>
+            <input type="checkbox" id="customer-address-same" value="customer-address-same" name="customer-address-same" checked><span class="input-span">Same as Boat Address?</span>
+            <div id="js-customer-address">
+                <input type="text" name="customer-address" id="add-customercustomer-address" value="123 Marina St">
+                <label for="add-customer-address-2">Address 2
+                    <input type="text" name="customer-address-2" id="add-customer-address-2" value="Apt 2">
+                </label>
+                <label for="customer-city">City
+                    <input type="text" name="customer-city" id="add-customer-city" value="Town">
+                </label>
+                <div class="drop-down">
+                    <label for="customer-state">State</label>
+                    <select id="add-customer-state" name="customer-state">
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AR">AR</option>
+                        <option value="AZ">AZ</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DC">DC</option>
+                        <option value="DE">DE</option>
+                        <option selected="selected" value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="IA">IA</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="MA">MA</option>
+                        <option value="MD">MD</option>
+                        <option value="ME">ME</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MO">MO</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="NC">NC</option>
+                        <option value="NE">NE</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NV">NV</option>
+                        <option value="NY">NY</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="WA">WA</option>
+                        <option value="WI">WI</option>
+                        <option value="WV">WV</option>
+                        <option value="WY">WY</option>
+                    </select>
+                </div>
+                <label for="customer-zip-code">Zip Code
+                    <input type="text" pattern="[0-9]{5}" name="customer-zip-code" id="add-customer-zip-code" value="33333">
+                </label>                                
+            </div>
+            <button role="button" name="add" id="js-add-boat-button" class="add-button" type="submit">ADD</button>
             <input type="button" name="cancel" value="Cancel" class="cancel-button js-cancel-button">
         </form>
     </main>

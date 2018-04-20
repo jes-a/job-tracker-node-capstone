@@ -279,6 +279,15 @@ input[type="checkbox"] {
     *overflow: hidden;
 }
 
+.input-span {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: #363636;
+    position: relative;
+    top: -2px;
+}
+
 textarea {
     width: 99%;
     height: 150px;
@@ -286,6 +295,7 @@ textarea {
     border: 1px solid #BFBFBF;
     border-radius: 5px;
     font-family: 'Lato', sans-serif;
+    font-weight: 300;
     font-size: 1.125rem;
     color: #363636;
     padding-left: 5px;

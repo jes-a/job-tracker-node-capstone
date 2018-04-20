@@ -57,6 +57,7 @@ $(document).ready(function() {
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
     $('.js-menu-btn').hide();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
@@ -69,7 +70,7 @@ $(document).ready(function() {
 //     $('html').addClass('white-bg');
 //     $('.js-menu-btn').show();
 //     $('.js-menu').hide();
-//     $('#admin-home').show();
+//     $('#admin-home').hide();
 //     $('#add-job-screen').hide();
 //     $('#edit-job-screen').hide();
 //     $('#job-list-screen-admin').hide();
@@ -77,6 +78,8 @@ $(document).ready(function() {
 //     $('#worker-list-screen').hide();
 //     $('#worker-detail-screen').hide();
 //     $('#edit-worker-screen').hide();
+//     $('#add-boat-details').show();
+//     $('#js-customer-address').hide();
 //     $('.js-worker-menu-btn').hide();
 //     $('.js-worker-menu').hide();
 //     $('#job-list-screen-worker').hide();
@@ -334,7 +337,7 @@ $(document).on('click', '.js-add-worker', function(event) {
 });
 
 // Open worker list screen from landing page or nav
-// Fill in with worker list from db
+// *** Fill in with worker list from users db
 $('.js-workers-screen').on('click', function(event) {
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -369,6 +372,7 @@ $('.js-worker-name').on('click', function(event) {
 });
 
 // Open edit worker form
+// *** Fill in with worker details from users db
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -397,6 +401,18 @@ $('.js-job-list').on('click', '.js-edit-job-link', function(event) {
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
     console.log('edit job link clicked');
+});
+
+// Open Add Boat Details form
+$('.js-add-boat').click(function(event) {
+    event.preventDefault();
+    $('#admin-home').hide();
+    $('#add-boat-details').show();
+});
+
+// Open Customer Address section when checkbox unchecked
+$('#customer-address-same').on('click', function() {
+    $('#js-customer-address').toggle();
 });
 
 
