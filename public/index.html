@@ -163,9 +163,9 @@
                 <label for="date-select">Date</label>
                 <input type="date" id="date-select" value="2018-03-22" name="serviceDate">
             </div>
-            <div>
-                <label for="add-assign-to">Assign To</label>
-                <ul id="add-assign-to" class="checkboxes">
+            <span class="span-label">Assign To</span>
+            <div class="js-assign-to-list">
+<!--                 <ul id="add-assign-to" class="checkboxes">
                     <li>
                         <input type="checkbox" id="add-worker1" value="worker1" name="assign-to" checked>
                         <label for="add-worker1" class="checkbox">Norman H</label>
@@ -178,7 +178,7 @@
                         <input type="checkbox" id="add-worker3" value="worker3" name="assign-to">
                         <label for="add-worker3" class="checkbox">Elsie F</label>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <div class="textarea">
                 <label for="add-notes">Notes</label>
@@ -525,25 +525,7 @@
                 </div>
             </nav>
         </header>
-        <div class="worker">
-            <ul class="js-worker-list-details">
-                <li class="js-worker-name">
-                    <h4>Norman Holloway</h4></li>
-                <li class="js-worker-phone">543-333-1254</li>
-                <li class="js-worker-email">orion.conn@yahoo.com</li>
-                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
-                <li class="js-worker-address2">Katarinaside, FL 92103</li>
-            </ul>
-        </div>
-        <div class="worker">
-            <ul class="js-worker-list-details">
-                <li class="js-worker-name">
-                    <h4>Alex Maxwell</h4></li>
-                <li class="js-worker-phone">543-333-1254</li>
-                <li class="js-worker-email">orion.conn@yahoo.com</li>
-                <li class="js-worker-address">9075 Crooks Corner Apt. 659</li>
-                <li class="js-worker-address2">Katarinaside, FL 92103</li>
-            </ul>
+        <div class="js-worker-detail-wrapper">
         </div>
     </main>
     <!-- Admin: Worker Detail Screen -->

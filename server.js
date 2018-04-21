@@ -158,6 +158,26 @@ app.post('/signin', function (req, res) {
         });
 });
 
+// GET
+// Retrieve user list to populate worker list
+
+app.get('/users', (req, res) => {
+    User
+        .find({'type': 'worker'})
+        .sort({'firstName': 1})
+        .then((users) => {
+            let workerOutput = [];
+            users.map(function (user) {
+                workerOutput.push(user.serialize());
+            });
+            res.json(workerOutput);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({error: 'Internal server error'});
+        });
+});
+
 // ---------------BOAT ENDPOINTS------------------------------
 //POST 
 // Create a new boat

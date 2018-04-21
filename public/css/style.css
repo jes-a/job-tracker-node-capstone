@@ -231,6 +231,16 @@ label {
     margin-top: 15px;
 }
 
+.span-label {
+    display: block;
+    padding-bottom: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #5E5E5E;
+    margin-top: 25px;
+}
+
 .checkboxes label {
     display: inline-block;
     font-weight: 300;
@@ -339,9 +349,9 @@ select::-ms-expand {
     padding-bottom: 5px;
 }
 
-.checkboxes li:last-of-type {
+/* .checkboxes li:last-of-type {
     margin-bottom: 10px;
-}
+} */
 
 button {
     width: 100%;

@@ -85,10 +85,30 @@ boatSchema.virtual('customerFullName').
 
 boatSchema.virtual('boatFullAddress').
     get(function () {
-        return this.boatAddress + ' ' + this.boatAddress2 + '\n' +
+        return this.boatAddress + ' ' + this.boatAddress2 + `\n` +
         this.boatCity + ',' + this.boatState + ' ' + this.boatZipCode;
     });
 
+boatSchema.virtual('custFullAddress').
+get(function () {
+    return this.custAddress + ' ' + this.custAddress2 + `\n` +
+    this.custCity + ',' + this.custState + ' ' + this.custZipCode;
+});
+
+boatSchema.methods.serialize = function() {
+  return {
+    id: this._id,
+    boatName: this.boatName,
+    boatMake: this.boatMake,
+    boatLength: this.boatLength,
+    boatFullAddress: this.boatFullAddress,
+    boatNotes: this.boatNotes,
+    customerFullName: this.customerFullName,
+    custEmail: this.custEmail,
+    custPhone: this.custPhone,
+    custFullAddress: this.custFullAddress
+  };
+};
 const Boat = mongoose.model('Boat', boatSchema);
 
 module.exports = Boat;

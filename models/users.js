@@ -71,9 +71,21 @@ userSchema.virtual('fullName').
 
 userSchema.virtual('fullAddress').
     get(function () {
-        return this.address + ' ' + this.address2 + '\n' +
+        return this.address + ' ' + this.address2 + `\n` +
         this.city + ',' + this.state + ' ' + this.zipCode;
     });
+
+userSchema.methods.serialize = function() {
+  return {
+    id: this._id,
+    fullName: this.fullName,
+    fullAddress: this.fullAddress,
+    phoneNumber: this.phoneNumber,
+    email: this.email,
+    type: this.type,
+    status: this.status
+  };
+};
 
 const User = mongoose.model('User', userSchema);
 
