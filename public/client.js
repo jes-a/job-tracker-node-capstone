@@ -523,8 +523,8 @@ $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
         $('#edit-zip-code').val(res.zipCode);
         $('#edit-email').val(res.email);
         $('#edit-email').val(res.email);
-        $('#edit-type').val(res.type);
-        $('#edit-status').val(res.status);
+        $('input[value="' + res.type + '"]').prop('checked', 'checked');
+        $('input[value="' + res.status + '"]').prop('checked', 'checked');
 
     });
 

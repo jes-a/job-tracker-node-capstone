@@ -163,7 +163,7 @@ app.post('/signin', function (req, res) {
 
 app.get('/users', (req, res) => {
     User
-        .find({'type': 'worker'})
+        .find()
         .sort({'firstName': 1})
         .then((users) => {
             let workerOutput = [];
