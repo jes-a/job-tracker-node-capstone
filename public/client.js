@@ -75,6 +75,27 @@ function populateWorkerList(workers) {
     $(".js-worker-detail-wrapper").html(outputHtmlContent);
 }
 
+// Populate Worker Detail Screen
+function populateWorkerDetail(worker) {
+    console.log(worker);
+    let htmlContent = "";
+    let item = {worker};
+    console.log(item);
+        htmlContent += `<i class="far fa-edit edit-btn js-edit-worker-button" id="${item.worker.id}"></i>`;
+        htmlContent += '<ul>';
+        htmlContent += `<li><h3 class="js-worker-name">${item.worker.fullName}</h3></li>`;
+        htmlContent += `<li class="js-worker-phone">${item.worker.phoneNumber}</li>`;
+        htmlContent += `<li class="js-worker-email">${item.worker.email}</li>`;
+        htmlContent += `<li class="js-worker-address">${item.worker.fullAddress}</li>`;
+        htmlContent += `<li class="js-worker-status"><span>Status:</span>Active</li>`;
+        htmlContent += '</ul>';
+
+    $(".js-worker-detail").html(htmlContent);
+}
+
+// Populate Worker Edit Form
+
+
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
 // $(document).ready(function() {
@@ -426,26 +447,6 @@ $('.js-workers-screen').on('click', function(event) {
         });
 });
 
-// Populate Worker Detail Screen
-function populateWorkerDetail(worker) {
-    console.log(worker);
-    let outputHtmlContent = "";
-    let item = {worker};
-    console.log(item);
-        outputHtmlContent += '<i class="far fa-edit edit-btn js-edit-worker-button"></i>';
-        outputHtmlContent += '<ul>';
-        outputHtmlContent += '<li>';
-        outputHtmlContent += `<h3 class="js-worker-name">${item.worker.fullName}</h3></li>`;
-        outputHtmlContent +=  `<li class="js-worker-phone">${item.worker.phoneNumber}</li>`;
-        outputHtmlContent +=  `<li class="js-worker-email">${item.worker.email}</li>`;
-        outputHtmlContent +=  `<li class="js-worker-address">${item.worker.fullAddress}</li>`;
-        outputHtmlContent +=  `<li class="js-worker-status"><span>Status:</span>Active</li>`;
-        outputHtmlContent +=  '</ul>';
-
-    $(".js-worker-detail").html(outputHtmlContent);
-}
-
-
 // Open worker detail screen from worker list screen    
 $('.js-worker-detail-wrapper').on('click', 'li', function(event) {
     event.preventDefault();
@@ -486,25 +487,81 @@ $('.js-worker-detail-wrapper').on('click', 'li', function(event) {
         });
 });
 
+// Populate Edit Worker Form
+// function populateEditWorkerForm(worker) {
+//     console.log(worker);
+//     let htmlContent = "";
+//     let item = {worker};
+//     console.log(item);
+//         htmlContent += '<i class="far fa-edit edit-btn js-edit-worker-button"></i>';
+//         htmlContent += '<ul>';
+//         htmlContent += `<li id="${item.worker.id}">'<h3 class="js-worker-name">${item.worker.fullName}</h3></li>`;
+//         htmlContent += `<li class="js-worker-phone">${item.worker.phoneNumber}</li>`;
+//         htmlContent += `<li class="js-worker-email">${item.worker.email}</li>`;
+//         htmlContent += `<li class="js-worker-address">${item.worker.fullAddress}</li>`;
+//         htmlContent += `<li class="js-worker-status"><span>Status:</span>Active</li>`;
+//         htmlContent += '</ul>';
+
+//     $(".js-worker-detail").html(htmlContent);
+// }
+
 // Open edit worker form
 // *** Fill in with worker details from users db
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
     event.preventDefault();
-    userId = event.target.id;
+    let workerId = $(this).attr('id');
+    console.log(workerId);
+    $.getJSON('/users/' + workerId, function(res) {
+    // add in pre-filled values based on worker id
+        $('#edit-first-name').val(res.firstName);
+        $('#edit-last-name').val(res.lastName);
+        $('#edit-phone-number').val(res.phoneNumber);
+        $('#edit-address').val(res.address);
+        $('#edit-address-2').val(res.address2);
+        $('#edit-city').val(res.city);
+        $('#edit-state').val(res.state);
+        $('#edit-zip-code').val(res.zipCode);
+        $('#edit-email').val(res.email);
+        $('#edit-email').val(res.email);
+        $('#edit-type').val(res.type);
+        $('#edit-status').val(res.status);
+
+    });
 
 
-
-    $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('.js-menu-btn').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').show();
+    // $.ajax({
+    //         type: 'GET',
+    //         url: '/users/' + workerId,
+    //         dataType: 'json',
+    //         contentType: 'application/json'
+    //     })
+    //     .done(function(result) {
+    //         console.log(result);
+    //         populateWorkerDetail(result);
+            $('*').scrollTop(0);
+            $('#login-screen').hide();
+            $('html').addClass('white-bg');
+            $('.js-menu-btn').hide();
+            $('.js-menu').hide();
+            $('#admin-home').hide();
+            $('#add-job-screen').hide();
+            $('#edit-job-screen').hide();
+            $('#job-list-screen-admin').hide();
+            $('#add-worker-screen').hide();
+            $('#worker-list-screen').hide();
+            $('#worker-detail-screen').hide();
+            $('#edit-worker-screen').show();
+            $('#add-boat-details').hide();
+            $('.js-worker-menu-btn').hide();
+            $('.js-worker-menu').hide();
+            $('#job-list-screen-worker').hide();
+            $('#worker-profile-screen').hide();
+        // })
+        // .fail(function(jqXHR, error, errorThrown) {
+        //     console.log(jqXHR);
+        //     console.log(error);
+        //     console.log(errorThrown);
+        // });
 });
 
 // Open edit job screen from edit button and fill in relevant fields

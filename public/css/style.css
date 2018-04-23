@@ -499,6 +499,7 @@ button {
     right: 0;
     font-size: 1.125rem;
     color: #002039;
+    cursor: pointer;
 }
 
 .worker-detail li {

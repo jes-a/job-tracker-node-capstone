@@ -78,7 +78,14 @@ userSchema.virtual('fullAddress').
 userSchema.methods.serialize = function() {
   return {
     id: this._id,
+    firstName: this.firstName,
+    lastName: this.lastName,
     fullName: this.fullName,
+    address: this.address,
+    address2: this.address2,
+    city: this.city,
+    state: this.state,
+    zipCode: this.zipCode,
     fullAddress: this.fullAddress,
     phoneNumber: this.phoneNumber,
     email: this.email,

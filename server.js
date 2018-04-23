@@ -180,7 +180,7 @@ app.get('/users', (req, res) => {
 });
 
 
-// Retrieve a single user to populate worker detail page
+// Retrieve a single user by id to populate worker detail page
 
 app.get('/users/:id', function(req, res) {
     User
@@ -195,6 +195,12 @@ app.get('/users/:id', function(req, res) {
             });
         });
 });
+
+
+// Edit details of a worker
+
+
+
 
 // ---------------BOAT ENDPOINTS------------------------------
 //POST 
