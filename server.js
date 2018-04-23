@@ -199,7 +199,40 @@ app.get('/users/:id', function(req, res) {
 
 // Edit details of a worker
 
+app.put('/users/:id', function(req, res) {
+    let toUpdate = {};
+    let updatedFields = [
+            'firstName',
+            'lastName',
+            'phoneNumber',
+            'address',
+            'address2',
+            'city',
+            'state',
+            'zipCode',
+            'email',
+            'password',
+            'type',
+            'status'];
+    updatedFields.forEach(function(field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    User
+        .findByIdAndUpdate(req.params.id, {
+            $set: toUpdate
+        }).exec().then(function(user) {
+            return res.json(user.serialize());
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
 
+});
 
 
 // ---------------BOAT ENDPOINTS------------------------------
