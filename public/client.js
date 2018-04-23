@@ -1,6 +1,6 @@
 "use strict";
 
-
+// Show Admin Landing Screen
 function showAdminLandingScreen() {
     $('#login-screen').hide();
     $('html').addClass('white-bg');
@@ -15,8 +15,10 @@ function showAdminLandingScreen() {
     $('.js-worker-menu-btn').hide();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
 }
 
+// Show Worker Landing Screen
 function showWorkerJobListScreen() {
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -32,39 +34,55 @@ function showWorkerJobListScreen() {
     $('.js-worker-menu-btn').show();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').show();
-    $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
+}
+
+
+// Populate Assign To checkboxes in Add Job Screen
+function populateAssignToList(workers) {
+    console.log(workers);
+    //create an empty variable to store one LI for each one the results
+    let outputHtmlContent = "";
+
+    $.each(workers, function(i, item) {
+        outputHtmlContent += `<li>
+                                <input type="checkbox" id="${item.id}" value="${item.id}" name="assign-to" checked>
+                                <label for="assign-to" class="checkbox">${item.fullName}</label>
+                              </li>`;
+    });
+
+    //use the HTML output to show it in the index.html
+    $(".js-assign-to-list").html(outputHtmlContent);
+}
+
+// Populate Workers List Screen
+function populateWorkerList(workers) {
+    //create an empty variable to store one LI for each one the results
+    let outputHtmlContent = "";
+
+    $.each(workers, function(i, item) {
+        outputHtmlContent += '<div class="worker">';
+        outputHtmlContent += '<ul class="js-worker-list-details">';
+        outputHtmlContent += `<li class="js-worker-name" id="${item.id}"><h4>${item.fullName}</h4></li>`;
+        outputHtmlContent += `<li class="js-worker-phone">${item.phoneNumber}</li>`;
+        outputHtmlContent += `<li class="js-worker-email">${item.email}</li>`;
+        outputHtmlContent += `<li class="js-worker-fullAddress">${item.fullAddress}</li>`;
+        outputHtmlContent += '</ul>';
+        outputHtmlContent += '</div>';
+    });
+    // /users/${item.id}
+    //use the HTML output to show it in the index.html
+    $(".js-worker-detail-wrapper").html(outputHtmlContent);
 }
 
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
-$(document).ready(function() {
-    $('#login-screen').show();
-    $('html').removeClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('#add-boat-details').hide();
-    $('.js-menu-btn').hide();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').hide();
-});
-
-// // for testing purposes
 // $(document).ready(function() {
-//     $('#login-screen').hide();
-//     $('html').addClass('white-bg');
-//     $('.js-menu-btn').show();
+//     $('#login-screen').show();
+//     $('html').removeClass('white-bg');
+//     $('.js-menu-btn').hide();
 //     $('.js-menu').hide();
-//     $('#admin-home').show();
+//     $('#admin-home').hide();
 //     $('#add-job-screen').hide();
 //     $('#edit-job-screen').hide();
 //     $('#job-list-screen-admin').hide();
@@ -73,12 +91,33 @@ $(document).ready(function() {
 //     $('#worker-detail-screen').hide();
 //     $('#edit-worker-screen').hide();
 //     $('#add-boat-details').hide();
-//     $('.js-worker-menu-btn').hide();
-//     $('.js-worker-menu').hide();
+//     $('.js-menu-btn').hide();
+//     $('.js-worker-menu').hide(); 
 //     $('#job-list-screen-worker').hide();
 //     $('#worker-profile-screen').hide();
-//     $('.js-edit-profile-section').hide();
 // });
+
+// // for testing purposes
+$(document).ready(function() {
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').show();
+    $('.js-menu').hide();
+    $('#admin-home').show();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
+    $('.js-edit-profile-section').hide();
+});
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -88,10 +127,9 @@ $('#js-login-button').on('click', function(event) {
     const inputEmail = $('input[name="js-userName"]').val();
     const inputPw = $('input[name="js-userPw"]').val();
     // check for spaces, undefined
-    if((!inputEmail) || (inputEmail.length < 1) || (inputEmail.indexOf(' ') > 0)) {
+    if ((!inputEmail) || (inputEmail.length < 1) || (inputEmail.indexOf(' ') > 0)) {
         alert('Invalid Email')
-    } 
-    else if ((!inputPw) || (inputPw.length < 1) || (inputPw.indexOf(' ') > 0)) {
+    } else if ((!inputPw) || (inputPw.length < 1) || (inputPw.indexOf(' ') > 0)) {
         alert('Invalid password')
     } else {
         const loginObject = {
@@ -100,26 +138,26 @@ $('#js-login-button').on('click', function(event) {
         };
         console.log(loginObject);
         $.ajax({
-            type: 'POST',
-            url: '/signin',
-            dataType: 'json',
-            data: JSON.stringify(loginObject),
-            contentType: 'application/json'
-        })
-        .done(function (result) {
-            console.log(result.type);
-            if (result.type == 'worker') {
-                showWorkerJobListScreen();
-            } else {
-                showAdminLandingScreen();
-            }
-        })
-        .fail(function (jqXHR, error, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(error);
-                    console.log(errorThrown);
-                    alert('Invalid username and password combination. Pleae check your username and password and try again.');
-        });
+                type: 'POST',
+                url: '/signin',
+                dataType: 'json',
+                data: JSON.stringify(loginObject),
+                contentType: 'application/json'
+            })
+            .done(function(result) {
+                console.log(result.type);
+                if (result.type == 'worker') {
+                    showWorkerJobListScreen();
+                } else {
+                    showAdminLandingScreen();
+                }
+            })
+            .fail(function(jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Invalid username and password combination. Pleae check your username and password and try again.');
+            });
     }
 });
 
@@ -151,61 +189,42 @@ $('.js-cancel-button').on('click', function(event) {
     showAdminLandingScreen();
 });
 
-function populateAssignToList (workers) {
-    //create an empty variable to store one LI for each one the results
-    let outputHtmlContent = "";
-
-
-    $.each(workers, function(i, item) {
-        console.log(i);
-        outputHtmlContent += '<ul class="checkboxes">';
-        outputHtmlContent += `<li>
-                                <input type="checkbox" id="add-worker${i+1}" value="worker${i+1}" name="assign-to" checked>
-                                <label for="add-worker${i+1}" class="checkbox">${item.fullName}</label>
-                            </li>`;
-        outputHtmlContent += '</ul>';
-    });
-
-    //use the HTML output to show it in the index.html
-    $(".js-assign-to-list").html(outputHtmlContent);
-}
 
 // Open Add Job Screen
 $('.js-add-job').on('click', function(event) {
     event.preventDefault();
-    console.log('workers button clicked');
-        $.ajax({
-                type: 'GET',
-                url: '/users',
-                dataType: 'json',
-                contentType: 'application/json'
-            })
-            .done(function(result) {
-                populateAssignToList(result);
-                $('*').scrollTop(0);
-                $('#login-screen').hide();
-                $('html').addClass('white-bg');
-                $('.js-menu-btn').hide();
-                $('.js-menu').hide();
-                $('#admin-home').hide();
-                $('#add-job-screen').show();
-                $('#edit-job-screen').hide();
-                $('#job-list-screen-admin').hide();
-                $('#add-worker-screen').hide();
-                $('#worker-list-screen').show();
-                $('#worker-detail-screen').hide();
-                $('#edit-worker-screen').hide();
-                $('#add-boat-details').hide();
-                $('.js-worker-menu-btn').hide();
-                $('.js-worker-menu').hide();
-                $('#job-list-screen-worker').hide();
-                $('#worker-profile-screen').hide();
-            })
-            .fail(function(jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });   
+    $.ajax({
+            type: 'GET',
+            url: '/users',
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        .done(function(result) {
+            populateAssignToList(result);
+            $('*').scrollTop(0);
+            $('#login-screen').hide();
+            $('html').addClass('white-bg');
+            $('.js-menu-btn').hide();
+            $('.js-menu').hide();
+            $('#admin-home').hide();
+            $('#add-job-screen').show();
+            $('#edit-job-screen').hide();
+            $('#job-list-screen-admin').hide();
+            $('#add-worker-screen').hide();
+            $('#worker-list-screen').show();
+            $('#worker-detail-screen').hide();
+            $('#edit-worker-screen').hide();
+            $('#add-boat-details').hide();
+            $('.js-worker-menu-btn').hide();
+            $('.js-worker-menu').hide();
+            $('#job-list-screen-worker').hide();
+            $('#worker-profile-screen').hide();
+        })
+        .fail(function(jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });
 
 //Add Job Data to database
@@ -213,13 +232,13 @@ $('#add-job-form').on('submit', function(event) {
     event.preventDefault();
     const jobName = $('#add-job-name option:selected').text();
     const services = [];
-    $('input[name="add-service"]:checked').each(function(i,e){
-        services.push( $(e).attr('value') )
+    $('input[name="add-service"]:checked').each(function(i, e) {
+        services.push($(e).attr('value'))
     })
     const serviceDate = $('#date-select').val();
     const assignTo = [];
-    $('input[name="assign-to"]:checked').each(function(i,e){
-        assignTo.push( $(e).attr('value') )
+    $('input[name="assign-to"]:checked').each(function(i, e) {
+        assignTo.push($(e).attr('value'))
     })
     const jobNotes = $('#add-notes').val();
     if (jobName == "") {
@@ -232,29 +251,29 @@ $('#add-job-form').on('submit', function(event) {
         alert('Please select workers');
     } else {
         const newJobObject = {
-           jobName, 
-           services, 
-           serviceDate, 
-           assignTo, 
-           jobNotes 
+            jobName,
+            services,
+            serviceDate,
+            assignTo,
+            jobNotes
         };
         $.ajax({
-            type: 'POST',
-            url: '/jobs/create',
-            dataType: 'json',
-            data: JSON.stringify(newJobObject),
-            contentType: 'application/json'
-        })
-        .done(function(result) {
-            console.log(result);
-            alert('You successfully added a new job');
-            showAdminLandingScreen();
-        })
-        .fail(function(jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                type: 'POST',
+                url: '/jobs/create',
+                dataType: 'json',
+                data: JSON.stringify(newJobObject),
+                contentType: 'application/json'
+            })
+            .done(function(result) {
+                console.log(result);
+                alert('You successfully added a new job');
+                showAdminLandingScreen();
+            })
+            .fail(function(jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
     }
 });
 
@@ -370,85 +389,111 @@ $(document).on('click', '.js-add-worker', function(event) {
 });
 
 
-function populateWorkerList (workers)  {
-    //create an empty variable to store one LI for each one the results
-    let outputHtmlContent = "";
-
-    $.each(workers, function(i, item) {
-        outputHtmlContent += '<div class="worker">';
-        outputHtmlContent += '<ul class="js-worker-list-details">';
-        outputHtmlContent += `<li class="js-worker-name"><h4>${item.fullName}</h4></li>`;
-        outputHtmlContent += `<li class="js-worker-phone">${item.phoneNumber}</li>`;
-        outputHtmlContent += `<li class="js-worker-email">${item.email}</li>`;
-        outputHtmlContent += `<li class="js-worker-fullAddress">${item.fullAddress}</li>`;
-        outputHtmlContent += '</ul>';
-        outputHtmlContent += '</div>';
-    });
-
-    //use the HTML output to show it in the index.html
-    $(".js-worker-detail-wrapper").html(outputHtmlContent);
-
-}
-
 // Open worker list screen from landing page or nav
-// *** Fill in with worker list from users db
 $('.js-workers-screen').on('click', function(event) {
     event.preventDefault();
-    console.log('workers button clicked');
-        $.ajax({
-                type: 'GET',
-                url: '/users',
-                dataType: 'json',
-                contentType: 'application/json'
-            })
-            .done(function(result) {
-                populateWorkerList(result);
-                $('*').scrollTop(0);
-                $('#login-screen').hide();
-                $('html').addClass('white-bg');
-                $('.js-menu-btn').show();
-                $('.js-menu').hide();
-                $('#admin-home').hide();
-                $('#add-job-screen').hide();
-                $('#edit-job-screen').hide();
-                $('#job-list-screen-admin').hide();
-                $('#add-worker-screen').hide();
-                $('#worker-list-screen').show();
-                $('#worker-detail-screen').hide();
-                $('#edit-worker-screen').hide();
-                $('#add-boat-details').hide();
-                $('.js-worker-menu-btn').hide();
-                $('.js-worker-menu').hide();
-                $('#job-list-screen-worker').hide();
-                $('#worker-profile-screen').hide();
-            })
-            .fail(function(jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });   
+    $.ajax({
+            type: 'GET',
+            url: '/users',
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        .done(function(result) {
+            populateWorkerList(result);
+            $('*').scrollTop(0);
+            $('#login-screen').hide();
+            $('html').addClass('white-bg');
+            $('.js-menu-btn').show();
+            $('.js-menu').hide();
+            $('#admin-home').hide();
+            $('#add-job-screen').hide();
+            $('#edit-job-screen').hide();
+            $('#job-list-screen-admin').hide();
+            $('#add-worker-screen').hide();
+            $('#worker-list-screen').show();
+            $('#worker-detail-screen').hide();
+            $('#edit-worker-screen').hide();
+            $('#add-boat-details').hide();
+            $('.js-worker-menu-btn').hide();
+            $('.js-worker-menu').hide();
+            $('#job-list-screen-worker').hide();
+            $('#worker-profile-screen').hide();
+        })
+        .fail(function(jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });
 
-// Open worker detail screen from db details	
-$('.js-worker-name').on('click', function(event) {
-    $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('.js-menu-btn').show();
-    $('.menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').show();
-    $('#edit-worker-screen').hide();
-    console.log('worker name clicked');
+// Populate Worker Detail Screen
+function populateWorkerDetail(worker) {
+    console.log(worker);
+    let outputHtmlContent = "";
+    let item = {worker};
+    console.log(item);
+        outputHtmlContent += '<i class="far fa-edit edit-btn js-edit-worker-button"></i>';
+        outputHtmlContent += '<ul>';
+        outputHtmlContent += '<li>';
+        outputHtmlContent += `<h3 class="js-worker-name">${item.worker.fullName}</h3></li>`;
+        outputHtmlContent +=  `<li class="js-worker-phone">${item.worker.phoneNumber}</li>`;
+        outputHtmlContent +=  `<li class="js-worker-email">${item.worker.email}</li>`;
+        outputHtmlContent +=  `<li class="js-worker-address">${item.worker.fullAddress}</li>`;
+        outputHtmlContent +=  `<li class="js-worker-status"><span>Status:</span>Active</li>`;
+        outputHtmlContent +=  '</ul>';
+
+    $(".js-worker-detail").html(outputHtmlContent);
+}
+
+
+// Open worker detail screen from worker list screen    
+$('.js-worker-detail-wrapper').on('click', 'li', function(event) {
+    event.preventDefault();
+    console.log('js-worker-name clicked');
+    let workerId = $(this).attr('id');
+    console.log(workerId);
+    $.ajax({
+            type: 'GET',
+            url: '/users/' + workerId,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        .done(function(result) {
+            console.log(result);
+            populateWorkerDetail(result);
+            $('#login-screen').hide();
+            $('html').addClass('white-bg');
+            $('.js-menu-btn').show();
+            $('.js-menu').hide();
+            $('#admin-home').hide();
+            $('#add-job-screen').hide();
+            $('#edit-job-screen').hide();
+            $('#job-list-screen-admin').hide();
+            $('#add-worker-screen').hide();
+            $('#worker-list-screen').hide();
+            $('#worker-detail-screen').show();
+            $('#edit-worker-screen').hide();
+            $('#add-boat-details').hide();
+            $('.js-worker-menu-btn').hide();
+            $('.js-worker-menu').hide();
+            $('#job-list-screen-worker').hide();
+            $('#worker-profile-screen').hide();
+        })
+        .fail(function(jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });
 
 // Open edit worker form
 // *** Fill in with worker details from users db
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
+    event.preventDefault();
+    userId = event.target.id;
+
+
+
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('.js-menu-btn').hide();
@@ -505,8 +550,8 @@ $('#add-boat-details-form').on('submit', function(event) {
     let boatZipCode = $('#add-boat-zip-code').val();
     let boatNotes = $('#add-boat-notes').val();
     let custFirstName = $('#add-customer-first-name').val();
-    let custLastName = $('#add-customer-last-name').val();  
-    let custEmail = $('#add-customer-email').val(); 
+    let custLastName = $('#add-customer-last-name').val();
+    let custEmail = $('#add-customer-email').val();
     let custPhone = $('#add-customer-phone-number').val();
     let sameAddress = $('#customer-address-same').is(':checked');
     let custAddress = $('#add-customer-address').val();
@@ -538,17 +583,17 @@ $('#add-boat-details-form').on('submit', function(event) {
         alert('Please input customer phone number');
     } else {
         const newBoatObject = {
-            boatName, 
-            boatMake, 
-            boatLength, 
-            boatAddress, 
-            boatAddress2, 
-            boatCity, 
-            boatState, 
-            boatZipCode, 
-            boatNotes, 
-            custFirstName, 
-            custLastName, 
+            boatName,
+            boatMake,
+            boatLength,
+            boatAddress,
+            boatAddress2,
+            boatCity,
+            boatState,
+            boatZipCode,
+            boatNotes,
+            custFirstName,
+            custLastName,
             custEmail,
             custPhone,
             custAddress,
@@ -557,7 +602,6 @@ $('#add-boat-details-form').on('submit', function(event) {
             custState,
             custZipCode
         };
-        console.log(boatName, boatMake, boatLength, boatAddress, boatAddress2, boatCity, boatState, boatZipCode, boatNotes, custFirstName, custLastName, custEmail, custPhone, custAddress, custAddress2, custCity, custState, custZipCode);
         $.ajax({
                 type: 'POST',
                 url: '/boats/create',
@@ -647,5 +691,3 @@ $('.js-profile-cancel-button').on('click', function(event) {
     $('#js-profile').show();
 
 })
-
-

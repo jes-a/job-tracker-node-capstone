@@ -174,7 +174,25 @@ app.get('/users', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({error: 'Internal server error'});
+            res.status(500).json({
+                message: 'Internal server error'});
+        });
+});
+
+
+// Retrieve a single user to populate worker detail page
+
+app.get('/users/:id', function(req, res) {
+    User
+        .findById(req.params.id)
+        .then(function(user) {
+            return res.json(user.serialize());
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
         });
 });
 

@@ -71,7 +71,7 @@ userSchema.virtual('fullName').
 
 userSchema.virtual('fullAddress').
     get(function () {
-        return this.address + ' ' + this.address2 + `\n` +
+        return this.address + ' ' + this.address2 + '</br>' +
         this.city + ',' + this.state + ' ' + this.zipCode;
     });
 
