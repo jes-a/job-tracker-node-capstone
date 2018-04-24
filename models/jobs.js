@@ -7,6 +7,10 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    jobAddress: {
+        type: String,
+        required: false
+    },
     services: {
         type: [String],
         required: false

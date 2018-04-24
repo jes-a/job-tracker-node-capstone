@@ -95,8 +95,6 @@
         <header role="banner">
             <div class="jt-header">
                 <h2>
-                    <span class="icon-link js-admin-home"><i class="far fa-home fa-fw i-inline back-link" aria-label="Home"></i></span>
-                    <i class="far fa-angle-double-right i-inline back-link"></i>
                     <i class="far fa-plus-square i-inline"></i>Add Job
                 </h2>
             </div>
@@ -104,10 +102,7 @@
         <form role="form" id="add-job-form">
             <div class="drop-down">
                 <label for="add-job-name">Boat Name</label>
-                <select id="add-job-name" name="boat-name">
-                    <option value="boat1">Boat 1</option>
-                    <option value="boat2" selected>Boat 2</option>
-                    <option value="boat3">Boat 3</option>
+                <select id="add-job-name" class="js-select-boat-name" name="boat-name">
                 </select>
             </div>
             <div>
@@ -315,10 +310,13 @@
                 </div>
             </nav>
         </header>
-        <div class="date-header">
+<!--         <div class="date-header js-date-header">
             <h3>Monday, March 26</h3>
+        </div> -->
+        <div class="js-job-list-wrapper">
+            
         </div>
-        <div class="job js-job-list">
+<!--         <div class="job js-job-list">
             <i class="far fa-edit edit-btn js-edit-job-link"></i>
             <h4 class="js-boat-name boat">Salty Sea</h4>
             <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
@@ -329,8 +327,8 @@
             <p class="js-job-worker">Glen W: 310-217-7848</p>
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
-        </div>
-        <div class="job js-job-list">
+        </div> -->
+<!--         <div class="job js-job-list">
             <i class="far fa-edit edit-btn js-edit-job-link"></i>
             <h4 class="js-boat-name">Sea and Sun</h4>
             <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
@@ -356,7 +354,7 @@
             <p class="js-job-worker">Glen W: 310-217-7848</p>
             <h5>Notes</h5>
             <p class="js-job-notes">Marina Code is 1234</p>
-        </div>
+        </div> -->
     </main>
     <!-- Admin: Add Worker Screen -->
     <main role="main" id="add-worker-screen">

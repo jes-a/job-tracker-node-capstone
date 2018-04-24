@@ -20,7 +20,31 @@ function showAdminLandingScreen() {
     $('#worker-profile-screen').hide();
 }
 
-// Show Worker Landing Screen
+// Show Admin Job List Screen
+function populateJobList(jobs) {
+    //create an empty variable to store one LI for each one the results
+//    let dateHeaderHtml = "";
+    let htmlContent = "";
+
+    $.each(jobs, function(i, item) {
+//        dateHeaderHtml += `<h3>Monday, March 26</h3>`;
+        htmlContent += '<div class="job js-job-list">';
+        htmlContent += `<h3 class="js-boat-name boat">${item.serviceDate}</h3>`;
+        htmlContent += '<i class="far fa-edit edit-btn js-edit-job-link"></i>';
+        htmlContent += `<h4 class="js-boat-name boat">${item.jobName}</h4>`;
+        // htmlContent += `<p class="js-job-address">${}</p>`;
+        htmlContent += `<p class="js-job-service">${item.services}</p>`;
+        htmlContent += '<h5>Workers</h5>';
+        htmlContent += `<p class="js-job-worker">${item.assignTo}</p>`;
+        htmlContent += '<h5>Notes</h5>';
+        htmlContent += `<p class="js-job-notes">${item.jobNotes}</p>`;
+        htmlContent += '</div>';
+    });
+
+//    $('.js-date-header').html(dateHeaderHtml);
+    $('.js-job-list-wrapper').html(htmlContent);
+}
+
 function showWorkerJobListScreen() {
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -40,6 +64,10 @@ function showWorkerJobListScreen() {
 }
 
 function showAdminJobListScreen() {
+    $.getJSON('/jobs', function(res) {
+        populateJobList(res);
+        console.log(res);
+    });
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('html').addClass('white-bg');
@@ -58,6 +86,17 @@ function showAdminJobListScreen() {
     $('#worker-profile-screen').hide();
 }
 
+// Populate Boat Name drop-down in Add Job Screen
+function populateBoatNameDropdown(boats) {
+    let htmlContent = "";
+
+    $.each(boats, function(i, item) {
+        htmlContent += `<option value="${item.id}">${item.boatName}</option>`;
+    });
+
+    $('.js-select-boat-name').html(htmlContent);
+}
+
 
 // Populate Assign To checkboxes in Add Job Screen
 function populateAssignToList(workers) {
@@ -66,31 +105,13 @@ function populateAssignToList(workers) {
 
     $.each(workers, function(i, item) {
         htmlContent += `<li>
-                                <input type="checkbox" id="${item.id}" value="${item.id}" name="assign-to" checked>
-                                <label for="assign-to" class="checkbox">${item.fullName}</label>
-                              </li>`;
+                            <input type="checkbox" id="${item.id}" value="${item.fullName}" name="assign-to" checked>
+                            <label for="assign-to" class="checkbox">${item.fullName}</label>
+                        </li>`;
     });
 
     //use the HTML output to show it in the index.html
     $(".js-assign-to-list").html(htmlContent);
-    $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('html').addClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').show();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('#add-boat-details').hide();
-    $('.js-worker-menu-btn').hide();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').hide();
 }
 
 // Populate Workers List Screen
@@ -281,20 +302,30 @@ $('.js-cancel-button').on('click', function(event) {
 // Open Add Job Screen
 $('.js-add-job').on('click', function(event) {
     event.preventDefault();
-    $.ajax({
-            type: 'GET',
-            url: '/users',
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        .done(function(result) {
-            populateAssignToList(result);
-        })
-        .fail(function(jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-        });
+    $.getJSON('/users', function(res) {
+        populateAssignToList(res);
+    });
+    $.getJSON('/boats', function(res) {
+        populateBoatNameDropdown(res);
+    });
+    $('*').scrollTop(0);
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').hide();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').show();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
 });
 
 //Add Job Data to database
@@ -302,14 +333,14 @@ $('#add-job-form').on('submit', function(event) {
     event.preventDefault();
     const jobName = $('#add-job-name option:selected').text();
     const services = [];
-    $('input[name="add-service"]:checked').each(function(i, e) {
-        services.push($(e).attr('value'))
-    })
+    $('input[name="add-service"]:checked').each(function(i, item) {
+        services.push($(item).attr('value'))
+    });
     const serviceDate = $('#date-select').val();
     const assignTo = [];
-    $('input[name="assign-to"]:checked').each(function(i, e) {
-        assignTo.push($(e).attr('value'))
-    })
+    $('input[name="assign-to"]:checked').each(function(i, item) {
+        assignTo.push($(item).attr('value'))
+    });
     const jobNotes = $('#add-notes').val();
     if (jobName == "") {
         alert('Please select boat');
@@ -349,7 +380,25 @@ $('#add-job-form').on('submit', function(event) {
 
 // Open job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
+    console.log('job-list-admin clicked');
     showAdminJobListScreen();
+    console.log();
+});
+
+// Open Edit job screen from edit button and fill in relevant fields
+$('.js-job-list').on('click', '.js-edit-job-link', function(event) {
+    $('*').scrollTop(0);
+    $('#login-screen').hide();
+    $('.js-menu-btn').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').show();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    console.log('edit job link clicked');
 });
 
 // Add worker data to database
@@ -602,8 +651,6 @@ $('.edit-worker-form').on('submit', function(event) {
     }
 });
 
-
-
 $('.js-edit-worker-cancel').on('click', function(event) {
     event.preventDefault();
     console.log('cancel button pushed');
@@ -637,22 +684,6 @@ $('.js-edit-worker-cancel').on('click', function(event) {
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
     $('#worker-profile-screen').hide();
-});
-
-// Open edit job screen from edit button and fill in relevant fields
-$('.js-job-list').on('click', '.js-edit-job-link', function(event) {
-    $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('.js-menu-btn').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').show();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    console.log('edit job link clicked');
 });
 
 // Open Add Boat Details form
@@ -765,13 +796,16 @@ $('.js-worker-menu-btn').on('click', function(event) {
 
 $(document).on('click', function() {
     $('.js-worker-menu').hide();
-})
+});
 
 // Open Job List Screen from nav or header
 $('.js-job-list-link').on('click', function(event) {
     event.preventDefault();
     console.log('home nav clicked');
-    showWorkerJobListScreen();
+    $.getJSON('/jobs', function(res) {
+        populateJobList(res);
+        showWorkerJobListScreen();
+    });
 });
 
 // Open Profile screen from nav
@@ -821,5 +855,4 @@ $('.js-edit-profile-btn').on('click', function(event) {
 $('.js-profile-cancel-button').on('click', function(event) {
     $('#js-edit-profile-section').hide();
     $('#js-profile').show();
-
-})
+});

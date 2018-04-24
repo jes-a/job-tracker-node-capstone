@@ -125,7 +125,7 @@ app.post('/users/create', (req, res) => {
 });
 
 // User log in 
-app.post('/signin', function (req, res) {
+app.post('/signin', function(req, res) {
     User
         .findOne({
             email: req.body.email
@@ -154,20 +154,20 @@ app.post('/signin', function (req, res) {
                         return res.json(items);
                     }
                 });
-            };   
+            };
         });
 });
 
+
 // GET
 // Retrieve user list to populate worker list
-
 app.get('/users', (req, res) => {
     User
         .find()
-        .sort({'firstName': 1})
+        .sort({ 'firstName': 1 })
         .then((users) => {
             let workerOutput = [];
-            users.map(function (user) {
+            users.map(function(user) {
                 workerOutput.push(user.serialize());
             });
             res.json(workerOutput);
@@ -175,13 +175,13 @@ app.get('/users', (req, res) => {
         .catch(err => {
             console.error(err);
             res.status(500).json({
-                message: 'Internal server error'});
+                message: 'Internal server error'
+            });
         });
 });
 
 
 // Retrieve a single user by id to populate worker detail page
-
 app.get('/users/:id', function(req, res) {
     User
         .findById(req.params.id)
@@ -198,22 +198,22 @@ app.get('/users/:id', function(req, res) {
 
 
 // Edit details of a worker
-
 app.put('/users/:id', function(req, res) {
     let toUpdate = {};
     let updatedFields = [
-            'firstName',
-            'lastName',
-            'phoneNumber',
-            'address',
-            'address2',
-            'city',
-            'state',
-            'zipCode',
-            'email',
-            'password',
-            'type',
-            'status'];
+        'firstName',
+        'lastName',
+        'phoneNumber',
+        'address',
+        'address2',
+        'city',
+        'state',
+        'zipCode',
+        'email',
+        'password',
+        'type',
+        'status'
+    ];
     updatedFields.forEach(function(field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
@@ -259,46 +259,58 @@ app.post('/boats/create', (req, res) => {
     let custState = req.body.custState;
     let custZipCode = req.body.custZipCode;
 
-            Boat.create({
-                boatName, 
-                boatMake, 
-                boatLength, 
-                boatAddress, 
-                boatAddress2, 
-                boatCity, 
-                boatState, 
-                boatZipCode, 
-                boatNotes, 
-                custFirstName, 
-                custLastName, 
-                custEmail,
-                custPhone,
-                custAddress,
-                custAddress2,
-                custCity,
-                custState,
-                custZipCode,
-            }, (err, item) => {
-                if (err) {
-                    return res.status(500).json({
-                        message: 'Internal Server Error on boat.create'
-                    });
-                }
-                if (item) {
-                    console.log(`Boat \`${boatName}\` created.`);
-                    return res.json(item);
-                }
+    Boat.create({
+        boatName,
+        boatMake,
+        boatLength,
+        boatAddress,
+        boatAddress2,
+        boatCity,
+        boatState,
+        boatZipCode,
+        boatNotes,
+        custFirstName,
+        custLastName,
+        custEmail,
+        custPhone,
+        custAddress,
+        custAddress2,
+        custCity,
+        custState,
+        custZipCode,
+    }, (err, item) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error on boat.create'
             });
+        }
+        if (item) {
+            console.log(`Boat \`${boatName}\` created.`);
+            return res.json(item);
+        }
+    });
 });
 
 // GET
 // Get boat names for Create Job drop-down
-
-// app.get('/boats', function (req, res) {
-//     Boat
-//         .find()
-//         .then()
-// });
+app.get('/boats', (req, res) => {
+    Boat
+        .find()
+        .sort({ 'boatName': 1 })
+        .then((boats) => {
+            let boatOutput = [];
+            boats.map(function(boat) {
+                boatOutput.push(boat.serialize());
+            });
+            res.json(boatOutput);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
 
 
 // ---------------JOB ENDPOINTS------------------------------
@@ -310,22 +322,41 @@ app.post('/jobs/create', (req, res) => {
     let assignTo = req.body.assignTo;
     let jobNotes = req.body.jobNotes;
 
-        Job.create({
-            jobName, 
-            services, 
-            serviceDate, 
-            assignTo, 
-            jobNotes,
-        }, (err, item) => {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Internal Server Error on job.create'
-                });
-            }
-            if (item) {
-                console.log(`Job \`${jobName}\` created.`);
-                return res.json(item);
-            }
+    Job.create({
+        jobName,
+        services,
+        serviceDate,
+        assignTo,
+        jobNotes,
+    }, (err, item) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error on job.create'
+            });
+        }
+        if (item) {
+            console.log(`Job \`${jobName}\` created.`);
+            return res.json(item);
+        }
+    });
+});
+
+app.get('/jobs', (req, res) => {
+    Job
+        .find()
+        .sort({ serviceDate: 1 })
+        .then((jobs) => {
+            let jobOutput = [];
+            jobs.map(function(job) {
+                jobOutput.push(job);
+            });
+            res.json(jobOutput);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
         });
 });
 
