@@ -20,6 +20,20 @@ function showAdminLandingScreen() {
     $('#worker-profile-screen').hide();
 }
 
+// function changeDate(){
+//     var currentDate= document.getElementById('date').value; 
+//     //Extracting the date value in dd/mm/yyyy format from the mentioned text box
+//     alert('The original value: ' + currentDate); 
+//     //Printing the extracted date value before making the change
+//     var newDate = currentDate.split('/'); 
+//     //Splitting the extracted date value using the delimiter /, which is the seperator used in the date value         
+//     currentDate = newDate[1] + "/" + newDate[0] + "/" + newDate[2];//Constructing a new date value (string) using the splitted values.
+//     alert('Value after the change : ' + currentDate);//Showing the new date value.
+// }
+
+
+
+
 // Show Admin Job List Screen
 function populateJobList(jobs) {
     //create an empty variable to store one LI for each one the results
@@ -27,15 +41,23 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
+        console.log(item.assignTo);
 //        dateHeaderHtml += `<h3>Monday, March 26</h3>`;
         htmlContent += '<div class="job js-job-list">';
         htmlContent += `<h3 class="js-boat-name boat">${item.serviceDate}</h3>`;
         htmlContent += '<i class="far fa-edit edit-btn js-edit-job-link"></i>';
         htmlContent += `<h4 class="js-boat-name boat">${item.jobName}</h4>`;
-        // htmlContent += `<p class="js-job-address">${}</p>`;
-        htmlContent += `<p class="js-job-service">${item.services}</p>`;
+        htmlContent += `<p class="js-job-address ${item.boatName}"></p>`;
+        htmlContent += '<h5>Services</h5>';
+        $.each(item.services, function(key, value) {
+        htmlContent += `<p class="js-job-service">${value}</p>`;
+        });
         htmlContent += '<h5>Workers</h5>';
-        htmlContent += `<p class="js-job-worker">${item.assignTo}</p>`;
+ //       htmlContent += '<ul>';
+        $.each(item.assignTo,function(key, value) {
+        htmlContent += `<p class="js-job-worker">${value}</p>`;
+        });
+ //       htmlContent += '</ul>';
         htmlContent += '<h5>Notes</h5>';
         htmlContent += `<p class="js-job-notes">${item.jobNotes}</p>`;
         htmlContent += '</div>';
