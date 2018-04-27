@@ -85,13 +85,13 @@ boatSchema.virtual('customerFullName').
 
 boatSchema.virtual('boatFullAddress').
     get(function () {
-        return this.boatAddress + ' ' + this.boatAddress2 + `\n` +
+        return this.boatAddress + ' ' + this.boatAddress2 + '</br>' +
         this.boatCity + ',' + this.boatState + ' ' + this.boatZipCode;
     });
 
 boatSchema.virtual('custFullAddress').
 get(function () {
-    return this.custAddress + ' ' + this.custAddress2 + `\n` +
+    return this.custAddress + ' ' + this.custAddress2 + '</br>' +
     this.custCity + ',' + this.custState + ' ' + this.custZipCode;
 });
 

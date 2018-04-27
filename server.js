@@ -312,11 +312,28 @@ app.get('/boats', (req, res) => {
         });
 });
 
+// Retrieve a single boat by id to populate address in job list
+app.get('/boats/:id', function(req, res) {
+    Boat
+        .findById(req.params.id)
+        .then(function(boat) {
+            return res.json(boat.serialize());
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+});
+
+
 
 // ---------------JOB ENDPOINTS------------------------------
 // Create a new job
 app.post('/jobs/create', (req, res) => {
     let jobName = req.body.jobName;
+    let boatFullAddress = req.body.boatFullAddress
     let services = req.body.services;
     let serviceDate = req.body.serviceDate;
     let assignTo = req.body.assignTo;
@@ -324,6 +341,7 @@ app.post('/jobs/create', (req, res) => {
 
     Job.create({
         jobName,
+        boatFullAddress,
         services,
         serviceDate,
         assignTo,

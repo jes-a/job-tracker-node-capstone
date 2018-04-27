@@ -7,7 +7,7 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    jobAddress: {
+    boatFullAddress: {
         type: String,
         required: false
     },

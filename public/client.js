@@ -1,5 +1,7 @@
 "use strict";
 
+let jobDate = [];
+
 // Show Admin Landing Screen
 function showAdminLandingScreen() {
     $('#login-screen').hide();
@@ -20,50 +22,44 @@ function showAdminLandingScreen() {
     $('#worker-profile-screen').hide();
 }
 
-// function changeDate(){
-//     var currentDate= document.getElementById('date').value; 
-//     //Extracting the date value in dd/mm/yyyy format from the mentioned text box
-//     alert('The original value: ' + currentDate); 
-//     //Printing the extracted date value before making the change
-//     var newDate = currentDate.split('/'); 
-//     //Splitting the extracted date value using the delimiter /, which is the seperator used in the date value         
-//     currentDate = newDate[1] + "/" + newDate[0] + "/" + newDate[2];//Constructing a new date value (string) using the splitted values.
-//     alert('Value after the change : ' + currentDate);//Showing the new date value.
-// }
-
-
+function setReadableDate(serviceDate) {
+    let d = serviceDate.split('-');
+    let readableDate = new Date(d);
+    return readableDate.toDateString();
+}
 
 
 // Show Admin Job List Screen
 function populateJobList(jobs) {
     //create an empty variable to store one LI for each one the results
-//    let dateHeaderHtml = "";
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
-        console.log(item.assignTo);
-//        dateHeaderHtml += `<h3>Monday, March 26</h3>`;
+        let serviceDate = setReadableDate(item.serviceDate);
+        htmlContent += '<div class="date-header">';
+        htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
+        htmlContent += '</div>';
         htmlContent += '<div class="job js-job-list">';
-        htmlContent += `<h3 class="js-boat-name boat">${item.serviceDate}</h3>`;
         htmlContent += '<i class="far fa-edit edit-btn js-edit-job-link"></i>';
         htmlContent += `<h4 class="js-boat-name boat">${item.jobName}</h4>`;
-        htmlContent += `<p class="js-job-address ${item.boatName}"></p>`;
+        htmlContent += `<p class="js-job-address">${item.boatFullAddress}</p>`;
         htmlContent += '<h5>Services</h5>';
+        htmlContent += '<ul class="job-list-items">';
         $.each(item.services, function(key, value) {
-        htmlContent += `<p class="js-job-service">${value}</p>`;
+        htmlContent += `<li class="js-job-service">${value}</li>`;
         });
+        htmlContent += '</ul class="job-list-items">';
         htmlContent += '<h5>Workers</h5>';
- //       htmlContent += '<ul>';
+        htmlContent += '<ul>';
         $.each(item.assignTo,function(key, value) {
-        htmlContent += `<p class="js-job-worker">${value}</p>`;
+        htmlContent += `<li class="js-job-worker">${value}</li>`;
         });
- //       htmlContent += '</ul>';
+        htmlContent += '</ul>';
         htmlContent += '<h5>Notes</h5>';
         htmlContent += `<p class="js-job-notes">${item.jobNotes}</p>`;
         htmlContent += '</div>';
     });
 
-//    $('.js-date-header').html(dateHeaderHtml);
     $('.js-job-list-wrapper').html(htmlContent);
 }
 
@@ -86,10 +82,11 @@ function showWorkerJobListScreen() {
 }
 
 function showAdminJobListScreen() {
+
     $.getJSON('/jobs', function(res) {
         populateJobList(res);
-        console.log(res);
     });
+
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('html').addClass('white-bg');
@@ -113,7 +110,7 @@ function populateBoatNameDropdown(boats) {
     let htmlContent = "";
 
     $.each(boats, function(i, item) {
-        htmlContent += `<option value="${item.id}">${item.boatName}</option>`;
+        htmlContent += `<option value="${item.boatFullAddress}">${item.boatName}</option>`;
     });
 
     $('.js-select-boat-name').html(htmlContent);
@@ -174,7 +171,6 @@ function populateWorkerList(workers) {
 
 function populateUpdatedWorkerScreen(result) {
     let updatedWorkerId = result.id;
-    console.log(updatedWorkerId);
     $.getJSON('/users/' + updatedWorkerId, function(res) {
         $(".js-worker-detail").html(
             `<i class="far fa-edit edit-btn js-edit-worker-button" id="${updatedWorkerId}"></i>
@@ -354,6 +350,7 @@ $('.js-add-job').on('click', function(event) {
 $('#add-job-form').on('submit', function(event) {
     event.preventDefault();
     const jobName = $('#add-job-name option:selected').text();
+    const boatFullAddress = $('#add-job-name option:selected').val();
     const services = [];
     $('input[name="add-service"]:checked').each(function(i, item) {
         services.push($(item).attr('value'))
@@ -375,6 +372,7 @@ $('#add-job-form').on('submit', function(event) {
     } else {
         const newJobObject = {
             jobName,
+            boatFullAddress,
             services,
             serviceDate,
             assignTo,
@@ -400,11 +398,10 @@ $('#add-job-form').on('submit', function(event) {
     }
 });
 
-// Open job list screen from landing page or nav
+// Open Job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
     console.log('job-list-admin clicked');
     showAdminJobListScreen();
-    console.log();
 });
 
 // Open Edit job screen from edit button and fill in relevant fields
@@ -823,7 +820,6 @@ $(document).on('click', function() {
 // Open Job List Screen from nav or header
 $('.js-job-list-link').on('click', function(event) {
     event.preventDefault();
-    console.log('home nav clicked');
     $.getJSON('/jobs', function(res) {
         populateJobList(res);
         showWorkerJobListScreen();
