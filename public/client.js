@@ -1,7 +1,5 @@
 "use strict";
 
-let jobDate = [];
-
 // Show Admin Landing Screen
 function showAdminLandingScreen() {
     $('#login-screen').hide();
@@ -25,6 +23,8 @@ function showAdminLandingScreen() {
 function setReadableDate(serviceDate) {
     let d = serviceDate.split('-');
     let readableDate = new Date(d);
+    console.log(readableDate.toDateString());
+    alert(readableDate.toDateString());
     return readableDate.toDateString();
 }
 
@@ -35,12 +35,13 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
+        console.log(item._id);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
         htmlContent += '</div>';
         htmlContent += '<div class="job js-job-list">';
-        htmlContent += '<i class="far fa-edit edit-btn js-edit-job-link"></i>';
+        htmlContent += `<i class="far fa-edit edit-btn js-edit-job-link" id="${item._id}""></i>`;
         htmlContent += `<h4 class="js-boat-name boat">${item.jobName}</h4>`;
         htmlContent += `<p class="js-job-address">${item.boatFullAddress}</p>`;
         htmlContent += '<h5>Services</h5>';
@@ -400,12 +401,17 @@ $('#add-job-form').on('submit', function(event) {
 
 // Open Job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
-    console.log('job-list-admin clicked');
     showAdminJobListScreen();
 });
 
-// Open Edit job screen from edit button and fill in relevant fields
-$('.js-job-list').on('click', '.js-edit-job-link', function(event) {
+// Open edit job form and fill in with worker values based on Id
+$('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
+    event.preventDefault();
+    let jobId = $(this).attr('id');
+    console.log(this);
+    $.getJSON('/jobs/' + jobId, function(res) {
+        // add in pre-filled values based on worker id
+        $('#edit-job-name').val(res.jobName);
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('.js-menu-btn').hide();
@@ -418,6 +424,7 @@ $('.js-job-list').on('click', '.js-edit-job-link', function(event) {
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
     console.log('edit job link clicked');
+    });
 });
 
 // Add worker data to database
@@ -559,6 +566,7 @@ $('.js-worker-detail-wrapper').on('click', 'li', function(event) {
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
+    console.log(this);
     $.getJSON('/users/' + workerId, function(res) {
         // add in pre-filled values based on worker id
         $('#edit-first-name').val(res.firstName);
