@@ -21,10 +21,9 @@ function showAdminLandingScreen() {
 }
 
 function setReadableDate(serviceDate) {
-    let d = serviceDate.split('-');
+    console.log(serviceDate);
+    let d = serviceDate.replace(/-/g, "/");
     let readableDate = new Date(d);
-    console.log(readableDate.toDateString());
-    alert(readableDate.toDateString());
     return readableDate.toDateString();
 }
 
@@ -35,7 +34,7 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
-        console.log(item._id);
+//        console.log(item._id);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
