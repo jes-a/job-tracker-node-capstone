@@ -20,8 +20,7 @@ const jobSchema = new mongoose.Schema({
         required: false
     },
     serviceDate: {
-        type: Date,
-        default: Date.now,
+        type: String,
         required: false
     },
     assignTo: {

@@ -28,13 +28,12 @@ function setReadableDate(serviceDate) {
 }
 
 
-// Show Admin Job List Screen
+// Populate Admin Job List Screen
 function populateJobList(jobs) {
     //create an empty variable to store one LI for each one the results
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
-        console.log(item);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -48,7 +47,8 @@ function populateJobList(jobs) {
         $.each(item.services, function(key, value) {
         htmlContent += `<li class="js-job-service">${value}</li>`;
         });
-        htmlContent += '</ul class="job-list-items">';
+        htmlContent += `<li class="js-job-service">${item.otherService}</li>`
+        htmlContent += '</ul>';
         htmlContent += '<h5>Workers</h5>';
         htmlContent += '<ul>';
         $.each(item.assignTo,function(key, value) {
@@ -83,9 +83,33 @@ function showWorkerJobListScreen() {
     $('#worker-profile-screen').hide();
 }
 
-// Populate Job List Screen for Admin
+// Show Job List Screen for Admin
 function showAdminJobListScreen() {
 
+    $.getJSON('/jobs', function(res) {
+        populateJobList(res);
+    });
+
+    $('*').scrollTop(0);
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').show();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').show();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
+}
+
+// Show Job List Screen for Admin after updating job
+function showUpdatedAdminJobListScreen() {
     $.getJSON('/jobs', function(res) {
         populateJobList(res);
     });
@@ -359,9 +383,9 @@ $('#add-job-form').on('submit', function(event) {
         services.push($(item).attr('value'))
     });
     const otherService = $('#add-other-service').val();
-        if (otherService !== "") {
-            services.push(otherService);
-        }
+        // if (otherService !== "") {
+        //     services.push(otherService);
+        // }
     const serviceDate = $('#date-select').val();
     const assignTo = [];
     $('input[name="assign-to"]:checked').each(function(i, item) {
@@ -395,7 +419,7 @@ $('#add-job-form').on('submit', function(event) {
             })
             .done(function(result) {
                 alert('You successfully added a new job');
-                showAdminJobListScreen();
+                showAdminJobListScreen(result);
             })
             .fail(function(jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -512,7 +536,7 @@ $('.edit-job-form').on('submit', function(event) {
             .done(function(result) {
                 console.log(result);
                 alert(`You successfully updated this job`);
-                populateJobList(result);
+                showUpdatedAdminJobListScreen();
             })
             .fail(function(jqXHR, error, errorThrown) {
                 console.log(jqXHR);

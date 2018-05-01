@@ -397,29 +397,30 @@ app.get('/jobs/:id', function(req, res) {
 
 // Edit details of a job
 app.put('/jobs/:id', function(req, res) {
-    // let toUpdate = {};
-    // let updatedFields = [
-    //     'services',
-    //     'otherService',
-    //     'serviceDate',
-    //     'assignTo',
-    //     'jobNotes'
-    // ];
-    // updatedFields.forEach(function(field) {
-    //     if (field in req.body) {
-    //         toUpdate[field] = req.body[field];
-    //     }
-    // });
+    let updated = {};
+    let updatedFields = [
+        'services',
+        'otherService',
+        'serviceDate',
+        'assignTo',
+        'jobNotes'
+    ];
+    updatedFields.forEach(field => {
+        if (field in req.body) {
+            updated[field] = req.body[field];
+        }
+    });
+
     Job
-        .findByIdAndUpdate(req.params.id, {
-            // $set: toUpdate
-            services: req.body.services,
-            otherService: req.body.otherService,
-            serviceDate: req.body.serviceDate,
-            assignTo: req.body.assignTo,
-            jobNotes: req.body.jobNotes},
+        .findByIdAndUpdate(req.params.id, 
+            { $set: updated },
+            // services: req.body.services,
+            // otherService: req.body.otherService,
+            // serviceDate: req.body.serviceDate,
+            // assignTo: req.body.assignTo,
+            // jobNotes: req.body.jobNotes},
             {new: true})
-        .exec().then(function(jobs) {
+        .then(function(jobs) {
             return res.json(jobs);
         })
         .catch(err => {
