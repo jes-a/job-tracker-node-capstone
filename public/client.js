@@ -64,6 +64,8 @@ function populateJobList(jobs) {
     $('.js-job-list-wrapper').html(htmlContent);
 }
 
+
+
 // Populate Worker Job List Screen for Worker after Log in
 function showWorkerJobListScreen() {
     $('*').scrollTop(0);
@@ -80,6 +82,7 @@ function showWorkerJobListScreen() {
     $('.js-worker-menu-btn').show();
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').show();
+    $('.js-add-note-section').hide();
     $('#worker-profile-screen').hide();
 }
 
@@ -233,33 +236,12 @@ function populateUpdatedWorkerScreen(result) {
 
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
-// $(document).ready(function() {
-//     $('#login-screen').show();
-//     $('html').removeClass('white-bg');
-//     $('.js-menu-btn').hide();
-//     $('.js-menu').hide();
-//     $('#admin-home').hide();
-//     $('#add-job-screen').hide();
-//     $('#edit-job-screen').hide();
-//     $('#job-list-screen-admin').hide();
-//     $('#add-worker-screen').hide();
-//     $('#worker-list-screen').hide();
-//     $('#worker-detail-screen').hide();
-//     $('#edit-worker-screen').hide();
-//     $('#add-boat-details').hide();
-//     $('.js-menu-btn').hide();
-//     $('.js-worker-menu').hide(); 
-//     $('#job-list-screen-worker').hide();
-//     $('#worker-profile-screen').hide();
-// });
-
-// // for testing purposes
 $(document).ready(function() {
-    $('#login-screen').hide();
-    $('html').addClass('white-bg');
-    $('.js-menu-btn').show();
+    $('#login-screen').show();
+    $('html').removeClass('white-bg');
+    $('.js-menu-btn').hide();
     $('.js-menu').hide();
-    $('#admin-home').show();
+    $('#admin-home').hide();
     $('#add-job-screen').hide();
     $('#edit-job-screen').hide();
     $('#job-list-screen-admin').hide();
@@ -268,12 +250,33 @@ $(document).ready(function() {
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
     $('#add-boat-details').hide();
-    $('.js-worker-menu-btn').hide();
-    $('.js-worker-menu').hide();
+    $('.js-menu-btn').hide();
+    $('.js-worker-menu').hide(); 
     $('#job-list-screen-worker').hide();
     $('#worker-profile-screen').hide();
-    $('.js-edit-profile-section').hide();
 });
+
+// // for testing purposes
+// $(document).ready(function() {
+//     $('#login-screen').hide();
+//     $('html').addClass('white-bg');
+//     $('.js-menu-btn').show();
+//     $('.js-menu').hide();
+//     $('#admin-home').show();
+//     $('#add-job-screen').hide();
+//     $('#edit-job-screen').hide();
+//     $('#job-list-screen-admin').hide();
+//     $('#add-worker-screen').hide();
+//     $('#worker-list-screen').hide();
+//     $('#worker-detail-screen').hide();
+//     $('#edit-worker-screen').hide();
+//     $('#add-boat-details').hide();
+//     $('.js-worker-menu-btn').hide();
+//     $('.js-worker-menu').hide();
+//     $('#job-list-screen-worker').hide();
+//     $('#worker-profile-screen').hide();
+//     $('.js-edit-profile-section').hide();
+// });
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -549,7 +552,6 @@ $('.edit-job-form').on('submit', function(event) {
 $('.edit-job-form').on('click', '#js-delete-job', function(event) {
     event.preventDefault();
     let jobId = event.delegateTarget.id;
-    console.log(jobId);
     if (confirm('Are you SURE you want to delete this job? Your data will be PERMANENTLY erased.') === true) {
         $.ajax({
                 method: 'DELETE',
@@ -699,7 +701,6 @@ $('.js-worker-detail-wrapper').on('click', 'li', function(event) {
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    console.log(this);
     $.getJSON('/users/' + workerId, function(res) {
         // add in pre-filled values based on worker id
         $('#edit-first-name').val(res.firstName);
