@@ -20,8 +20,8 @@ function showAdminLandingScreen() {
     $('#worker-profile-screen').hide();
 }
 
+// Change date from YYYY-MM-DD format to readable format for Job List header
 function setReadableDate(serviceDate) {
-    console.log(serviceDate);
     let d = serviceDate.replace(/-/g, "/");
     let readableDate = new Date(d);
     return readableDate.toDateString();
@@ -34,7 +34,7 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
-//        console.log(item._id);
+        console.log(item);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -60,9 +60,11 @@ function populateJobList(jobs) {
         htmlContent += '</div>';
     });
 
+    //use the HTML output to show it in the index.html
     $('.js-job-list-wrapper').html(htmlContent);
 }
 
+// Populate Worker Job List Screen for Worker after Log in
 function showWorkerJobListScreen() {
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -81,6 +83,7 @@ function showWorkerJobListScreen() {
     $('#worker-profile-screen').hide();
 }
 
+// Populate Job List Screen for Admin
 function showAdminJobListScreen() {
 
     $.getJSON('/jobs', function(res) {
@@ -109,10 +112,12 @@ function showAdminJobListScreen() {
 function populateBoatNameDropdown(boats) {
     let htmlContent = "";
 
+        htmlContent += '<option disabled selected value> -- Select a Boat -- </option>';
     $.each(boats, function(i, item) {
         htmlContent += `<option value="${item.boatFullAddress}">${item.boatName}</option>`;
     });
 
+    //use the HTML output to show it in the index.html
     $('.js-select-boat-name').html(htmlContent);
 }
 
@@ -124,7 +129,7 @@ function populateAssignToList(workers) {
 
     $.each(workers, function(i, item) {
         htmlContent += `<li>
-                            <input type="checkbox" id="${item.id}" value="${item.fullName}" name="assign-to" checked>
+                            <input type="checkbox" class="${item.id}" value="${item.fullName}" name="assign-to">
                             <label for="assign-to" class="checkbox">${item.fullName}</label>
                         </li>`;
     });
@@ -263,7 +268,6 @@ $('#js-login-button').on('click', function(event) {
             email: inputEmail,
             password: inputPw
         };
-        console.log(loginObject);
         $.ajax({
                 type: 'POST',
                 url: '/signin',
@@ -272,7 +276,6 @@ $('#js-login-button').on('click', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                console.log(result.type);
                 if (result.type == 'worker') {
                     showWorkerJobListScreen();
                 } else {
@@ -297,7 +300,6 @@ $('.js-logout-link').on('click', function(event) {
 // Open admin landing screen when home is clicked on
 $('.js-admin-home').on('click', function(event) {
     showAdminLandingScreen();
-    console.log('home button clicked');
 });
 
 // Open nav menu from headers
@@ -306,12 +308,13 @@ $('.js-menu-btn').on('click', function(event) {
     $('.js-menu').toggle();
 });
 
+// Hide nav menu when clicked outside nav menu
 $(document).on('click', function() {
     $('.js-menu').hide();
 })
 
 
-// go to Admin Landing Screen when cancel is clicked
+// Go to Admin Landing Screen when cancel is clicked
 $('.js-cancel-button').on('click', function(event) {
     showAdminLandingScreen();
 });
@@ -355,6 +358,10 @@ $('#add-job-form').on('submit', function(event) {
     $('input[name="add-service"]:checked').each(function(i, item) {
         services.push($(item).attr('value'))
     });
+    const otherService = $('#add-other-service').val();
+        if (otherService !== "") {
+            services.push(otherService);
+        }
     const serviceDate = $('#date-select').val();
     const assignTo = [];
     $('input[name="assign-to"]:checked').each(function(i, item) {
@@ -374,6 +381,7 @@ $('#add-job-form').on('submit', function(event) {
             jobName,
             boatFullAddress,
             services,
+            otherService,
             serviceDate,
             assignTo,
             jobNotes
@@ -386,7 +394,6 @@ $('#add-job-form').on('submit', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                console.log(result);
                 alert('You successfully added a new job');
                 showAdminJobListScreen();
             })
@@ -400,17 +407,56 @@ $('#add-job-form').on('submit', function(event) {
 
 // Open Job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
-    showAdminJobListScreen();
+        $.getJSON('/jobs', function(res) {
+        populateJobList(res);
+    });
+
+    $('*').scrollTop(0);
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').show();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').show();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
 });
 
 // Open edit job form and fill in with worker values based on Id
 $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
     event.preventDefault();
+    $.getJSON('/users', function(res) {
+    populateAssignToList(res);
+    });
+    $.getJSON('/boats', function(res) {
+        populateBoatNameDropdown(res);
+    });
     let jobId = $(this).attr('id');
-    console.log(this);
     $.getJSON('/jobs/' + jobId, function(res) {
-        // add in pre-filled values based on worker id
-        $('#edit-job-name').val(res.jobName);
+        console.log(jobId);
+        // add in pre-filled values based on job id
+        let htmlContent = "";
+        htmlContent += `<h3 class="js-boat-name boat">${res.jobName}</h3>`;
+        $('.edit-boat-name').html(htmlContent);      
+        $.each(res.services, function(key, value) {
+        $('input[value="' + value + '"]').prop('checked', true);
+        });
+        $('#edit-other-service').text(res.otherService);
+        $('#edit-date-select').val(res.serviceDate);        
+        $.each(res.assignTo, function(key, value) {
+        $('input[value="' + value + '"]').prop('checked', true);
+        });
+        $('#edit-notes').val(res.jobNotes);
+        $('.edit-job-form').attr('id', jobId);
+
+    });
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('.js-menu-btn').hide();
@@ -422,8 +468,58 @@ $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
-    console.log('edit job link clicked');
+});
+
+//Send Edit Job form to update job information 
+$('.edit-job-form').on('submit', function(event) {
+    event.preventDefault(); 
+    let jobId = $(this).attr('id');
+    const services = [];
+    $('input[name="edit-service"]:checked').each(function(i, item) {
+        services.push($(item).attr('value'))
     });
+    const otherService = $('#edit-other-service').val();
+        // if (otherService !== "") {
+        //     services.push(otherService);
+        // }
+    const serviceDate = $('#edit-date-select').val();
+    const assignTo = [];
+    $('input[name="assign-to"]:checked').each(function(i, item) {
+        assignTo.push($(item).attr('value'))
+    });
+    const jobNotes = $('#edit-notes').val();
+    if (services == "") {
+        alert('Please select service');
+    } else if (serviceDate == "") {
+        alert('Please select service date');
+    } else if (assignTo == "") {
+        alert('Please select workers');
+    } else {
+        const updateJobObject = {
+            services,
+            otherService,
+            serviceDate,
+            assignTo,
+            jobNotes
+        };
+        $.ajax({
+                type: 'PUT',
+                url: '/jobs/' + jobId,
+                dataType: 'json',
+                data: JSON.stringify(updateJobObject),
+                contentType: 'application/json'
+            })
+            .done(function(result) {
+                console.log(result);
+                alert(`You successfully updated this job`);
+                populateJobList(result);
+            })
+            .fail(function(jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    }
 });
 
 // Add worker data to database
@@ -606,8 +702,6 @@ $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
 $('.edit-worker-form').on('submit', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    console.log(workerId);
-    console.log('save button clicked');
     const firstName = $('#edit-first-name').val();
     const lastName = $('#edit-last-name').val();
     const phoneNumber = $('#edit-phone-number').val();
@@ -665,7 +759,6 @@ $('.edit-worker-form').on('submit', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                console.log(result);
                 alert(`You successfully updated ${firstName}`);
                 populateUpdatedWorkerScreen(result);
             })
@@ -679,9 +772,7 @@ $('.edit-worker-form').on('submit', function(event) {
 
 $('.js-edit-worker-cancel').on('click', function(event) {
     event.preventDefault();
-    console.log('cancel button pushed');
     let workerId = $('.edit-worker-form').attr('id');
-    console.log(workerId);
     $.getJSON('/users/' + workerId, function(res) {
         $(".js-worker-detail").html(
             `<i class="far fa-edit edit-btn js-edit-worker-button" id="${workerId}"></i>
@@ -728,7 +819,6 @@ $('#customer-address-same').on('click', function() {
 // Add boat data to database
 $('#add-boat-details-form').on('submit', function(event) {
     event.preventDefault();
-    console.log('Add boat form submitted');
     let boatName = $('#add-boat-name').val();
     let boatMake = $('#add-boat-make').val();
     let boatLength = $('#add-boat-length').val();

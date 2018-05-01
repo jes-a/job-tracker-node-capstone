@@ -15,8 +15,13 @@ const jobSchema = new mongoose.Schema({
         type: [String],
         required: false
     },
-    serviceDate: {
+    otherService: {
         type: String,
+        required: false
+    },
+    serviceDate: {
+        type: Date,
+        default: Date.now,
         required: false
     },
     assignTo: {
@@ -29,6 +34,10 @@ const jobSchema = new mongoose.Schema({
     },
 });
 
+// jobSchema.virtual('allServices').
+//     get(function() {
+//         return this.services + ", " + this.otherService;
+//     });
 
 const Job = mongoose.model('Job', jobSchema);
 

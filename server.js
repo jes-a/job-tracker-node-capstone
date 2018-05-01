@@ -335,6 +335,7 @@ app.post('/jobs/create', (req, res) => {
     let jobName = req.body.jobName;
     let boatFullAddress = req.body.boatFullAddress
     let services = req.body.services;
+    let otherService = req.body.otherService;
     let serviceDate = req.body.serviceDate;
     let assignTo = req.body.assignTo;
     let jobNotes = req.body.jobNotes;
@@ -343,6 +344,7 @@ app.post('/jobs/create', (req, res) => {
         jobName,
         boatFullAddress,
         services,
+        otherService,
         serviceDate,
         assignTo,
         jobNotes,
@@ -377,6 +379,58 @@ app.get('/jobs', (req, res) => {
             });
         });
 });
+
+// Retrieve a single job by id to populate edit job form
+app.get('/jobs/:id', function(req, res) {
+    Job
+        .findById(req.params.id)
+        .then(function(job) {
+            return res.json(job);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+});
+
+// Edit details of a job
+app.put('/jobs/:id', function(req, res) {
+    // let toUpdate = {};
+    // let updatedFields = [
+    //     'services',
+    //     'otherService',
+    //     'serviceDate',
+    //     'assignTo',
+    //     'jobNotes'
+    // ];
+    // updatedFields.forEach(function(field) {
+    //     if (field in req.body) {
+    //         toUpdate[field] = req.body[field];
+    //     }
+    // });
+    Job
+        .findByIdAndUpdate(req.params.id, {
+            // $set: toUpdate
+            services: req.body.services,
+            otherService: req.body.otherService,
+            serviceDate: req.body.serviceDate,
+            assignTo: req.body.assignTo,
+            jobNotes: req.body.jobNotes},
+            {new: true})
+        .exec().then(function(jobs) {
+            return res.json(jobs);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+
+});
+
 
 
 // ---------------MISC------------------------------
