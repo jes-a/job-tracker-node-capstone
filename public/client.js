@@ -47,7 +47,7 @@ function populateJobList(jobs) {
         $.each(item.services, function(key, value) {
         htmlContent += `<li class="js-job-service">${value}</li>`;
         });
-        htmlContent += `<li class="js-job-service">${item.otherService}</li>`
+        // htmlContent += `<li class="js-job-service">${item.otherService}</li>`
         htmlContent += '</ul>';
         htmlContent += '<h5>Workers</h5>';
         htmlContent += '<ul>';
@@ -383,9 +383,9 @@ $('#add-job-form').on('submit', function(event) {
         services.push($(item).attr('value'))
     });
     const otherService = $('#add-other-service').val();
-        // if (otherService !== "") {
-        //     services.push(otherService);
-        // }
+        if (otherService !== "") {
+            services.push(otherService);
+        }
     const serviceDate = $('#date-select').val();
     const assignTo = [];
     $('input[name="assign-to"]:checked').each(function(i, item) {
@@ -464,7 +464,6 @@ $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
     });
     let jobId = $(this).attr('id');
     $.getJSON('/jobs/' + jobId, function(res) {
-        console.log(jobId);
         // add in pre-filled values based on job id
         let htmlContent = "";
         htmlContent += `<h3 class="js-boat-name boat">${res.jobName}</h3>`;
@@ -503,9 +502,9 @@ $('.edit-job-form').on('submit', function(event) {
         services.push($(item).attr('value'))
     });
     const otherService = $('#edit-other-service').val();
-        // if (otherService !== "") {
-        //     services.push(otherService);
-        // }
+        if (otherService !== "") {
+            services.push(otherService);
+        }
     const serviceDate = $('#edit-date-select').val();
     const assignTo = [];
     $('input[name="assign-to"]:checked').each(function(i, item) {
@@ -544,6 +543,21 @@ $('.edit-job-form').on('submit', function(event) {
                 console.log(errorThrown);
             });
     }
+});
+
+// Delete job from Edit Job Form
+$('.edit-job-form').on('click', '#js-delete-job', function(event) {
+    event.preventDefault();
+    let jobId = event.delegateTarget.id;
+    console.log(jobId);
+    if (confirm('Are you SURE you want to delete this job? Your data will be PERMANENTLY erased.') === true) {
+        $.ajax({
+                method: 'DELETE',
+                url: '/jobs/' + jobId,
+                success: showAdminLandingScreen()
+        })
+    }
+
 });
 
 // Add worker data to database

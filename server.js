@@ -234,6 +234,125 @@ app.put('/users/:id', function(req, res) {
 
 });
 
+// ---------------JOB ENDPOINTS------------------------------
+// Create a new job
+app.post('/jobs/create', (req, res) => {
+    let jobName = req.body.jobName;
+    let boatFullAddress = req.body.boatFullAddress
+    let services = req.body.services;
+    let otherService = req.body.otherService;
+    let serviceDate = req.body.serviceDate;
+    let assignTo = req.body.assignTo;
+    let jobNotes = req.body.jobNotes;
+
+    Job.create({
+        jobName,
+        boatFullAddress,
+        services,
+        otherService,
+        serviceDate,
+        assignTo,
+        jobNotes,
+    }, (err, item) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error on job.create'
+            });
+        }
+        if (item) {
+            console.log(`Job \`${jobName}\` created.`);
+            return res.json(item);
+        }
+    });
+});
+
+app.get('/jobs', (req, res) => {
+    Job
+        .find()
+        .sort({ serviceDate: 1 })
+        .then((jobs) => {
+            let jobOutput = [];
+            jobs.map(function(job) {
+                jobOutput.push(job);
+            });
+            res.json(jobOutput);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
+// Retrieve a single job by id to populate edit job form
+app.get('/jobs/:id', function(req, res) {
+    Job
+        .findById(req.params.id)
+        .then(function(job) {
+            return res.json(job);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+});
+
+// Edit details of a job
+app.put('/jobs/:id', function(req, res) {
+    let updated = {};
+    let updatedFields = [
+        'services',
+        'otherService',
+        'serviceDate',
+        'assignTo',
+        'jobNotes'
+    ];
+    updatedFields.forEach(field => {
+        if (field in req.body) {
+            updated[field] = req.body[field];
+        }
+    });
+
+    Job
+        .findByIdAndUpdate(req.params.id, 
+            { $set: updated },
+            // services: req.body.services,
+            // otherService: req.body.otherService,
+            // serviceDate: req.body.serviceDate,
+            // assignTo: req.body.assignTo,
+            // jobNotes: req.body.jobNotes},
+            {new: true})
+        .then(jobs =>  {
+            return res.json(jobs);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+
+});
+
+//DELETE
+//Delete a job by id
+app.delete('/jobs/:id', function(req, res) {
+    Job
+        .findByIdAndRemove(req.params.id)
+        .then(() => {
+            console.log(`Deleted job with id \`${req.params.id}\``);
+            res.status(204).end();
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+});
 
 // ---------------BOAT ENDPOINTS------------------------------
 //POST 
@@ -327,110 +446,6 @@ app.get('/boats/:id', function(req, res) {
         });
 });
 
-
-
-// ---------------JOB ENDPOINTS------------------------------
-// Create a new job
-app.post('/jobs/create', (req, res) => {
-    let jobName = req.body.jobName;
-    let boatFullAddress = req.body.boatFullAddress
-    let services = req.body.services;
-    let otherService = req.body.otherService;
-    let serviceDate = req.body.serviceDate;
-    let assignTo = req.body.assignTo;
-    let jobNotes = req.body.jobNotes;
-
-    Job.create({
-        jobName,
-        boatFullAddress,
-        services,
-        otherService,
-        serviceDate,
-        assignTo,
-        jobNotes,
-    }, (err, item) => {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error on job.create'
-            });
-        }
-        if (item) {
-            console.log(`Job \`${jobName}\` created.`);
-            return res.json(item);
-        }
-    });
-});
-
-app.get('/jobs', (req, res) => {
-    Job
-        .find()
-        .sort({ serviceDate: 1 })
-        .then((jobs) => {
-            let jobOutput = [];
-            jobs.map(function(job) {
-                jobOutput.push(job);
-            });
-            res.json(jobOutput);
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
-        });
-});
-
-// Retrieve a single job by id to populate edit job form
-app.get('/jobs/:id', function(req, res) {
-    Job
-        .findById(req.params.id)
-        .then(function(job) {
-            return res.json(job);
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
-});
-
-// Edit details of a job
-app.put('/jobs/:id', function(req, res) {
-    let updated = {};
-    let updatedFields = [
-        'services',
-        'otherService',
-        'serviceDate',
-        'assignTo',
-        'jobNotes'
-    ];
-    updatedFields.forEach(field => {
-        if (field in req.body) {
-            updated[field] = req.body[field];
-        }
-    });
-
-    Job
-        .findByIdAndUpdate(req.params.id, 
-            { $set: updated },
-            // services: req.body.services,
-            // otherService: req.body.otherService,
-            // serviceDate: req.body.serviceDate,
-            // assignTo: req.body.assignTo,
-            // jobNotes: req.body.jobNotes},
-            {new: true})
-        .then(function(jobs) {
-            return res.json(jobs);
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
-
-});
 
 
 
