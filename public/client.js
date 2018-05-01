@@ -3,7 +3,7 @@
 // Show Admin Landing Screen
 function showAdminLandingScreen() {
     $('#login-screen').hide();
-    $('html').addClass('white-bg');
+    $('html').removeClass('white-bg');
     $('.js-menu-btn').show();
     $('.js-menu').hide();
     $('#admin-home').show();
@@ -236,33 +236,12 @@ function populateUpdatedWorkerScreen(result) {
 
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
-$(document).ready(function() {
-    $('#login-screen').show();
-    $('html').removeClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('#add-boat-details').hide();
-    $('.js-menu-btn').hide();
-    $('.js-worker-menu').hide(); 
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').hide();
-});
-
-// // for testing purposes
 // $(document).ready(function() {
-//     $('#login-screen').hide();
-//     $('html').addClass('white-bg');
-//     $('.js-menu-btn').show();
+//     $('#login-screen').show();
+//     $('html').removeClass('white-bg');
+//     $('.js-menu-btn').hide();
 //     $('.js-menu').hide();
-//     $('#admin-home').show();
+//     $('#admin-home').hide();
 //     $('#add-job-screen').hide();
 //     $('#edit-job-screen').hide();
 //     $('#job-list-screen-admin').hide();
@@ -271,12 +250,33 @@ $(document).ready(function() {
 //     $('#worker-detail-screen').hide();
 //     $('#edit-worker-screen').hide();
 //     $('#add-boat-details').hide();
-//     $('.js-worker-menu-btn').hide();
-//     $('.js-worker-menu').hide();
+//     $('.js-menu-btn').hide();
+//     $('.js-worker-menu').hide(); 
 //     $('#job-list-screen-worker').hide();
 //     $('#worker-profile-screen').hide();
-//     $('.js-edit-profile-section').hide();
 // });
+
+// for testing purposes
+$(document).ready(function() {
+    $('#login-screen').hide();
+    $('html').removeClass('white-bg');
+    $('.js-menu-btn').show();
+    $('.js-menu').hide();
+    $('#admin-home').show();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
+    $('.js-edit-profile-section').hide();
+});
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 

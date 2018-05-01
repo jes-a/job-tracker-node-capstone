@@ -131,11 +131,6 @@ fa {
     font-size: 1rem;
 }
 
-header {
-    background: #3B6478;
-    height: 60px;
-}
-
 li {
     font-family: 'lato', sans-serif;
     font-size: 1rem;
@@ -153,7 +148,19 @@ a {
 /* Style for Main Headers */
 
 .jt-header {
+    background: #3B6478;
+    height: 60px;
     position: relative;
+}
+
+.jt-header:before {
+    content: "";
+    background-color: #3B6478;
+    position: absolute;
+    height: 100%;
+    width:  200vw;
+    left:  -100vw;
+    z-index: -1;
 }
 
 .jt-header h2 {
