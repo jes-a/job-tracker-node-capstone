@@ -1,4 +1,5 @@
 "use strict";
+let workerName = "";
 
 // Show Admin Landing Screen
 function showAdminLandingScreen() {
@@ -119,7 +120,7 @@ function showUpdatedAdminJobListScreen() {
 function populateBoatNameDropdown(boats) {
     let htmlContent = "";
 
-        htmlContent += '<option disabled selected value> -- Select a Boat -- </option>';
+    htmlContent += '<option disabled selected value> -- Select a Boat -- </option>';
     $.each(boats, function(i, item) {
         htmlContent += `<option value="${item.boatFullAddress}">${item.boatName}</option>`;
     });
@@ -165,7 +166,7 @@ function populateEditAssignToList(workers) {
 function populateWorkerList(workers) {
     //create an empty variable to store one LI for each one the results
     let htmlContent = "";
-
+    console.log(workers);
     $.each(workers, function(i, item) {
         htmlContent += '<div class="worker">';
         htmlContent += '<ul class="js-worker-list-details">';
@@ -230,16 +231,14 @@ function populateUpdatedWorkerScreen(result) {
 }
 
 // Populate Worker Job List Screen for Worker after Log in
-function showWorkerJobListScreen(worker) {
-    let workerName = worker.fullName;
-    let workerId = worker.id;
+function showWorkerJobListScreen(jobs) {
     let htmlContent = "";
 
-
-    $.getJSON('/get-jobs', function(res) {
-        console.log(res);
-        $.each(res, function(i, item) {
-            if (item.assignTo == workerName) {
+    // Find jobs assigned to worker and populate job list
+    $.each(jobs, function(i, item) {
+        $.each(item.assignTo,function(key, value) {
+            let assigned = value;
+            if (assigned == workerName) {
                 let serviceDate = setReadableDate(item.serviceDate);
                 htmlContent += '<div class="date-header">';
                 htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -262,17 +261,11 @@ function showWorkerJobListScreen(worker) {
                 htmlContent += '<h5>Notes</h5>';
                 htmlContent += `<p class="js-job-notes">${item.jobNotes}</p>`;
                 htmlContent += '</div>';
-               }
-            });
+            }
+        });
     });
 
     $('.js-worker-job-list-wrapper').html(htmlContent);
-
-
-    // Add worker Id to Profile buttons
-    $('.js-profile-link').attr('id', `${workerId}`);
-    $('.js-edit-profile-btn').attr('id', `${workerId}`);
-    $('.js-edit-profile-form').attr('id', `${workerId}`);
 
     $('*').scrollTop(0);
     $('#login-screen').hide();
@@ -292,6 +285,34 @@ function showWorkerJobListScreen(worker) {
     $('.js-worker-menu').hide();
     $('#job-list-screen-worker').show();
     $('#worker-profile-screen').hide();
+}
+
+
+function populateWorkerProfileScreen(worker) {
+    $('.js-profile').html(
+    `<h4 class="js-profile-name">${worker.fullName}</h4>
+    <p class="js-profile-phone">${worker.phoneNumber}</p>
+    <p class="js-profile-email">${worker.email}</p>
+    <p class="js-profile-address">${worker.fullAddress}</p>
+    `);
+
+    $('#login-screen').hide();
+    $('html').addClass('white-bg');
+    $('.js-menu-btn').hide();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('.js-worker-menu-btn').show();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').show();
+    $('#js-edit-profile-section').hide();
 }
 
 
@@ -365,8 +386,14 @@ $('#js-login-button').on('click', function(event) {
             })
             .done(function(result) {
                 if (result.type == 'worker') {
-                    showWorkerJobListScreen(result);
-                    console.log(result);
+                    workerName = result.fullName;
+                    let workerId = result.id;
+                    $('.js-profile-link').attr('id', `${workerId}`);
+                    $('.js-edit-profile-btn').attr('id', `${workerId}`);
+                    $('.js-edit-profile-form').attr('id', `${workerId}`);
+                    $.getJSON('/get-jobs', function(res) {
+                        showWorkerJobListScreen(res); 
+                    });
                 } else {
                     showAdminLandingScreen();
                 }
@@ -1017,54 +1044,23 @@ $(document).on('click', function() {
 $('.js-job-list-link').on('click', function(event) {
     event.preventDefault();
     $.getJSON('/get-jobs', function(res) {
-        showWorkerJobListScreen(res);
+        showWorkerJobListScreen(res); 
     });
 });
-
-function populateWorkerProfileScreen(worker) {
-    $('.js-profile').html(
-    `<h4 class="js-profile-name">${worker.fullName}</h4>
-    <p class="js-profile-phone">${worker.phoneNumber}</p>
-    <p class="js-profile-email">${worker.email}</p>
-    <p class="js-profile-address">${worker.fullAddress}</p>
-    `);
-
-    $('#login-screen').hide();
-    $('html').addClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('.js-worker-menu-btn').show();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').show();
-    $('#js-edit-profile-section').hide();
-}
 
 // Open Profile screen from nav
 $('.js-worker-menu').on('click', '.js-profile-link', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    console.log(workerId);
     $.getJSON('/get-one-user/' + workerId, function(res) {
-        console.log(res);
         populateWorkerProfileScreen(res);
     }); 
-
 });
 
 // Open Edit Profile section in Profile and fill in with values based on Id
 $('.js-edit-profile-btn').on('click', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    console.log(workerId);
     $('#js-edit-profile-section').show();
     $('#js-profile').hide();
     $('#edit-profile-phone-number').focus();
@@ -1084,6 +1080,7 @@ $('.js-edit-profile-btn').on('click', function(event) {
 // Hide Edit Profile section when cancel is clicked
 $('.js-profile-cancel-button').on('click', function(event) {
     $('#js-edit-profile-section').hide();
+    $('.js-edit-profile-form')[0].reset();
     $('#js-profile').show();
 });
 
