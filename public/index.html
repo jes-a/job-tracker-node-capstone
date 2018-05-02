@@ -24,7 +24,7 @@
             <form role="form" id="login-form">
                 <span id="login-error"></span>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="js-userName" value="johnny@email.com">
+                <input type="email" id="email" name="js-userName" value="jenny@email.com">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="js-userPw" value="12345">
                 <button role="button" name="login" class="login-button" id="js-login-button" type="submit">Sign In</button>
@@ -246,7 +246,7 @@
             </div>
             <div class="edit-assign">
                 <span class="span-label">Assign To</span>
-                <ul class="js-assign-to-list checkboxes">
+                <ul class="js-edit-assign-to-list checkboxes">
                 </ul>
             </div>
             <div class="textarea">
@@ -825,19 +825,19 @@
                 </nav>
             </div>
         </header>
-        <div class="date-header">
-            <h3>Monday, March 26</h3>
+        <div class="js-job-list-wrapper">
+            <div class="job js-job-detail">
+    <!--             <h4 class="js-boat-name boat">Salty Sea</h4>
+                <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
+                <h5>Service(s):</h5>
+                <p class="js-job-service">Wash, Wax</p>
+                <h5>Workers</h5>
+                <p class="js-job-worker">Norman H: 543-333-1254</p>
+                <p class="js-job-worker">Glen W: 310-217-7848</p>
+                <h5>Notes</h5>
+                <p class="js-job-notes">Marina Code is 1234</p> -->
+            </div>
         </div>
-        <div class="job js-job-detail">
-            <h4 class="js-boat-name boat">Salty Sea</h4>
-            <p class="js-job-address">9075 Crooks Corner Apt. 659</br>Katarinaside, FL 92103</p>
-            <h5>Service(s):</h5>
-            <p class="js-job-service">Wash, Wax</p>
-            <h5>Workers</h5>
-            <p class="js-job-worker">Norman H: 543-333-1254</p>
-            <p class="js-job-worker">Glen W: 310-217-7848</p>
-            <h5>Notes</h5>
-            <p class="js-job-notes">Marina Code is 1234</p>
             <div class="notes-section js-notes-section">
                 <button class="alt-button js-add-notes-btn">
                     <i class="fas fa-pen i-inline"></i>Add Notes + Hours
@@ -865,87 +865,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="job">
-            <h4 class="js-boat-name">Sea and Sun</h4>
-            <p class="js-job-address">176 Cronin Ports Apt. 962</br>Jovanfort, FL 33103</p>
-            <h5>Service(s):</h5>
-            <p class="js-job-service">Wash, Teak Cleaning</p>
-            <h5>Workers</h5>
-            <p class="js-job-worker">Glen W: 310-217-7848</p>
-            <p class="js-job-worker">Elsie F: 449-588-3131</p>
-            <h5>Notes</h5>
-            <p class="js-job-notes">Marina Code is 1234</p>
-            <div class="notes-section js-notes-section">
-                <button class="alt-button js-add-notes-btn">
-                    <i class="fas fa-pen i-inline"></i>Add Notes + Hours
-                </button>
-                <!-- Add Notes Section -->
-                <div class="toggle-section js-add-note-section">
-                    <form role="form" class="add-notes-form">
-                        <h4>Add Notes + Hours</h4>
-                        <div class="textarea">
-                            <label for="worker-notes">Notes</label>
-                            <textarea name="worker-notes" class="worker-notes" value="worker-notes"></textarea>
-                        </div>
-                        <label for="worker-hours">Hours Worked</label>
-                        <input type="number" name="worker-hours" class="worker-hours">
-                        <label>Job Completed?
-                            <div class="radio-label">
-                                <input type="radio" name="job-complete" class="job-complete" value="yes">
-                                <label for="job-complete">Yes</label>
-                                <input type="radio" name="job-complete" class="job-complete" value="no">
-                                <label for="type-2">No</label>
-                            </div>
-                        </label>
-                        <button role="button" name="add" class="add-button js-add-notes-btn" type="submit">ADD</button>
-                        <input type="button" name="cancel" value="Cancel" class="cancel-button js-notes-cancel-button">
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="date-header">
-            <h3>Tuesday, March 27</h3>
-        </div>
-        <div class="job">
-            <h4 class="js-boat-name">Dolphin Spotter</h4>
-            <p class="js-job-address">553 Dickinson Mall Apt. 957</p>
-            <p class="js-cityStateZip">Wilberbury, FL 33101</p>
-            <h5>Service(s):</h5>
-            <p class="js-job-service">Wash, Wax</p>
-            <h5>Workers</h5>
-            <p class="js-job-worker">Norman H: 543-333-1254</p>
-            <p class="js-job-worker">Glen W: 310-217-7848</p>
-            <h5>Notes</h5>
-            <p class="js-job-notes">Marina Code is 1234</p>
-            <div class="notes-section js-notes-section">
-                <button class="alt-button js-add-notes-btn">
-                    <i class="fas fa-pen i-inline"></i>Add Notes + Hours
-                </button>
-                <!-- Add Notes Section -->
-                <div class="toggle-section js-add-note-section">
-                    <form role="form" class="add-notes-form">
-                        <h4>Add Notes + Hours</h4>
-                        <div class="textarea">
-                            <label for="worker-notes">Notes</label>
-                            <textarea name="worker-notes" class="worker-notes" value="worker-notes"></textarea>
-                        </div>
-                        <label for="worker-hours">Hours Worked</label>
-                        <input type="number" name="worker-hours" class="worker-hours">
-                        <label>Job Completed?
-                            <div class="radio-label">
-                                <input type="radio" name="job-complete" class="job-complete" value="yes">
-                                <label for="job-complete">Yes</label>
-                                <input type="radio" name="job-complete" class="job-complete" value="no">
-                                <label for="type-2">No</label>
-                            </div>
-                        </label>
-                        <button role="button" name="add" class="add-button js-add-notes-btn" type="submit">ADD</button>
-                        <input type="button" name="cancel" value="Cancel" class="cancel-button js-notes-cancel-button">
-                    </form>
-                </div>
-            </div>
-        </div>
     </main>
     <!-- Worker: Profile Screen -->
     <main role="main" id="worker-profile-screen">

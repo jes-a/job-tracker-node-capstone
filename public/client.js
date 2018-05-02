@@ -34,6 +34,7 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
+       // console.log(item);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -47,7 +48,6 @@ function populateJobList(jobs) {
         $.each(item.services, function(key, value) {
         htmlContent += `<li class="js-job-service">${value}</li>`;
         });
-        // htmlContent += `<li class="js-job-service">${item.otherService}</li>`
         htmlContent += '</ul>';
         htmlContent += '<h5>Workers</h5>';
         htmlContent += '<ul>';
@@ -65,9 +65,25 @@ function populateJobList(jobs) {
 }
 
 
-
 // Populate Worker Job List Screen for Worker after Log in
-function showWorkerJobListScreen() {
+function showWorkerJobListScreen(worker) {
+    console.log(worker);
+    let workerName = worker.fullName;
+    let assignedJobs = {};
+
+    $.getJSON('/get-jobs', function(res) {
+ //       console.log(res);
+
+        $.each(res, function(i, item) {
+            if (item.assignTo == workerName) {
+ //               console.log(item);
+                // $(assignedJobs).add(item);
+ //               console.log(assignedJobs);
+                populateJobList(assignedJobs);
+            }
+       });
+    });
+
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('html').addClass('white-bg');
@@ -89,7 +105,7 @@ function showWorkerJobListScreen() {
 // Show Job List Screen for Admin
 function showAdminJobListScreen() {
 
-    $.getJSON('/jobs', function(res) {
+    $.getJSON('/get-jobs', function(res) {
         populateJobList(res);
     });
 
@@ -113,7 +129,7 @@ function showAdminJobListScreen() {
 
 // Show Job List Screen for Admin after updating job
 function showUpdatedAdminJobListScreen() {
-    $.getJSON('/jobs', function(res) {
+    $.getJSON('/get-jobs', function(res) {
         populateJobList(res);
     });
 
@@ -165,6 +181,22 @@ function populateAssignToList(workers) {
     $(".js-assign-to-list").html(htmlContent);
 }
 
+// Populate Assign To checkboxes in Edit Job Screen
+function populateEditAssignToList(workers) {
+    //create an empty variable to store one LI for each one the results
+    let htmlContent = "";
+
+    $.each(workers, function(i, item) {
+        htmlContent += `<li>
+                            <input type="checkbox" class="${item.id}" value="${item.fullName}" name="edit-assign-to">
+                            <label for="edit-assign-to" class="checkbox">${item.fullName}</label>
+                        </li>`;
+    });
+
+    //use the HTML output to show it in the index.html
+    $(".js-edit-assign-to-list").html(htmlContent);
+}
+
 // Populate Workers List Screen
 function populateWorkerList(workers) {
     //create an empty variable to store one LI for each one the results
@@ -203,7 +235,7 @@ function populateWorkerList(workers) {
 
 function populateUpdatedWorkerScreen(result) {
     let updatedWorkerId = result.id;
-    $.getJSON('/users/' + updatedWorkerId, function(res) {
+    $.getJSON('/get-one-user/' + updatedWorkerId, function(res) {
         $(".js-worker-detail").html(
             `<i class="far fa-edit edit-btn js-edit-worker-button" id="${updatedWorkerId}"></i>
             <ul>
@@ -236,33 +268,12 @@ function populateUpdatedWorkerScreen(result) {
 
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
-// $(document).ready(function() {
-//     $('#login-screen').show();
-//     $('html').removeClass('white-bg');
-//     $('.js-menu-btn').hide();
-//     $('.js-menu').hide();
-//     $('#admin-home').hide();
-//     $('#add-job-screen').hide();
-//     $('#edit-job-screen').hide();
-//     $('#job-list-screen-admin').hide();
-//     $('#add-worker-screen').hide();
-//     $('#worker-list-screen').hide();
-//     $('#worker-detail-screen').hide();
-//     $('#edit-worker-screen').hide();
-//     $('#add-boat-details').hide();
-//     $('.js-menu-btn').hide();
-//     $('.js-worker-menu').hide(); 
-//     $('#job-list-screen-worker').hide();
-//     $('#worker-profile-screen').hide();
-// });
-
-// for testing purposes
 $(document).ready(function() {
-    $('#login-screen').hide();
+    $('#login-screen').show();
     $('html').removeClass('white-bg');
-    $('.js-menu-btn').show();
+    $('.js-menu-btn').hide();
     $('.js-menu').hide();
-    $('#admin-home').show();
+    $('#admin-home').hide();
     $('#add-job-screen').hide();
     $('#edit-job-screen').hide();
     $('#job-list-screen-admin').hide();
@@ -271,12 +282,33 @@ $(document).ready(function() {
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
     $('#add-boat-details').hide();
-    $('.js-worker-menu-btn').hide();
-    $('.js-worker-menu').hide();
+    $('.js-menu-btn').hide();
+    $('.js-worker-menu').hide(); 
     $('#job-list-screen-worker').hide();
     $('#worker-profile-screen').hide();
-    $('.js-edit-profile-section').hide();
 });
+
+// for testing purposes
+// $(document).ready(function() {
+//     $('#login-screen').hide();
+//     $('html').removeClass('white-bg');
+//     $('.js-menu-btn').show();
+//     $('.js-menu').hide();
+//     $('#admin-home').show();
+//     $('#add-job-screen').hide();
+//     $('#edit-job-screen').hide();
+//     $('#job-list-screen-admin').hide();
+//     $('#add-worker-screen').hide();
+//     $('#worker-list-screen').hide();
+//     $('#worker-detail-screen').hide();
+//     $('#edit-worker-screen').hide();
+//     $('#add-boat-details').hide();
+//     $('.js-worker-menu-btn').hide();
+//     $('.js-worker-menu').hide();
+//     $('#job-list-screen-worker').hide();
+//     $('#worker-profile-screen').hide();
+//     $('.js-edit-profile-section').hide();
+// });
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -304,7 +336,9 @@ $('#js-login-button').on('click', function(event) {
             })
             .done(function(result) {
                 if (result.type == 'worker') {
-                    showWorkerJobListScreen();
+                    let workerName = result.fullName;
+                    console.log(workerName);
+                    showWorkerJobListScreen(result);
                 } else {
                     showAdminLandingScreen();
                 }
@@ -350,10 +384,10 @@ $('.js-cancel-button').on('click', function(event) {
 // Open Add Job Screen
 $('.js-add-job').on('click', function(event) {
     event.preventDefault();
-    $.getJSON('/users', function(res) {
+    $.getJSON('/get-users', function(res) {
         populateAssignToList(res);
     });
-    $.getJSON('/boats', function(res) {
+    $.getJSON('/get-boats', function(res) {
         populateBoatNameDropdown(res);
     });
     $('*').scrollTop(0);
@@ -434,7 +468,7 @@ $('#add-job-form').on('submit', function(event) {
 
 // Open Job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
-        $.getJSON('/jobs', function(res) {
+        $.getJSON('/get-jobs', function(res) {
         populateJobList(res);
     });
 
@@ -459,14 +493,11 @@ $('.js-job-list-admin').on('click', function(event) {
 // Open edit job form and fill in with worker values based on Id
 $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
     event.preventDefault();
-    $.getJSON('/users', function(res) {
-    populateAssignToList(res);
-    });
-    $.getJSON('/boats', function(res) {
-        populateBoatNameDropdown(res);
+    $.getJSON('/get-users', function(res) {
+    populateEditAssignToList(res);
     });
     let jobId = $(this).attr('id');
-    $.getJSON('/jobs/' + jobId, function(res) {
+    $.getJSON('/get-one-job/' + jobId, function(res) {
         // add in pre-filled values based on job id
         let htmlContent = "";
         htmlContent += `<h3 class="js-boat-name boat">${res.jobName}</h3>`;
@@ -496,6 +527,7 @@ $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
     $('#edit-worker-screen').hide();
 });
 
+
 //Send Edit Job form to update job information 
 $('.edit-job-form').on('submit', function(event) {
     event.preventDefault(); 
@@ -510,7 +542,7 @@ $('.edit-job-form').on('submit', function(event) {
         }
     const serviceDate = $('#edit-date-select').val();
     const assignTo = [];
-    $('input[name="assign-to"]:checked').each(function(i, item) {
+    $('input[name="edit-assign-to"]:checked').each(function(i, item) {
         assignTo.push($(item).attr('value'))
     });
     const jobNotes = $('#edit-notes').val();
@@ -536,7 +568,6 @@ $('.edit-job-form').on('submit', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                console.log(result);
                 alert(`You successfully updated this job`);
                 showUpdatedAdminJobListScreen();
             })
@@ -640,6 +671,7 @@ $('#add-worker-form').on('submit', function(event) {
 $(document).on('click', '.js-add-worker', function(event) {
     $('*').scrollTop(0);
     $('#login-screen').hide();
+    $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
     $('.menu').hide();
     $('#admin-home').hide();
@@ -650,13 +682,12 @@ $(document).on('click', '.js-add-worker', function(event) {
     $('#worker-list-screen').hide();
     $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
-    console.log('openAddWorkerScreen ran');
 });
 
 // Open worker list screen from landing page or nav
 $('.js-workers-screen').on('click', function(event) {
     event.preventDefault();
-    $.getJSON('/users', function(res) {
+    $.getJSON('/get-users', function(res) {
         populateWorkerList(res);
     });
 });
@@ -667,7 +698,7 @@ $('.js-worker-detail-wrapper').on('click', 'li', function(event) {
     console.log('js-worker-name clicked');
     let workerId = $(this).attr('id');
     console.log(workerId);
-    $.getJSON('/users/' + workerId, function(res) {
+    $.getJSON('/get-one-user/' + workerId, function(res) {
         $(".js-worker-detail").html(
             `<i class="far fa-edit edit-btn js-edit-worker-button" id="${workerId}"></i>
             <ul>
@@ -701,7 +732,7 @@ $('.js-worker-detail-wrapper').on('click', 'li', function(event) {
 $('.js-worker-detail').on('click', '.js-edit-worker-button', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    $.getJSON('/users/' + workerId, function(res) {
+    $.getJSON('/get-one-user/' + workerId, function(res) {
         // add in pre-filled values based on worker id
         $('#edit-first-name').val(res.firstName);
         $('#edit-last-name').val(res.lastName);
@@ -812,7 +843,7 @@ $('.edit-worker-form').on('submit', function(event) {
 $('.js-edit-worker-cancel').on('click', function(event) {
     event.preventDefault();
     let workerId = $('.edit-worker-form').attr('id');
-    $.getJSON('/users/' + workerId, function(res) {
+    $.getJSON('/get-one-user/' + workerId, function(res) {
         $(".js-worker-detail").html(
             `<i class="far fa-edit edit-btn js-edit-worker-button" id="${workerId}"></i>
             <ul>
@@ -956,7 +987,7 @@ $(document).on('click', function() {
 // Open Job List Screen from nav or header
 $('.js-job-list-link').on('click', function(event) {
     event.preventDefault();
-    $.getJSON('/jobs', function(res) {
+    $.getJSON('/get-jobs', function(res) {
         populateJobList(res);
         showWorkerJobListScreen();
     });

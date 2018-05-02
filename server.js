@@ -151,7 +151,7 @@ app.post('/signin', function(req, res) {
                         });
                     } else {
                         console.log("user logged in successfully");
-                        return res.json(items);
+                        return res.json(items.serialize());
                     }
                 });
             };
@@ -161,7 +161,7 @@ app.post('/signin', function(req, res) {
 
 // GET
 // Retrieve user list to populate worker list
-app.get('/users', (req, res) => {
+app.get('/get-users', (req, res) => {
     User
         .find()
         .sort({ 'firstName': 1 })
@@ -182,7 +182,7 @@ app.get('/users', (req, res) => {
 
 
 // Retrieve a single user by id to populate worker detail page
-app.get('/users/:id', function(req, res) {
+app.get('/get-one-user/:id', function(req, res) {
     User
         .findById(req.params.id)
         .then(function(user) {
@@ -266,7 +266,7 @@ app.post('/jobs/create', (req, res) => {
     });
 });
 
-app.get('/jobs', (req, res) => {
+app.get('/get-jobs', (req, res) => {
     Job
         .find()
         .sort({ serviceDate: 1 })
@@ -278,7 +278,7 @@ app.get('/jobs', (req, res) => {
             res.json(jobOutput);
         })
         .catch(err => {
-            console.error(err);
+           console.error(err);
             res.status(500).json({
                 message: 'Internal server error'
             });
@@ -286,14 +286,14 @@ app.get('/jobs', (req, res) => {
 });
 
 // Retrieve a single job by id to populate edit job form
-app.get('/jobs/:id', function(req, res) {
+app.get('/get-one-job/:id', function(req, res) {
     Job
         .findById(req.params.id)
         .then(function(job) {
             return res.json(job);
         })
         .catch(err => {
-            console.error(err);
+           console.error(err);
             res.status(500).json({
                 message: 'Internal Server Error'
             });
@@ -319,17 +319,13 @@ app.put('/jobs/:id', function(req, res) {
     Job
         .findByIdAndUpdate(req.params.id, 
             { $set: updated },
-            // services: req.body.services,
-            // otherService: req.body.otherService,
-            // serviceDate: req.body.serviceDate,
-            // assignTo: req.body.assignTo,
-            // jobNotes: req.body.jobNotes},
             {new: true})
         .then(jobs =>  {
+            console.log('add updated jobs =', jobs);            
             return res.json(jobs);
         })
         .catch(err => {
-            console.error(err);
+            console.error('add updated jobs error =', err);
             res.status(500).json({
                 message: 'Internal Server Error'
             });
@@ -412,7 +408,7 @@ app.post('/boats/create', (req, res) => {
 
 // GET
 // Get boat names for Create Job drop-down
-app.get('/boats', (req, res) => {
+app.get('/get-boats', (req, res) => {
     Boat
         .find()
         .sort({ 'boatName': 1 })
@@ -432,19 +428,19 @@ app.get('/boats', (req, res) => {
 });
 
 // Retrieve a single boat by id to populate address in job list
-app.get('/boats/:id', function(req, res) {
-    Boat
-        .findById(req.params.id)
-        .then(function(boat) {
-            return res.json(boat.serialize());
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
-});
+// app.get('/get-one-boat/:id', function(req, res) {
+//     Boat
+//         .findById(req.params.id)
+//         .then(function(boat) {
+//             return res.json(boat.serialize());
+//         })
+//         .catch(err => {
+//             console.error(err);
+//             res.status(500).json({
+//                 message: 'Internal Server Error'
+//             });
+//         });
+// });
 
 
 
