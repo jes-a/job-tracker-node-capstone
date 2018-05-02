@@ -266,6 +266,7 @@ app.post('/jobs/create', (req, res) => {
     });
 });
 
+// Get jobs to populate Admin Job List
 app.get('/get-jobs', (req, res) => {
     Job
         .find()
@@ -285,7 +286,7 @@ app.get('/get-jobs', (req, res) => {
         });
 });
 
-// Retrieve a single job by id to populate edit job form
+// Get a single job by id to populate edit job form
 app.get('/get-one-job/:id', function(req, res) {
     Job
         .findById(req.params.id)
