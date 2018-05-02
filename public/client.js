@@ -232,27 +232,17 @@ function populateUpdatedWorkerScreen(result) {
 function showWorkerJobListScreen(worker) {
     let workerName = worker.fullName;
     let workerId = worker.id;
-    console.log(workerId);
     let htmlContent = "";
 
-    // Add worker Id to Profile nav link
-    $('.js-worker-menu').html(`
-                        <ul>
-                            <li class="js-job-list-link">
-                                <i class="far fa-calendar-alt fa-fw i-inline"></i>Job List
-                            </li>
-                            <li class="js-profile-link" id="${workerId}">
-                                <i class="far fa-user fa-fw i-inline"></i>Profile
-                            </li>
-                            <li class="js-logout-link">
-                                <i class="far fa-sign-out-alt fa-fw i-inline"></i>Log Out
-                            </li>
-                        </ul>`);
+    // Add worker Id to Profile buttons
+    $('.js-profile-link').attr('id', `${workerId}`);
+    $('.js-edit-profile-btn').attr('id', `${workerId}`);
+    $('.js-edit-profile-form').attr('id', `${workerId}`);
+
 
     $.getJSON('/get-jobs', function(res) {
         $.each(res, function(i, item) {
             if (item.assignTo == workerName) {
-                console.log(item);
                 let serviceDate = setReadableDate(item.serviceDate);
                 htmlContent += '<div class="date-header">';
                 htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -1024,9 +1014,21 @@ $('.js-job-list-link').on('click', function(event) {
     });
 });
 
+
 // Open Profile screen from nav
-$('.js-profile-link').on('click', function(event) {
-    $('*').scrollTop(0);
+$('.js-worker-menu').on('click', '.js-profile-link', function(event) {
+    event.preventDefault();
+    let workerId = $(this).attr('id');
+    console.log(workerId);
+    $.getJSON('/get-one-user/' + workerId, function(res) {
+        console.log(res);
+        $('.js-profile').html(
+            `<h4 class="js-profile-name">${res.fullName}</h4>
+            <p class="js-profile-phone">${res.phoneNumber}</p>
+            <p class="js-profile-email">${res.email}</p>
+            <p class="js-profile-address">${res.fullAddress}</p>
+            `);
+    });
     $('#login-screen').hide();
     $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
@@ -1046,11 +1048,25 @@ $('.js-profile-link').on('click', function(event) {
     $('#js-edit-profile-section').hide();
 });
 
-// Open Edit Profile section in Profile
+// Open Edit Profile section in Profile and fill in with values based on Id
 $('.js-edit-profile-btn').on('click', function(event) {
+    event.preventDefault();
+    let workerId = $(this).attr('id');
+    console.log(workerId);
     $('#js-edit-profile-section').show();
     $('#js-profile').hide();
     $('#edit-profile-phone-number').focus();
+
+    $.getJSON('/get-one-user/' + workerId, function(res) {
+        // add in pre-filled values based on worker id
+        $('#edit-profile-phone-number').val(res.phoneNumber);
+        $('#edit-profile-email').val(res.email);
+        $('#edit-profile-address').val(res.address);
+        $('#edit-profile-address-2').val(res.address2);
+        $('#edit-profile-city').val(res.city);
+        $('#edit-profile-state').val(res.state);
+        $('#edit-profile-zip-code').val(res.zipCode);
+    });
 });
 
 // Hide Edit Profile section when cancel is clicked
@@ -1059,68 +1075,25 @@ $('.js-profile-cancel-button').on('click', function(event) {
     $('#js-profile').show();
 });
 
-// Open edit worker form and fill in with worker values based on Id
-$('.js-worker-menu').on('click', '.js-profile-link', function(event) {
+//Send Edit Profile form to update worker information 
+$('.js-edit-profile-form').on('submit', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    $.getJSON('/get-one-user/' + workerId, function(res) {
-        // add in pre-filled values based on worker id
-        $('#edit-first-name').val(res.firstName);
-        $('#edit-last-name').val(res.lastName);
-        $('#edit-phone-number').val(res.phoneNumber);
-        $('#edit-address').val(res.address);
-        $('#edit-address-2').val(res.address2);
-        $('#edit-city').val(res.city);
-        $('#edit-state').val(res.state);
-        $('#edit-zip-code').val(res.zipCode);
-        $('#edit-email').val(res.email);
-        $('#edit-email').val(res.email);
-        $('input[value="' + res.type + '"]').prop('checked', 'checked');
-        $('input[value="' + res.status + '"]').prop('checked', 'checked');
-        $('.edit-worker-form').attr('id', workerId);
-    });
-    $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('html').addClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').show();
-    $('#add-boat-details').hide();
-    $('.js-worker-menu-btn').hide();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').hide();
-});
-
-//Send Edit Worker form to update worker information 
-$('.edit-worker-form').on('submit', function(event) {
-    event.preventDefault();
-    let workerId = $(this).attr('id');
-    const firstName = $('#edit-first-name').val();
-    const lastName = $('#edit-last-name').val();
-    const phoneNumber = $('#edit-phone-number').val();
-    const address = $('#edit-address').val();
-    const address2 = $('#edit-address-2').val();
-    const city = $('#edit-city').val();
-    const state = $('#edit-state').val();
-    const zipCode = $('#edit-zip-code').val();
-    const email = $('#edit-email').val();
-    const password = $('#edit-initial-pw').val();
+    const phoneNumber = $('#edit-profile-phone-number').val();
+    const email = $('#edit-profile-email').val();
+    const address = $('#edit-profile-address').val();
+    const address2 = $('#edit-profile-address-2').val();
+    const city = $('#edit-profile-city').val();
+    const state = $('#edit-profile-state').val();
+    const zipCode = $('#edit-profile-zip-code').val();
+    const password = $('#profile-change-pw').val();
+    const password2 = $('#profile-retype-pw').val();
     const type = $('input[class="edit-type"]:checked').val();
     const status = $('input[class="edit-status"]:checked').val();
-    if (firstName == "") {
-        alert('Please input first name');
-    } else if (lastName == "") {
-        alert('Please input last name');
-    } else if (phoneNumber == "") {
+    if (phoneNumber == "") {
         alert('Please input phone number');
+    } else if (email == "") {
+        alert('Please input email');
     } else if (address == "") {
         alert('Please input address');
     } else if (address2 == "") {
@@ -1131,16 +1104,10 @@ $('.edit-worker-form').on('submit', function(event) {
         alert('Please input state');
     } else if (zipCode == "") {
         alert('Please input zip code');
-    } else if (email == "") {
-        alert('Please input email');
-    } else if (type == "") {
-        alert('Please input type');
-    } else if (status == "") {
-        alert('Please input status');
+    } else if (password !== password2) {
+        alert ('Passwords do not match, please re-enter password');
     } else {
         const updateUserObject = {
-            firstName,
-            lastName,
             phoneNumber,
             address,
             address2,
@@ -1160,7 +1127,7 @@ $('.edit-worker-form').on('submit', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                alert(`You successfully updated ${firstName}`);
+                alert('You successfully updated your profile');
                 populateUpdatedWorkerScreen(result);
             })
             .fail(function(jqXHR, error, errorThrown) {

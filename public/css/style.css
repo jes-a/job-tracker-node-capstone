@@ -631,6 +631,11 @@ button {
     position: relative;
 }
 
+.edit-profile-section {
+    margin-right: 20px;
+    padding-left: 20px;
+}
+
 .profile-section form {
     padding-left: 0;
 }
