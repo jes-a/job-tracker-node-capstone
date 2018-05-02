@@ -12,6 +12,7 @@ function showAdminLandingScreen() {
     $('#edit-job-screen').hide();
     $('#add-worker-screen').hide();
     $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
     $('#edit-worker-screen').hide();
     $('#add-boat-details').hide();
     $('.js-worker-menu-btn').hide();
@@ -234,13 +235,9 @@ function showWorkerJobListScreen(worker) {
     let workerId = worker.id;
     let htmlContent = "";
 
-    // Add worker Id to Profile buttons
-    $('.js-profile-link').attr('id', `${workerId}`);
-    $('.js-edit-profile-btn').attr('id', `${workerId}`);
-    $('.js-edit-profile-form').attr('id', `${workerId}`);
-
 
     $.getJSON('/get-jobs', function(res) {
+        console.log(res);
         $.each(res, function(i, item) {
             if (item.assignTo == workerName) {
                 let serviceDate = setReadableDate(item.serviceDate);
@@ -265,10 +262,18 @@ function showWorkerJobListScreen(worker) {
                 htmlContent += '<h5>Notes</h5>';
                 htmlContent += `<p class="js-job-notes">${item.jobNotes}</p>`;
                 htmlContent += '</div>';
-                $('.js-worker-job-list-wrapper').html(htmlContent);
                }
             });
     });
+
+    $('.js-worker-job-list-wrapper').html(htmlContent);
+
+
+    // Add worker Id to Profile buttons
+    $('.js-profile-link').attr('id', `${workerId}`);
+    $('.js-edit-profile-btn').attr('id', `${workerId}`);
+    $('.js-edit-profile-form').attr('id', `${workerId}`);
+
     $('*').scrollTop(0);
     $('#login-screen').hide();
     $('html').addClass('white-bg');
@@ -316,9 +321,9 @@ $(document).ready(function() {
 // $(document).ready(function() {
 //     $('#login-screen').hide();
 //     $('html').removeClass('white-bg');
-//     $('.js-menu-btn').show();
+//     $('.js-menu-btn').hide();
 //     $('.js-menu').hide();
-//     $('#admin-home').show();
+//     $('#admin-home').hide();
 //     $('#add-job-screen').hide();
 //     $('#edit-job-screen').hide();
 //     $('#job-list-screen-admin').hide();
@@ -327,10 +332,10 @@ $(document).ready(function() {
 //     $('#worker-detail-screen').hide();
 //     $('#edit-worker-screen').hide();
 //     $('#add-boat-details').hide();
-//     $('.js-worker-menu-btn').hide();
+//     $('.js-worker-menu-btn').show();
 //     $('.js-worker-menu').hide();
 //     $('#job-list-screen-worker').hide();
-//     $('#worker-profile-screen').hide();
+//     $('#worker-profile-screen').show();
 //     $('.js-edit-profile-section').hide();
 // });
 
@@ -361,6 +366,7 @@ $('#js-login-button').on('click', function(event) {
             .done(function(result) {
                 if (result.type == 'worker') {
                     showWorkerJobListScreen(result);
+                    console.log(result);
                 } else {
                     showAdminLandingScreen();
                 }
@@ -845,7 +851,7 @@ $('.edit-worker-form').on('submit', function(event) {
         };
         $.ajax({
                 type: 'PUT',
-                url: '/users/' + workerId,
+                url: '/update-user/' + workerId,
                 dataType: 'json',
                 data: JSON.stringify(updateUserObject),
                 contentType: 'application/json'
@@ -899,6 +905,7 @@ $('.js-edit-worker-cancel').on('click', function(event) {
 $('.js-add-boat').click(function(event) {
     event.preventDefault();
     $('#admin-home').hide();
+    $('html').addClass('white-bg');
     $('#add-boat-details').show();
     $('#js-customer-address').hide();
 });
@@ -1014,21 +1021,14 @@ $('.js-job-list-link').on('click', function(event) {
     });
 });
 
+function populateWorkerProfileScreen(worker) {
+    $('.js-profile').html(
+    `<h4 class="js-profile-name">${worker.fullName}</h4>
+    <p class="js-profile-phone">${worker.phoneNumber}</p>
+    <p class="js-profile-email">${worker.email}</p>
+    <p class="js-profile-address">${worker.fullAddress}</p>
+    `);
 
-// Open Profile screen from nav
-$('.js-worker-menu').on('click', '.js-profile-link', function(event) {
-    event.preventDefault();
-    let workerId = $(this).attr('id');
-    console.log(workerId);
-    $.getJSON('/get-one-user/' + workerId, function(res) {
-        console.log(res);
-        $('.js-profile').html(
-            `<h4 class="js-profile-name">${res.fullName}</h4>
-            <p class="js-profile-phone">${res.phoneNumber}</p>
-            <p class="js-profile-email">${res.email}</p>
-            <p class="js-profile-address">${res.fullAddress}</p>
-            `);
-    });
     $('#login-screen').hide();
     $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
@@ -1046,6 +1046,18 @@ $('.js-worker-menu').on('click', '.js-profile-link', function(event) {
     $('#job-list-screen-worker').hide();
     $('#worker-profile-screen').show();
     $('#js-edit-profile-section').hide();
+}
+
+// Open Profile screen from nav
+$('.js-worker-menu').on('click', '.js-profile-link', function(event) {
+    event.preventDefault();
+    let workerId = $(this).attr('id');
+    console.log(workerId);
+    $.getJSON('/get-one-user/' + workerId, function(res) {
+        console.log(res);
+        populateWorkerProfileScreen(res);
+    }); 
+
 });
 
 // Open Edit Profile section in Profile and fill in with values based on Id
@@ -1106,6 +1118,16 @@ $('.js-edit-profile-form').on('submit', function(event) {
         alert('Please input zip code');
     } else if (password !== password2) {
         alert ('Passwords do not match, please re-enter password');
+    } else if (password == "") {
+        const updateUserObject = {
+            phoneNumber,
+            address,
+            address2,
+            city,
+            state,
+            zipCode,
+            email
+        };
     } else {
         const updateUserObject = {
             phoneNumber,
@@ -1115,20 +1137,18 @@ $('.js-edit-profile-form').on('submit', function(event) {
             state,
             zipCode,
             email,
-            password,
-            type,
-            status
+            password
         };
         $.ajax({
                 type: 'PUT',
-                url: '/users/' + workerId,
+                url: '/update-user/' + workerId,
                 dataType: 'json',
                 data: JSON.stringify(updateUserObject),
                 contentType: 'application/json'
             })
             .done(function(result) {
                 alert('You successfully updated your profile');
-                populateUpdatedWorkerScreen(result);
+                populateWorkerProfileScreen(result);
             })
             .fail(function(jqXHR, error, errorThrown) {
                 console.log(jqXHR);

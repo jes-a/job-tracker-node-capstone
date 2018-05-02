@@ -197,32 +197,111 @@ app.get('/get-one-user/:id', function(req, res) {
 });
 
 
+// Edit details of a worker in Admin screen
+// app.put('/users/:id', function(req, res) {
+//     let toUpdate = {};
+//     let updatedFields = [
+//         'firstName',
+//         'lastName',
+//         'phoneNumber',
+//         'address',
+//         'address2',
+//         'city',
+//         'state',
+//         'zipCode',
+//         'email',
+//         'password',
+//         'type',
+//         'status'
+//     ];
+//     updatedFields.forEach(function(field) {
+//         if (field in req.body) {
+//             toUpdate[field] = req.body[field];
+//         }
+//         console.log(toUpdate);
+
+//     });
+//     User
+//         .findByIdAndUpdate(req.params.id, {
+//             $set: toUpdate
+//         }).exec().then(function(user) {
+//             return res.json(user.serialize());
+//         })
+//         .catch(err => {
+//             console.error(err);
+//             res.status(500).json({
+//                 message: 'Internal Server Error'
+//             });
+//         });
+
+// });
+
 // Edit details of a worker
-app.put('/users/:id', function(req, res) {
+app.put('/update-user/:id', function(req, res) {
     let toUpdate = {};
     let updatedFields = [
         'firstName',
         'lastName',
         'phoneNumber',
+        'email',    
         'address',
         'address2',
         'city',
         'state',
         'zipCode',
-        'email',
-        'password',
         'type',
         'status'
     ];
     updatedFields.forEach(function(field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
+            console.log(field)
         }
     });
-    User
+
+    // If user has input new password
+    let password = req.body.password;
+    if (password != "") {
+        password = password.trim();
+        bcrypt.genSalt(10, (err, salt) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal server error on genSalt'
+                });
+            }
+
+            bcrypt.hash(password, salt, (err, hash) => {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Internal server error on hash'
+                    });
+                }
+
+            User
+            .findByIdAndUpdate(req.params.id, {
+                $set: toUpdate, 
+                password: hash
+            })
+            .exec().then(function(user) {
+                console.log()
+                console.log('Updated profile with pw');
+                return res.json(user.serialize());
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            });
+        });
+    });
+    } else {
+        User
         .findByIdAndUpdate(req.params.id, {
             $set: toUpdate
-        }).exec().then(function(user) {
+        })
+        .exec().then(function(user) {
+            console.log('Updated profile without pw');
             return res.json(user.serialize());
         })
         .catch(err => {
@@ -231,7 +310,7 @@ app.put('/users/:id', function(req, res) {
                 message: 'Internal Server Error'
             });
         });
-
+    }
 });
 
 // ---------------JOB ENDPOINTS------------------------------
@@ -266,7 +345,7 @@ app.post('/jobs/create', (req, res) => {
     });
 });
 
-// Get jobs to populate Admin Job List
+// Get jobs to populate Job List
 app.get('/get-jobs', (req, res) => {
     Job
         .find()
@@ -427,22 +506,6 @@ app.get('/get-boats', (req, res) => {
             });
         });
 });
-
-// Retrieve a single boat by id to populate address in job list
-// app.get('/get-one-boat/:id', function(req, res) {
-//     Boat
-//         .findById(req.params.id)
-//         .then(function(boat) {
-//             return res.json(boat.serialize());
-//         })
-//         .catch(err => {
-//             console.error(err);
-//             res.status(500).json({
-//                 message: 'Internal Server Error'
-//             });
-//         });
-// });
-
 
 
 
