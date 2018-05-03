@@ -44,7 +44,7 @@ function populateJobList(jobs) {
         htmlContent += '<div class="job js-job-list">';
         htmlContent += `<i class="far fa-edit edit-btn js-edit-job-link" id="${item._id}""></i>`;
         htmlContent += `<h4 class="js-boat-name boat">${item.jobName}</h4>`;
-        htmlContent += `<p class="js-job-address">${item.boatFullAddress}</p>`;
+        htmlContent += `<a href=<p class="js-job-address">${item.boatFullAddress}</p>`;
         htmlContent += '<h5>Services</h5>';
         htmlContent += '<ul class="job-list-items">';
         $.each(item.services, function(key, value) {
@@ -166,7 +166,6 @@ function populateEditAssignToList(workers) {
 function populateWorkerList(workers) {
     //create an empty variable to store one LI for each one the results
     let htmlContent = "";
-    console.log(workers);
     $.each(workers, function(i, item) {
         htmlContent += '<div class="worker">';
         htmlContent += '<ul class="js-worker-list-details">';
@@ -748,9 +747,8 @@ $('.js-workers-screen').on('click', function(event) {
 });
 
 // Open worker detail screen from worker list screen    
-$('.js-worker-detail-wrapper').on('click', 'li', function(event) {
+$('.js-worker-detail-wrapper').on('click', '.js-worker-name', function(event) {
     event.preventDefault();
-    console.log('js-worker-name clicked');
     let workerId = $(this).attr('id');
     console.log(workerId);
     $.getJSON('/get-one-user/' + workerId, function(res) {
