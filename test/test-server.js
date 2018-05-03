@@ -140,17 +140,37 @@ describe('Users API resource', function() {
 				.then(function(_res) {
 					res = _res;
 					res.should.have.status(200);
-					res.body.workerOutput.should.have.length.of.at.least(1);
+					res.body.should.have.lengthOf.at.least(1);
 					return User.count();
 				})
 				.then(function(count) {
-					res.body.workerOutput.should.have.length.of(count);
+					res.body.should.have.lengthOf(count);
 				})
 		});
 
 	});
 
-
+	// Test getting one user back
+	describe('Get one user endpoint', function() {
+		it('should return one user from DB in admin screen', function() {
+			let res;
+			let workerId;
+			return chai.request(app)
+				.get('/get-users')
+				.then(function(_res) {
+					res = _res;
+					workerId = res.body.id;
+					console.log(workerId)
+					return workerId;
+				})
+				.get('/get-one-user' + workerId)
+				.then(function(_res) {
+					res = _res;
+					res.should.have.status(200);
+					res.body.id.should.equal(workerId);
+				})
+		});
+	});
 
 
 
