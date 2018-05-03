@@ -32,7 +32,7 @@ function seedUserData() {
 	const seedUsersData = [];
 
 	for (let i=1; i<10; i++) {
-		seedUserData.push({
+		seedUsersData.push({
 		    firstName: faker.name.firstName(),
 		    lastName: faker.name.lastName(),
 		    phoneNumber: faker.phone.phoneNumber(),
@@ -68,7 +68,7 @@ function seedJobData() {
 	const seedJobsData = [];
 
 	for (let i=1; i<10; i++) {
-		seedJobData.push({
+		seedJobsData.push({
 			jobName: faker.lorem.words(),
 		    boatFullAddress: faker.address.streetAddress(),
 		    services: [generateServices(), generateServices(), generateServices()],
