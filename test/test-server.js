@@ -6,9 +6,9 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 
-const { Job } = require('../models/jobs');
-const { Boat } = require('../models/boats');
-const { User } = require('../models/users');
+const Job = require('../models/jobs');
+const Boat = require('../models/boats');
+const User = require('../models/users');
 const { app, runServer, closeServer } = require('../server');
 const { TEST_DATABASE_URL } = require('../config');
 
@@ -52,12 +52,6 @@ function seedUserData() {
 
 // Seed random documents into jobs DB
 function generateServices() {
-	const services = [
-		'Wash', 'Hull Wash', 'Topside Wax', 'Hull Wax', 'Compounding Service', 'Interior Cleaning', 'Teak Cleaning', 'Teak Sealing', 'Engine Room Detailing', 'System Check', 'Bottom Cleaning'];
-		return services[Math.floor(Math.random() * services.length)];
-}
-
-function generateAssignTo() {
 	const services = [
 		'Wash', 'Hull Wash', 'Topside Wax', 'Hull Wax', 'Compounding Service', 'Interior Cleaning', 'Teak Cleaning', 'Teak Sealing', 'Engine Room Detailing', 'System Check', 'Bottom Cleaning'];
 		return services[Math.floor(Math.random() * services.length)];
