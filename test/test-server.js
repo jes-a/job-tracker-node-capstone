@@ -6,9 +6,9 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 
-const { Job } = require('../models/jobs');
-const { Boat } = require('../models/boats');
-const { User } = require('../models/users');
+const Job = require('../models/jobs');
+const Boat = require('../models/boats');
+const User = require('../models/users');
 const { app, runServer, closeServer } = require('../server');
 const { TEST_DATABASE_URL } = require('../config');
 
