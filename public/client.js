@@ -137,8 +137,8 @@ function populateAssignToList(workers) {
 
     $.each(workers, function(i, item) {
         htmlContent += `<li>
-                            <input type="checkbox" class="${item.id}" value="${item.fullName}" name="assign-to">
-                            <label for="assign-to" class="checkbox">${item.fullName}</label>
+                            <input type="checkbox" class="${item.id}" id="assign-to-${item.firstName}" value="${item.fullName}" name="assign-to">
+                            <label for="assign-to-${item.firstName}" class="checkbox">${item.fullName}</label>
                         </li>`;
     });
 
@@ -317,29 +317,8 @@ function populateWorkerProfileScreen(worker) {
 
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
-$(document).ready(function() {
-    $('#login-screen').show();
-    $('html').removeClass('white-bg');
-    $('.js-menu-btn').hide();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').hide();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('#add-boat-details').hide();
-    $('.js-menu-btn').hide();
-    $('.js-worker-menu').hide(); 
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').hide();
-});
-
-// for testing purposes
 // $(document).ready(function() {
-//     $('#login-screen').hide();
+//     $('#login-screen').show();
 //     $('html').removeClass('white-bg');
 //     $('.js-menu-btn').hide();
 //     $('.js-menu').hide();
@@ -352,12 +331,33 @@ $(document).ready(function() {
 //     $('#worker-detail-screen').hide();
 //     $('#edit-worker-screen').hide();
 //     $('#add-boat-details').hide();
-//     $('.js-worker-menu-btn').show();
-//     $('.js-worker-menu').hide();
+//     $('.js-menu-btn').hide();
+//     $('.js-worker-menu').hide(); 
 //     $('#job-list-screen-worker').hide();
-//     $('#worker-profile-screen').show();
-//     $('.js-edit-profile-section').hide();
+//     $('#worker-profile-screen').hide();
 // });
+
+// for testing purposes
+$(document).ready(function() {
+    $('#login-screen').hide();
+    $('html').removeClass('white-bg');
+    $('.js-menu-btn').show();
+    $('.js-menu').hide();
+    $('#admin-home').show();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-worker-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide();
+    $('.js-edit-profile-section').hide();
+});
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -510,6 +510,7 @@ $('#add-job-form').on('submit', function(event) {
             })
             .done(function(result) {
                 alert('You successfully added a new job');
+                $('#add-job-form')[0].reset();
                 showAdminJobListScreen(result);
             })
             .fail(function(jqXHR, error, errorThrown) {
@@ -623,6 +624,7 @@ $('.edit-job-form').on('submit', function(event) {
             })
             .done(function(result) {
                 alert(`You successfully updated this job`);
+                $('.edit-job-form')[0].reset();
                 showUpdatedAdminJobListScreen();
             })
             .fail(function(jqXHR, error, errorThrown) {
@@ -660,6 +662,7 @@ $('#add-worker-form').on('submit', function(event) {
     const zipCode = $('#add-zip-code').val();
     const email = $('#add-email').val();
     const password = $('#add-initial-pw').val();
+    const password2 = $('#add-initial-pw2').val();
     const type = $('input[class="add-type"]:checked').val();
     const status = $('input[class="add-status"]:checked').val();
     if (firstName == "") {
@@ -670,8 +673,6 @@ $('#add-worker-form').on('submit', function(event) {
         alert('Please input phone number');
     } else if (address == "") {
         alert('Please input address');
-    } else if (address2 == "") {
-        alert('Please input address2');
     } else if (city == "") {
         alert('Please input city');
     } else if (state == "") {
@@ -682,6 +683,8 @@ $('#add-worker-form').on('submit', function(event) {
         alert('Please input email');
     } else if (password == "") {
         alert('Please input password');
+    } else if (password != password2) {
+        alert('Passwords do not match, please re-enter password');
     } else if (type == "") {
         alert('Please input type');
     } else if (status == "") {
@@ -711,6 +714,7 @@ $('#add-worker-form').on('submit', function(event) {
             .done(function(result) {
                 console.log(result);
                 alert('You successfully added a new user');
+                $('#add-worker-form')[0].reset();
                 showAdminLandingScreen();
             })
             .fail(function(jqXHR, error, errorThrown) {
@@ -883,6 +887,7 @@ $('.edit-worker-form').on('submit', function(event) {
             })
             .done(function(result) {
                 alert(`You successfully updated ${firstName}`);
+                $('#edit-worker-form')[0].reset();
                 populateUpdatedWorkerScreen(result);
             })
             .fail(function(jqXHR, error, errorThrown) {
@@ -1015,6 +1020,7 @@ $('#add-boat-details-form').on('submit', function(event) {
             .done(function(result) {
                 console.log(result);
                 alert('You successfully added a new boat');
+                $('#add-boat-details-form')[0].reset();
                 showAdminLandingScreen();
             })
             .fail(function(jqXHR, error, errorThrown) {
