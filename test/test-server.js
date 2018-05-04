@@ -218,12 +218,7 @@ describe('Users API resource', function() {
 	// Test update user
 	describe('Users PUT endpoint', function() {
 		it('should update user fields sent over', function() {
-			const updateUser = {
-				firstName: 'Jerry', 
-				lastName: 'Smith', 
-				phoneNumber: '692-333-1212',
-				email: 'jerry@email.com'
-			};
+			const updateUser = generateUser();
 
 			return User
 				.findOne()
@@ -236,7 +231,7 @@ describe('Users API resource', function() {
 				})
 				.then(function(res) {
 					console.log(res);
-					res.should.have.status(204);
+					res.should.have.status(200);
 					return User.findById(updateUser.id);
 				})
 				.then(function(user) {
