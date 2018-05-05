@@ -16,7 +16,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 
-// Generate random type and status values for user
+// Populate random type and status values for worker
 function generateType() {
 	const type = ['worker', 'admin'];
 	return type[Math.floor(Math.random() * type.length)];
@@ -27,7 +27,7 @@ function generateStatus() {
 	return status[Math.floor(Math.random() * status.length)];
 }
 
-// Create one user
+// Create one user to seed users db and test create user
 function generateUser() {
 	return {
 		    firstName: faker.name.firstName(),
@@ -45,6 +45,7 @@ function generateUser() {
 	}
 }
 
+// Seed Users database
 function seedUserData() {
 	console.info('Seeding Admin user data');
 	const seedData = [];
@@ -55,13 +56,14 @@ function seedUserData() {
 	return User.insertMany(seedData);
 } 
 
-// Seed random documents into jobs DB
+// Seed random services into jobs 
 function generateServices() {
 	const services = [
 		'Wash', 'Hull Wash', 'Topside Wax', 'Hull Wax', 'Compounding Service', 'Interior Cleaning', 'Teak Cleaning', 'Teak Sealing', 'Engine Room Detailing', 'System Check', 'Bottom Cleaning'];
 		return services[Math.floor(Math.random() * services.length)];
 }
 
+// Create one job to seed jobs db and test create job
 function generateJob() {
 	return {
 			jobName: faker.lorem.words(),
@@ -74,14 +76,16 @@ function generateJob() {
 	}
 }
 
+
+// Seed Jobs database
 function seedJobData() {
 	console.info('Seeding Job data');
-	const seedData = [];
+	const seedJData = [];
 
 	for (let i=1; i<10; i++) {
-		seedData.push(generateJob());
+		seedJData.push(generateJob());
 	}
-	return Job.insertMany(seedData);
+	return Job.insertMany(seedJData);
 }
 
 // Create one boat
@@ -111,12 +115,12 @@ function generateBoat() {
 // Seed random documents into boats DB
 function seedBoatData() {
 	console.info('Seeding Boat Data');
-	const seedData = [];
+	const seedBData = [];
 
 	for (let i=1; i<10; i++) {
-		seedData.push(generateBoat());
+		seedBData.push(generateBoat());
 	}
-	return Boat.insertMany(seedData);
+	return Boat.insertMany(seedBData);
 }
 
 // Tear down Database after each test
@@ -130,7 +134,7 @@ function tearDownDb() {
 }
 
 
-// Test User Endpoints
+// --------------- Test User Endpoints ---------------
 
 describe('Users API resource', function() {
 
@@ -167,7 +171,6 @@ describe('Users API resource', function() {
 		return chai.request(app)
 			.get('/get-users')
 			.then(function(res) {
-				console.log(res);
 				res.should.have.status(200);
 				res.should.be.json;
 				res.body.should.be.a('array');
@@ -175,7 +178,21 @@ describe('Users API resource', function() {
 
 				res.body.forEach(function(user) {
 					user.should.be.a('object');
-					user.should.include.keys('id', 'firstName', 'lastName', 'fullName', 'phoneNumber', 'address', 'address2', 'city', 'state', 'zipCode', 'fullAddress', 'email', 'type', 'status');
+					user.should.include.keys(
+						'id', 
+						'firstName', 
+						'lastName', 
+						'fullName', 
+						'phoneNumber', 
+						'address', 
+						'address2', 
+						'city', 
+						'state', 
+						'zipCode', 
+						'fullAddress', 
+						'email', 
+						'type', 
+						'status');
 				});
 
 				resUser = res.body[0];
@@ -193,7 +210,6 @@ describe('Users API resource', function() {
 	
 	it('should create a new user', function() {
 		const newUser = generateUser();
-		console.log(newUser);
 		return chai.request(app)
 			.post('/users/create')
 			.send(newUser)
@@ -201,7 +217,11 @@ describe('Users API resource', function() {
 				res.should.have.status(200);
 				res.should.be.json;
 				res.body.should.include.keys(
-					'firstName', 'lastName', 'phoneNumber', 'email', 'password');
+					'firstName', 
+					'lastName', 
+					'phoneNumber', 
+					'email', 
+					'password');
 				res.body.firstName.should.equal(newUser.firstName);
 				res.body.lastName.should.equal(newUser.lastName);
 				res.body.phoneNumber.should.equal(newUser.phoneNumber);
@@ -227,7 +247,6 @@ describe('Users API resource', function() {
 					.send(updateUser);
 			})
 			.then(function(res) {
-				console.log(res);
 				res.should.have.status(200);
 				return User.findById(updateUser.id);
 			})
@@ -237,7 +256,6 @@ describe('Users API resource', function() {
 				user.phoneNumber.should.equal(updateUser.phoneNumber);
 				user.email.should.equal(updateUser.email);
 			});
-
 	});
 
 
@@ -248,5 +266,133 @@ describe('Users API resource', function() {
 	after(function() {
 		return closeServer();
 	});
+});
 
+
+
+// --------------- Test Job Endpoints ---------------
+
+describe('Jobs API resource', function() {
+
+	before(function() {
+		return runServer(TEST_DATABASE_URL)
+		.then(console.log('Running server'))
+		.catch(err => console.log({err}));
+	});
+
+	beforeEach(function() {
+		return seedJobData(); 
+	});
+
+	// Test job database
+	it('should return a list of all jobs', function() {
+		let res;
+		return chai.request(app)
+			.get('/get-jobs')
+			.then(function(_res) {
+				res = _res;
+				res.should.have.status(200);
+				res.body.should.have.lengthOf.at.least(1);
+				return Job.count();
+			})
+			.then(function(count) {
+				res.body.should.have.lengthOf(count);
+			});
+	});
+
+	it('should return job with right fields', function() {
+		return chai.request(app)
+			.get('/get-jobs')
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.be.a('array');
+				res.body.should.have.lengthOf.at.least(1);
+
+				res.body.forEach(function(job) {
+					job.should.be.a('object');
+					job.should.include.keys(
+						'_id', 'jobName','boatFullAddress','services','otherService','serviceDate','assignTo','jobNotes');
+				});
+			});
+	});
+
+
+	// Test create new job
+	it('should create a new job', function() {
+		const newJob = generateJob();
+		return chai.request(app)
+			.post('/jobs/create')
+			.send(newJob)
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.include.keys(
+					'jobName','boatFullAddress','services','otherService','serviceDate','assignTo','jobNotes');
+				res.body.jobName.should.equal(newJob.jobName);
+				res.body.boatFullAddress.should.equal(newJob.boatFullAddress);
+				res.body.services.should.be.a('array');
+				res.body.otherService.should.equal(newJob.otherService);
+				res.body.serviceDate.should.not.be.null;	
+				res.body.assignTo.should.be.a('array');
+				res.body.jobNotes.should.equal(newJob.jobNotes);
+				res.body._id.should.not.be.null;				
+			});
+	});
+
+
+	// Test update job	
+	it('should update job fields sent over', function() {
+		const updateJob = generateJob();
+
+		return Job
+			.findOne()
+			.then(function(job) {
+				updateJob.id = job._id;
+
+				return chai.request(app)
+					.put(`/jobs/${job.id}`)
+					.send(updateJob);
+			})
+			.then(function(res) {
+				res.should.have.status(200);
+				return Job.findById(updateJob.id);
+			})
+			.then(function(job) {
+				job.services.should.be.a('array');
+				job.otherService.should.equal(updateJob.otherService);
+				job.serviceDate.should.not.be.null;
+				job.assignTo.should.be.a('array');
+				job.jobNotes.should.equal(updateJob.jobNotes);
+			});
+	});
+
+	// Test delete a job
+	it('should delete a job by id', function() {
+		let job;
+      
+		return Job
+			.findOne()
+			.then(function(_job) {
+				console.log(job);
+				job = _job;
+				return chai.request(app).delete(`/jobs/${job._id}`);
+			})
+			.then(function(res) {
+				res.should.have.status(204);
+				return Job.findById(job._id);
+			})
+			.then(function(_job) {
+				should.not.exist(_job);
+			});
+      
+	});
+
+	afterEach(function() {
+		return tearDownDb();
+	});
+
+	after(function() {
+		return closeServer();
+	});
 });

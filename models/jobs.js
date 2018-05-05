@@ -33,11 +33,6 @@ const jobSchema = new mongoose.Schema({
     },
 });
 
-// jobSchema.virtual('allServices').
-//     get(function() {
-//         return this.services + ", " + this.otherService;
-//     });
-
 const Job = mongoose.model('Job', jobSchema);
 
 module.exports = Job;
