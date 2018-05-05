@@ -94,7 +94,7 @@ function generateBoat() {
 			boatName: faker.lorem.words(),
 	        boatMake: faker.lorem.words(),
 	        boatLength: faker.random.number(),
-	        boatAddress: faker.address.address(),
+	        boatAddress: faker.address.streetAddress(),
 	        boatAddress2: faker.address.secondaryAddress(),
 	        boatCity: faker.address.city(),
 	        boatState: faker.address.stateAbbr(),
@@ -104,7 +104,7 @@ function generateBoat() {
 	        custLastName: faker.name.lastName(),
 	        custEmail: faker.internet.email(),
 	        custPhone: faker.phone.phoneNumber(),
-	        custAddress: faker.address.address(),
+	        custAddress: faker.address.streetAddress(),
 	        custAddress2: faker.address.secondaryAddress(),
 	        custCity: faker.address.city(),
 	        custState: faker.address.stateAbbr(),
@@ -312,7 +312,14 @@ describe('Jobs API resource', function() {
 				res.body.forEach(function(job) {
 					job.should.be.a('object');
 					job.should.include.keys(
-						'_id', 'jobName','boatFullAddress','services','otherService','serviceDate','assignTo','jobNotes');
+						'_id', 
+						'jobName',
+						'boatFullAddress',
+						'services',
+						'otherService',
+						'serviceDate',
+						'assignTo',
+						'jobNotes');
 				});
 			});
 	});
@@ -387,6 +394,129 @@ describe('Jobs API resource', function() {
 			});
       
 	});
+
+	afterEach(function() {
+		return tearDownDb();
+	});
+
+	after(function() {
+		return closeServer();
+	});
+});
+
+
+
+// --------------- Test Boat Endpoints ---------------
+
+describe('Boats API resource', function() {
+
+	before(function() {
+		return runServer(TEST_DATABASE_URL)
+		.then(console.log('Running server'))
+		.catch(err => console.log({err}));
+	});
+
+	beforeEach(function() {
+		return seedBoatData(); 
+	});
+
+	// Test boat database
+
+	it('should return a list of all boats', function() {
+		let res;
+		return chai.request(app)
+			.get('/get-boats')
+			.then(function(_res) {
+				res = _res;
+				res.should.have.status(200);
+				res.body.should.have.lengthOf.at.least(1);
+				return Boat.count();
+			})
+			.then(function(count) {
+				res.body.should.have.lengthOf(count);
+			});
+	});
+
+	it('should return boats with right fields', function() {
+
+		let resBoat;
+		return chai.request(app)
+			.get('/get-boats')
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.be.a('array');
+				res.body.should.have.lengthOf.at.least(1);
+
+				res.body.forEach(function(boat) {
+					boat.should.be.a('object');
+					boat.should.include.keys(
+						'id', 
+						'boatName', 
+						'boatMake', 
+						'boatLength', 
+						'boatFullAddress', 
+						'boatNotes', 
+						'customerFullName',  
+						'custEmail', 
+						'custPhone', 
+						'custFullAddress');
+				});
+
+				resBoat = res.body[0];
+				return Boat.findById(resBoat.id);
+			})
+			.then(function(boat) {
+				resBoat.boatName.should.equal(boat.boatName);
+				resBoat.boatMake.should.equal(boat.boatMake);
+				resBoat.boatLength.should.equal(boat.boatLength);
+				resBoat.boatFullAddress.should.equal(boat.boatFullAddress);
+				resBoat.boatNotes.should.equal(boat.boatNotes);
+				resBoat.customerFullName.should.equal(boat.customerFullName);
+				resBoat.custEmail.should.equal(boat.custEmail);
+				resBoat.custPhone.should.equal(boat.custPhone);
+				resBoat.custFullAddress.should.equal(boat.custFullAddress);
+			});
+	});
+
+
+	// // Test create new boat
+	
+	it('should create a new boat', function() {
+		const newBoat = generateBoat();
+		return chai.request(app)
+			.post('/boats/create')
+			.send(newBoat)
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.include.keys(
+					'boatName', 
+					'boatMake', 
+					'boatLength', 
+					'boatAddress', 
+					'boatAddress2', 
+					'boatCity', 
+					'boatState', 
+					'boatZipCode', 
+					'boatNotes', 
+					'custFirstName', 
+					'custLastName', 
+					'custEmail', 
+					'custPhone', 
+					'custAddress',
+			        'custAddress2',
+			        'custCity',
+			        'custState',
+			        'custZipCode');
+				res.body.boatName.should.equal(newBoat.boatName);
+				res.body.boatAddress.should.equal(newBoat.boatAddress);
+				res.body.custFirstName.should.equal(newBoat.custFirstName);
+				res.body.custLastName.should.equal(newBoat.custLastName);
+				res.body._id.should.not.be.null;				
+			});
+	});
+
 
 	afterEach(function() {
 		return tearDownDb();
