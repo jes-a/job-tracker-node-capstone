@@ -6,7 +6,7 @@
 
 ### Working Prototype
 
-Can be viewed here [Prototype](https://job-tracker-node-capstone.herokuapp.com/)
+Can be viewed here: [Job Tracker](https://job-tracker-node-capstone.herokuapp.com/)
 
 
 ## User Stories: MVP
@@ -32,44 +32,13 @@ Can be viewed here [Prototype](https://job-tracker-node-capstone.herokuapp.com/)
 
 ## Screenshots: MVP
 
-* Both: Screen for Logging in
-![Log In Screen](/screenshots/log-in-screen.png)
+* Admin Screenshots  
 
-* Admin: Home Screen
-![Home Screen](/screenshots/admin-home.png)
+![Admin Screenshots](/screenshots/screenshots-admin.png)
 
-* Admin: Screen for adding worker
-![Add Worker Screen](/screenshots/add-worker.png)
+* Worker Screenshots  
 
-* Admin: Screen for worker list
-![Worker List Screen](/screenshots/worker-list.png)
-
-* Admin: Screen for worker detail
-![Worker Detail Screen](/screenshots/worker-detail.png)
-
-* Admin: Screen for editing worker
-![Edit Worker Screen](/screenshots/edit-worker.png)
-
-* Admin: Screen for adding boat
-![Add Boat Screen](/screenshots/add-boat.png)
-
-* Admin: Screen for assigning a job 
-![Add Job Screen](/screenshots/add-job.png)
-
-* Admin: Screen for job list
-![Job List Screen](/screenshots/admin-job-list.png)
-
-* Admin: Screen for editing job
-![Edit Job Screen](/screenshots/edit-job.png)
-
-* Worker: Screen for viewing job list
-![Worker Job List Screen](/screenshots/worker-job-list.png)
-
-* Worker: Screen for viewing profile
-![Worker View Profile Screen](/screenshots/worker-profile.png)
-
-* Worker: Screen for viewing profile
-![Worker Edit Profile Screen](/screenshots/worker-edit-profile.png)
+![Worker Screenshots](/screenshots/screenshots-worker.png)
 
 
 ## User Flow: MVP 
