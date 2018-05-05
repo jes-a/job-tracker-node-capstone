@@ -32,11 +32,8 @@ Can be viewed here: [Job Tracker](https://job-tracker-node-capstone.herokuapp.co
 
 ## Screenshots: MVP
 
-* Admin Screenshots  
-
 ![Admin Screenshots](/screenshots/screenshots-admin.png)
-
-* Worker Screenshots  
+  
 
 ![Worker Screenshots](/screenshots/screenshots-worker.png)
 
