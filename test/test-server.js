@@ -47,12 +47,12 @@ function generateUser() {
 
 function seedUserData() {
 	console.info('Seeding Admin user data');
-	const seedUsersData = [];
+	const seedData = [];
 
 	for (let i=1; i<10; i++) {
-		seedUsersData.push(generateUser());
+		seedData.push(generateUser());
 	}
-	return User.insertMany(seedUsersData);
+	return User.insertMany(seedData);
 } 
 
 // Seed random documents into jobs DB
@@ -76,12 +76,12 @@ function generateJob() {
 
 function seedJobData() {
 	console.info('Seeding Job data');
-	const seedJobsData = [];
+	const seedData = [];
 
 	for (let i=1; i<10; i++) {
-		seedJobsData.push(generateJob());
+		seedData.push(generateJob());
 	}
-	return Job.insertMany(seedJobsData);
+	return Job.insertMany(seedData);
 }
 
 // Create one boat
@@ -111,12 +111,12 @@ function generateBoat() {
 // Seed random documents into boats DB
 function seedBoatData() {
 	console.info('Seeding Boat Data');
-	const seedBoatsData = [];
+	const seedData = [];
 
 	for (let i=1; i<10; i++) {
-		seedBoatsData.push(generateBoat());
+		seedData.push(generateBoat());
 	}
-	return Boat.insertMany(seedBoatsData);
+	return Boat.insertMany(seedData);
 }
 
 // Tear down Database after each test
@@ -141,115 +141,104 @@ describe('Users API resource', function() {
 	});
 
 	beforeEach(function() {
-		return seedUserData();
+		return seedUserData(); 
 	});
 
 	// Test user database
-	describe('Users GET endpoint', function() {
-		it('should return a list of all users', function() {
-			let res;
-			return chai.request(app)
-				.get('/get-users')
-				.then(function(_res) {
-					res = _res;
-					res.should.have.status(200);
-					res.body.should.have.lengthOf.at.least(1);
-					return User.count();
-				})
-				.then(function(count) {
-					res.body.should.have.lengthOf(count);
+
+	it('should return a list of all users', function() {
+		let res;
+		return chai.request(app)
+			.get('/get-users')
+			.then(function(_res) {
+				res = _res;
+				res.should.have.status(200);
+				res.body.should.have.lengthOf.at.least(1);
+				return User.count();
+			})
+			.then(function(count) {
+				res.body.should.have.lengthOf(count);
+			});
+	});
+
+	it('should return users with right fields', function() {
+
+		let resUser;
+		return chai.request(app)
+			.get('/get-users')
+			.then(function(res) {
+				console.log(res);
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.be.a('array');
+				res.body.should.have.lengthOf.at.least(1);
+
+				res.body.forEach(function(user) {
+					user.should.be.a('object');
+					user.should.include.keys('id', 'firstName', 'lastName', 'fullName', 'phoneNumber', 'address', 'address2', 'city', 'state', 'zipCode', 'fullAddress', 'email', 'type', 'status');
 				});
-		});
 
-		it('should return users with right fields', function() {
-
-			let resUser;
-			return chai.request(app)
-				.get('/get-users')
-				.then(function(res) {
-					console.log(res);
-					res.should.have.status(200);
-					res.should.be.json;
-					res.body.should.be.a('array');
-					res.body.should.have.lengthOf.at.least(1);
-
-					res.body.forEach(function(user) {
-						user.should.be.a('object');
-						user.should.include.keys('id', 'firstName', 'lastName', 'fullName', 'phoneNumber', 'address', 'address2', 'city', 'state', 'zipCode', 'fullAddress', 'email', 'type', 'status');
-					});
-
-					resUser = res.body[0];
-					return User.findById(resUser.id);
-				})
-				.then(function(user) {
-					resUser.firstName.should.equal(user.firstName);
-					resUser.lastName.should.equal(user.lastName);
-					resUser.phoneNumber.should.equal(user.phoneNumber);
-				});
-		});
-
+				resUser = res.body[0];
+				return User.findById(resUser.id);
+			})
+			.then(function(user) {
+				resUser.firstName.should.equal(user.firstName);
+				resUser.lastName.should.equal(user.lastName);
+				resUser.phoneNumber.should.equal(user.phoneNumber);
+			});
 	});
 
 
 	// Test create new user
-	describe('Users POST endpoint', function() {
-		it('should create a new user', function() {
-			const newUser = generateUser();
-			console.log(newUser);
-			return chai.request(app)
-				.post('/users/create')
-				.send(newUser)
-				.then(function(res) {
-					res.should.have.status(200);
-					res.should.be.json;
-					res.body.should.include.keys(
-						'firstName', 'lastName', 'phoneNumber', 'email', 'password');
-					res.body.firstName.should.equal(newUser.firstName);
-					res.body.lastName.should.equal(newUser.lastName);
-					res.body.phoneNumber.should.equal(newUser.phoneNumber);
-					res.body.email.should.equal(newUser.email);
-					res.body.password.should.not.equal(newUser.password);	
-					res.body._id.should.not.be.null;				
-				});
-		});
+	
+	it('should create a new user', function() {
+		const newUser = generateUser();
+		console.log(newUser);
+		return chai.request(app)
+			.post('/users/create')
+			.send(newUser)
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.include.keys(
+					'firstName', 'lastName', 'phoneNumber', 'email', 'password');
+				res.body.firstName.should.equal(newUser.firstName);
+				res.body.lastName.should.equal(newUser.lastName);
+				res.body.phoneNumber.should.equal(newUser.phoneNumber);
+				res.body.email.should.equal(newUser.email);
+				res.body.password.should.not.equal(newUser.password);	
+				res.body._id.should.not.be.null;				
+			});
 	});
 
 
 	// Test update user
-	describe('Users PUT endpoint', function() {
-		it('should update user fields sent over', function() {
-			const updateUser = generateUser();
+	
+	it('should update user fields sent over', function() {
+		const updateUser = generateUser();
 
-			return User
-				.findOne()
-				.then(function(user) {
-					updateUser.id = user.id;
+		return User
+			.findOne()
+			.then(function(user) {
+				updateUser.id = user.id;
 
-					return chai.request(app)
-						.put(`/update-user/${user.id}`)
-						.send(updateUser);
-				})
-				.then(function(res) {
-					console.log(res);
-					res.should.have.status(200);
-					return User.findById(updateUser.id);
-				})
-				.then(function(user) {
-					user.firstName.should.equal(updateUser.firstName);
-					user.lastName.should.equal(updateUser.lastName);
-					user.phoneNumber.should.equal(updateUser.phoneNumber);
-					user.email.should.equal(updateUser.email);
-				});
+				return chai.request(app)
+					.put(`/update-user/${user.id}`)
+					.send(updateUser);
+			})
+			.then(function(res) {
+				console.log(res);
+				res.should.have.status(200);
+				return User.findById(updateUser.id);
+			})
+			.then(function(user) {
+				user.firstName.should.equal(updateUser.firstName);
+				user.lastName.should.equal(updateUser.lastName);
+				user.phoneNumber.should.equal(updateUser.phoneNumber);
+				user.email.should.equal(updateUser.email);
+			});
 
-		});
 	});
-
-
-
-
-
-
-
 
 
 	afterEach(function() {
