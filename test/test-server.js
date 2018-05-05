@@ -381,7 +381,6 @@ describe('Jobs API resource', function() {
 		return Job
 			.findOne()
 			.then(function(_job) {
-				console.log(job);
 				job = _job;
 				return chai.request(app).delete(`/jobs/${job._id}`);
 			})

@@ -36,7 +36,7 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
-       // console.log(item);
+        // console.log(item);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -48,13 +48,13 @@ function populateJobList(jobs) {
         htmlContent += '<h5>Services</h5>';
         htmlContent += '<ul class="job-list-items">';
         $.each(item.services, function(key, value) {
-        htmlContent += `<li class="js-job-service">${value}</li>`;
+            htmlContent += `<li class="js-job-service">${value}</li>`;
         });
         htmlContent += '</ul>';
         htmlContent += '<h5>Workers</h5>';
         htmlContent += '<ul>';
-        $.each(item.assignTo,function(key, value) {
-        htmlContent += `<li class="js-job-worker">${value}</li>`;
+        $.each(item.assignTo, function(key, value) {
+            htmlContent += `<li class="js-job-worker">${value}</li>`;
         });
         htmlContent += '</ul>';
         htmlContent += '<h5>Notes</h5>';
@@ -158,44 +158,10 @@ function populateEditAssignToList(workers) {
                         </li>`;
     });
 
-    //use the HTML output to show it in the index.html
+    //use the HTML output to show it in the assign to list
     $(".js-edit-assign-to-list").html(htmlContent);
 }
 
-// Populate Workers List Screen
-function populateWorkerList(workers) {
-    //create an empty variable to store one LI for each one the results
-    let htmlContent = "";
-    $.each(workers, function(i, item) {
-        htmlContent += '<div class="worker">';
-        htmlContent += '<ul class="js-worker-list-details">';
-        htmlContent += `<li class="js-worker-name" id="${item.id}"><h4>${item.fullName}</h4></li>`;
-        htmlContent += `<li class="js-worker-phone">${item.phoneNumber}</li>`;
-        htmlContent += `<li class="js-worker-email">${item.email}</li>`;
-        htmlContent += `<li class="js-worker-fullAddress">${item.fullAddress}</li>`;
-        htmlContent += '</ul>';
-        htmlContent += '</div>';
-    });
-    $(".js-worker-detail-wrapper").html(htmlContent);
-    $('*').scrollTop(0);
-    $('#login-screen').hide();
-    $('html').addClass('white-bg');
-    $('.js-menu-btn').show();
-    $('.js-menu').hide();
-    $('#admin-home').hide();
-    $('#add-job-screen').hide();
-    $('#edit-job-screen').hide();
-    $('#job-list-screen-admin').hide();
-    $('#add-worker-screen').hide();
-    $('#worker-list-screen').show();
-    $('#worker-detail-screen').hide();
-    $('#edit-worker-screen').hide();
-    $('#add-boat-details').hide();
-    $('.js-worker-menu-btn').hide();
-    $('.js-worker-menu').hide();
-    $('#job-list-screen-worker').hide();
-    $('#worker-profile-screen').hide();
-}
 
 function populateUpdatedWorkerScreen(result) {
     let updatedWorkerId = result.id;
@@ -235,7 +201,7 @@ function showWorkerJobListScreen(jobs) {
 
     // Find jobs assigned to worker and populate job list
     $.each(jobs, function(i, item) {
-        $.each(item.assignTo,function(key, value) {
+        $.each(item.assignTo, function(key, value) {
             let assigned = value;
             if (assigned == workerName) {
                 let serviceDate = setReadableDate(item.serviceDate);
@@ -248,13 +214,13 @@ function showWorkerJobListScreen(jobs) {
                 htmlContent += '<h5>Services</h5>';
                 htmlContent += '<ul class="job-list-items">';
                 $.each(item.services, function(key, value) {
-                htmlContent += `<li class="js-job-service">${value}</li>`;
+                    htmlContent += `<li class="js-job-service">${value}</li>`;
                 });
                 htmlContent += '</ul>';
                 htmlContent += '<h5>Workers</h5>';
                 htmlContent += '<ul>';
-                $.each(item.assignTo,function(key, value) {
-                htmlContent += `<li class="js-job-worker">${value}</li>`;
+                $.each(item.assignTo, function(key, value) {
+                    htmlContent += `<li class="js-job-worker">${value}</li>`;
                 });
                 htmlContent += '</ul>';
                 htmlContent += '<h5>Notes</h5>';
@@ -289,7 +255,7 @@ function showWorkerJobListScreen(jobs) {
 
 function populateWorkerProfileScreen(worker) {
     $('.js-profile').html(
-    `<h4 class="js-profile-name">${worker.fullName}</h4>
+        `<h4 class="js-profile-name">${worker.fullName}</h4>
     <p class="js-profile-phone">${worker.phoneNumber}</p>
     <p class="js-profile-email">${worker.email}</p>
     <p class="js-profile-address">${worker.fullAddress}</p>
@@ -332,32 +298,11 @@ $(document).ready(function() {
     $('#edit-worker-screen').hide();
     $('#add-boat-details').hide();
     $('.js-menu-btn').hide();
-    $('.js-worker-menu').hide(); 
+    $('.js-worker-menu').hide();
     $('#job-list-screen-worker').hide();
     $('#worker-profile-screen').hide();
 });
 
-// for testing purposes
-// $(document).ready(function() {
-//     $('#login-screen').hide();
-//     $('html').removeClass('white-bg');
-//     $('.js-menu-btn').show();
-//     $('.js-menu').hide();
-//     $('#admin-home').show();
-//     $('#add-job-screen').hide();
-//     $('#edit-job-screen').hide();
-//     $('#job-list-screen-admin').hide();
-//     $('#add-worker-screen').hide();
-//     $('#worker-list-screen').hide();
-//     $('#worker-detail-screen').hide();
-//     $('#edit-worker-screen').hide();
-//     $('#add-boat-details').hide();
-//     $('.js-worker-menu-btn').hide();
-//     $('.js-worker-menu').hide();
-//     $('#job-list-screen-worker').hide();
-//     $('#worker-profile-screen').hide();
-//     $('.js-edit-profile-section').hide();
-// });
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
 
@@ -391,7 +336,7 @@ $('#js-login-button').on('click', function(event) {
                     $('.js-edit-profile-btn').attr('id', `${workerId}`);
                     $('.js-edit-profile-form').attr('id', `${workerId}`);
                     $.getJSON('/get-jobs', function(res) {
-                        showWorkerJobListScreen(res); 
+                        showWorkerJobListScreen(res);
                     });
                 } else {
                     showAdminLandingScreen();
@@ -474,9 +419,9 @@ $('#add-job-form').on('submit', function(event) {
         services.push($(item).attr('value'))
     });
     const otherService = $('#add-other-service').val();
-        if (otherService !== "") {
-            services.push(otherService);
-        }
+    if (otherService !== "") {
+        services.push(otherService);
+    }
     const serviceDate = $('#date-select').val();
     const assignTo = [];
     $('input[name="assign-to"]:checked').each(function(i, item) {
@@ -523,7 +468,7 @@ $('#add-job-form').on('submit', function(event) {
 
 // Open Job list screen from landing page or nav
 $('.js-job-list-admin').on('click', function(event) {
-        $.getJSON('/get-jobs', function(res) {
+    $.getJSON('/get-jobs', function(res) {
         populateJobList(res);
     });
 
@@ -549,21 +494,21 @@ $('.js-job-list-admin').on('click', function(event) {
 $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
     event.preventDefault();
     $.getJSON('/get-users', function(res) {
-    populateEditAssignToList(res);
+        populateEditAssignToList(res);
     });
     let jobId = $(this).attr('id');
     $.getJSON('/get-one-job/' + jobId, function(res) {
         // add in pre-filled values based on job id
         let htmlContent = "";
         htmlContent += `<h3 class="js-boat-name boat">${res.jobName}</h3>`;
-        $('.edit-boat-name').html(htmlContent);      
+        $('.edit-boat-name').html(htmlContent);
         $.each(res.services, function(key, value) {
-        $('input[value="' + value + '"]').prop('checked', true);
+            $('input[value="' + value + '"]').prop('checked', true);
         });
         $('#edit-other-service').text(res.otherService);
-        $('#edit-date-select').val(res.serviceDate);        
+        $('#edit-date-select').val(res.serviceDate);
         $.each(res.assignTo, function(key, value) {
-        $('input[value="' + value + '"]').prop('checked', true);
+            $('input[value="' + value + '"]').prop('checked', true);
         });
         $('#edit-notes').val(res.jobNotes);
         $('.edit-job-form').attr('id', jobId);
@@ -585,16 +530,16 @@ $('.js-job-list-wrapper').on('click', '.js-edit-job-link', function(event) {
 
 //Send Edit Job form to update job information 
 $('.edit-job-form').on('submit', function(event) {
-    event.preventDefault(); 
+    event.preventDefault();
     let jobId = $(this).attr('id');
     const services = [];
     $('input[name="edit-service"]:checked').each(function(i, item) {
         services.push($(item).attr('value'))
     });
     const otherService = $('#edit-other-service').val();
-        if (otherService !== "") {
-            services.push(otherService);
-        }
+    if (otherService !== "") {
+        services.push(otherService);
+    }
     const serviceDate = $('#edit-date-select').val();
     const assignTo = [];
     $('input[name="edit-assign-to"]:checked').each(function(i, item) {
@@ -641,9 +586,9 @@ $('.edit-job-form').on('click', '#js-delete-job', function(event) {
     let jobId = event.delegateTarget.id;
     if (confirm('Are you SURE you want to delete this job? Your data will be PERMANENTLY erased.') === true) {
         $.ajax({
-                method: 'DELETE',
-                url: '/jobs/' + jobId,
-                success: showAdminLandingScreen()
+            method: 'DELETE',
+            url: '/jobs/' + jobId,
+            success: showAdminLandingScreen()
         })
     }
 
@@ -745,8 +690,41 @@ $(document).on('click', '.js-add-worker', function(event) {
 // Open worker list screen from landing page or nav
 $('.js-workers-screen').on('click', function(event) {
     event.preventDefault();
+    //create an empty variable to store one LI for each one the results
+    let htmlContent = "";
+
     $.getJSON('/get-users', function(res) {
-        populateWorkerList(res);
+        console.log(res);
+        $.each(res, function(i, item) {
+            console.log(item);
+            htmlContent += '<div class="worker">';
+            htmlContent += '<ul class="js-worker-list-details">';
+            htmlContent += `<li class="js-worker-name" id="${item.id}"><h4>${item.fullName}</h4></li>`;
+            htmlContent += `<li class="js-worker-phone">${item.phoneNumber}</li>`;
+            htmlContent += `<li class="js-worker-email">${item.email}</li>`;
+            htmlContent += `<li class="js-worker-fullAddress">${item.fullAddress}</li>`;
+            htmlContent += '</ul>';
+            htmlContent += '</div>';
+        });
+        $(".js-worker-detail-wrapper").html(htmlContent);
+        $('*').scrollTop(0);
+        $('#login-screen').hide();
+        $('html').addClass('white-bg');
+        $('.js-menu-btn').show();
+        $('.js-menu').hide();
+        $('#admin-home').hide();
+        $('#add-job-screen').hide();
+        $('#edit-job-screen').hide();
+        $('#job-list-screen-admin').hide();
+        $('#add-worker-screen').hide();
+        $('#worker-list-screen').show();
+        $('#worker-detail-screen').hide();
+        $('#edit-worker-screen').hide();
+        $('#add-boat-details').hide();
+        $('.js-worker-menu-btn').hide();
+        $('.js-worker-menu').hide();
+        $('#job-list-screen-worker').hide();
+        $('#worker-profile-screen').hide();
     });
 });
 
@@ -754,7 +732,6 @@ $('.js-workers-screen').on('click', function(event) {
 $('.js-worker-detail-wrapper').on('click', '.js-worker-name', function(event) {
     event.preventDefault();
     let workerId = $(this).attr('id');
-    console.log(workerId);
     $.getJSON('/get-one-user/' + workerId, function(res) {
         $(".js-worker-detail").html(
             `<i class="far fa-edit edit-btn js-edit-worker-button" id="${workerId}"></i>
@@ -849,8 +826,6 @@ $('.edit-worker-form').on('submit', function(event) {
         alert('Please input phone number');
     } else if (address == "") {
         alert('Please input address');
-    } else if (address2 == "") {
-        alert('Please input address2');
     } else if (city == "") {
         alert('Please input city');
     } else if (state == "") {
@@ -887,7 +862,6 @@ $('.edit-worker-form').on('submit', function(event) {
             })
             .done(function(result) {
                 alert(`You successfully updated ${firstName}`);
-                $('#edit-worker-form')[0].reset();
                 populateUpdatedWorkerScreen(result);
             })
             .fail(function(jqXHR, error, errorThrown) {
@@ -1048,7 +1022,7 @@ $(document).on('click', function() {
 $('.js-job-list-link').on('click', function(event) {
     event.preventDefault();
     $.getJSON('/get-jobs', function(res) {
-        showWorkerJobListScreen(res); 
+        showWorkerJobListScreen(res);
     });
 });
 
@@ -1058,7 +1032,7 @@ $('.js-worker-menu').on('click', '.js-profile-link', function(event) {
     let workerId = $(this).attr('id');
     $.getJSON('/get-one-user/' + workerId, function(res) {
         populateWorkerProfileScreen(res);
-    }); 
+    });
 });
 
 // Open Edit Profile section in Profile and fill in with values based on Id
@@ -1109,8 +1083,6 @@ $('.js-edit-profile-form').on('submit', function(event) {
         alert('Please input email');
     } else if (address == "") {
         alert('Please input address');
-    } else if (address2 == "") {
-        alert('Please input address2');
     } else if (city == "") {
         alert('Please input city');
     } else if (state == "") {
@@ -1118,7 +1090,7 @@ $('.js-edit-profile-form').on('submit', function(event) {
     } else if (zipCode == "") {
         alert('Please input zip code');
     } else if (password !== password2) {
-        alert ('Passwords do not match, please re-enter password');
+        alert('Passwords do not match, please re-enter password');
     } else if (password == "") {
         const updateUserObject = {
             phoneNumber,

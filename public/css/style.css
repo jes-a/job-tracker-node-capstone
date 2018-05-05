@@ -302,6 +302,10 @@ input[type="checkbox"] {
     color: #363636
 }
 
+:focus {
+    outline: #93C0D1 auto 5px;
+}
+
 textarea {
     width: 99%;
     height: 75px;
