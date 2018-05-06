@@ -51,6 +51,13 @@ This app is built to be primarily used on a mobile device and is optimized for a
 
 
 
+## Development Road Map
 
+Features for future iterations include: 
+* Add styling for errors and dialogs
+* Add ability for workers to add notes to job
+* Add ability for workers to mark job as complete
+* Add job report list to Admin section
+* Add ability for user to click on job location and be taken to map
 
 
