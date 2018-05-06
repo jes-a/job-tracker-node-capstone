@@ -6,9 +6,10 @@
 
 ### Working Prototype
 
-View working prototype here: [Job Tracker](https://job-tracker-node-capstone.herokuapp.com/)
-To log in to admin view: email: admin@email.com / pw: admin
-To log in to worker view: email: worker@email.com / pw: worker
+View working prototype here: [Job Tracker](https://job-tracker-node-capstone.herokuapp.com/)  
+
+* To log in to admin view: email: admin@email.com / pw: admin
+* To log in to worker view: email: worker@email.com / pw: worker
 
 ## Screenshots: MVP
 
