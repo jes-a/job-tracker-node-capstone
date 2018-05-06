@@ -32,7 +32,6 @@ function setReadableDate(serviceDate) {
 
 // Populate Admin Job List Screen
 function populateJobList(jobs) {
-    //create an empty variable to store one LI for each one the results
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
@@ -132,7 +131,6 @@ function populateBoatNameDropdown(boats) {
 
 // Populate Assign To checkboxes in Add Job Screen
 function populateAssignToList(workers) {
-    //create an empty variable to store one LI for each one the results
     let htmlContent = "";
 
     $.each(workers, function(i, item) {
@@ -148,7 +146,6 @@ function populateAssignToList(workers) {
 
 // Populate Assign To checkboxes in Edit Job Screen
 function populateEditAssignToList(workers) {
-    //create an empty variable to store one LI for each one the results
     let htmlContent = "";
 
     $.each(workers, function(i, item) {

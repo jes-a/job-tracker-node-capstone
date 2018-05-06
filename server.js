@@ -203,7 +203,7 @@ app.put('/update-user/:id', function(req, res) {
         'firstName',
         'lastName',
         'phoneNumber',
-        'email',    
+        'email',
         'address',
         'address2',
         'city',
@@ -237,14 +237,31 @@ app.put('/update-user/:id', function(req, res) {
                     });
                 }
 
-            User
+                User
+                    .findByIdAndUpdate(req.params.id, {
+                        $set: toUpdate,
+                        password: hash
+                    })
+                    .exec().then(function(user) {
+                        console.log()
+                        console.log('Updated profile with pw');
+                        return res.json(user.serialize());
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        res.status(500).json({
+                            message: 'Internal Server Error'
+                        });
+                    });
+            });
+        });
+    } else {
+        User
             .findByIdAndUpdate(req.params.id, {
-                $set: toUpdate, 
-                password: hash
+                $set: toUpdate
             })
             .exec().then(function(user) {
-                console.log()
-                console.log('Updated profile with pw');
+                console.log('Updated profile without pw');
                 return res.json(user.serialize());
             })
             .catch(err => {
@@ -253,23 +270,6 @@ app.put('/update-user/:id', function(req, res) {
                     message: 'Internal Server Error'
                 });
             });
-        });
-    });
-    } else {
-        User
-        .findByIdAndUpdate(req.params.id, {
-            $set: toUpdate
-        })
-        .exec().then(function(user) {
-            console.log('Updated profile without pw');
-            return res.json(user.serialize());
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
     }
 });
 
@@ -318,7 +318,7 @@ app.get('/get-jobs', (req, res) => {
             res.json(jobOutput);
         })
         .catch(err => {
-           console.error(err);
+            console.error(err);
             res.status(500).json({
                 message: 'Internal server error'
             });
@@ -333,7 +333,7 @@ app.get('/get-one-job/:id', function(req, res) {
             return res.json(job);
         })
         .catch(err => {
-           console.error(err);
+            console.error(err);
             res.status(500).json({
                 message: 'Internal Server Error'
             });
@@ -357,11 +357,9 @@ app.put('/jobs/:id', function(req, res) {
     });
 
     Job
-        .findByIdAndUpdate(req.params.id, 
-            { $set: updated },
-            {new: true})
-        .then(jobs =>  {
-            console.log('add updated jobs =', jobs);            
+        .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+        .then(jobs => {
+            console.log('add updated jobs =', jobs);
             return res.json(jobs);
         })
         .catch(err => {

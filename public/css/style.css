@@ -1,6 +1,6 @@
 /* -------------------------------------
 CSS reset
-Is a short set of CSS rules that resets the styling of all HTML elements to a consistent baseline so the website will look the same on all browsers
+A short set of CSS rules that resets the styling of all HTML elements to a consistent baseline so the website will look the same on all browsers
 */
 
 * {
@@ -59,7 +59,7 @@ html {
 }
 
 .white-bg {
-	background: #ffffff;
+    background: #ffffff;
 }
 
 body {
@@ -72,8 +72,9 @@ body {
 }
 
 main {
-	height: 100%;
+    height: 100%;
 }
+
 
 
 /* General Styles */
@@ -145,6 +146,7 @@ a {
 }
 
 
+
 /* Style for Main Headers */
 
 .jt-header {
@@ -158,8 +160,8 @@ a {
     background-color: #3B6478;
     position: absolute;
     height: 100%;
-    width:  200vw;
-    left:  -100vw;
+    width: 200vw;
+    left: -100vw;
     z-index: -1;
 }
 
@@ -188,6 +190,7 @@ a {
 }
 
 
+
 /* Nav Style */
 
 .menu {
@@ -197,7 +200,7 @@ a {
     right: 0;
     border: 1px solid #979797;
     width: 225px;
-    z-index:  1000;
+    z-index: 1000;
 }
 
 nav li {
@@ -219,6 +222,7 @@ nav li {
     right: 16px;
     cursor: pointer;
 }
+
 
 
 /* Form Styles */
@@ -359,9 +363,6 @@ select::-ms-expand {
     padding-bottom: 5px;
 }
 
-/* .checkboxes li:last-of-type {
-    margin-bottom: 10px;
-} */
 
 button {
     width: 100%;
@@ -404,10 +405,11 @@ button {
 
 
 
+
 /* Style for Login Screen */
 
 #login-screen {
-	margin-top: 70px;
+    margin-top: 70px;
 }
 
 #login-section {
@@ -427,6 +429,7 @@ button {
     color: #002039;
     padding-top: 40px;
 }
+
 
 
 /* Style for Admin: Landing Screen */
@@ -465,17 +468,6 @@ button {
 }
 
 
-/* Style for Admin: Add Job Screen */
-
-
-
-/* Style for Admin: Edit Job Screen */
-
-
-
-/* Style for Admin: Add Worker Screen */
-
-
 
 /* Style for Admin: Worker List Screen */
 
@@ -491,6 +483,7 @@ button {
 .worker li:last-of-type {
     padding-bottom: 20px;
 }
+
 
 
 
@@ -541,11 +534,6 @@ button {
 
 
 
-/* Style for Admin: Add Job Screen */
-
-
-
-
 /* Style for Admin: Job List Screen */
 
 .date-header {
@@ -593,6 +581,7 @@ button {
 }
 
 
+
 /* Style for Worker: Job List Screen */
 
 .alt-button {
@@ -625,6 +614,7 @@ button {
     padding-left: 0;
     margin: 0;
 }
+
 
 /* Style for Worker: Profile Screen */
 
