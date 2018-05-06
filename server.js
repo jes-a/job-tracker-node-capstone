@@ -215,7 +215,6 @@ app.put('/update-user/:id', function(req, res) {
     updatedFields.forEach(function(field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
-            console.log(field)
         }
     });
 
@@ -243,8 +242,6 @@ app.put('/update-user/:id', function(req, res) {
                         password: hash
                     })
                     .exec().then(function(user) {
-                        console.log()
-                        console.log('Updated profile with pw');
                         return res.json(user.serialize());
                     })
                     .catch(err => {
@@ -261,7 +258,6 @@ app.put('/update-user/:id', function(req, res) {
                 $set: toUpdate
             })
             .exec().then(function(user) {
-                console.log('Updated profile without pw');
                 return res.json(user.serialize());
             })
             .catch(err => {

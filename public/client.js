@@ -35,7 +35,6 @@ function populateJobList(jobs) {
     let htmlContent = "";
 
     $.each(jobs, function(i, item) {
-        // console.log(item);
         let serviceDate = setReadableDate(item.serviceDate);
         htmlContent += '<div class="date-header">';
         htmlContent += `<h3 class="js-job-date">${serviceDate}</h3>`;
@@ -654,7 +653,6 @@ $('#add-worker-form').on('submit', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                console.log(result);
                 alert('You successfully added a new user');
                 $('#add-worker-form')[0].reset();
                 showAdminLandingScreen();
@@ -691,9 +689,7 @@ $('.js-workers-screen').on('click', function(event) {
     let htmlContent = "";
 
     $.getJSON('/get-users', function(res) {
-        console.log(res);
         $.each(res, function(i, item) {
-            console.log(item);
             htmlContent += '<div class="worker">';
             htmlContent += '<ul class="js-worker-list-details">';
             htmlContent += `<li class="js-worker-name" id="${item.id}"><h4>${item.fullName}</h4></li>`;
@@ -989,7 +985,6 @@ $('#add-boat-details-form').on('submit', function(event) {
                 contentType: 'application/json'
             })
             .done(function(result) {
-                console.log(result);
                 alert('You successfully added a new boat');
                 $('#add-boat-details-form')[0].reset();
                 showAdminLandingScreen();
