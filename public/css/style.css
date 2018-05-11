@@ -54,7 +54,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background: linear-gradient(#f6f9fa, #C6DDE5, #3B6478);
+    background: linear-gradient(#d0e3e9, #9cbec9, #3B6478);
     background-repeat: no-repeat;
 }
 
@@ -177,7 +177,7 @@ a {
 }
 
 .i-inline {
-    padding-right: 3px;
+    margin-right: 3px;
 }
 
 .back-link {
@@ -419,7 +419,6 @@ button {
 
 .landing-top {
     background: #002039;
-    max-height: 150px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     margin: 0 auto;
@@ -429,38 +428,40 @@ button {
 .landing-top h1 {
     color: #ffffff;
     margin: 0;
-    padding-top: 10px;
+    padding: 10px;
 }
 
-#ship-landing {
-    font-size: 50px;
+#icon-landing {
+    font-size: 65px;
     color: #ffffff;
 }
 
 #landing-content {
     max-width: 80%;
     text-align: center;
-    margin: 0 auto;
+    margin: 25px auto;
     padding: 30px 0;
 }
 
 #landing-content p {
     color: #363636;
-    padding-bottom: 15px;
+    padding-bottom: 25px;
     font-size: 1.5rem;
     line-height: 2rem;
 }
 
-#demo-sign-in {
+.landing-link {
     border-top: 1px solid #BFBFBF;
     padding-top: 30px;
     margin-top: 15px;
-}
-
-.landing-link {
+    font-size: 1.5rem;
     font-weight: 400;
     color: #002039;
     cursor: pointer;
+}
+
+.i-right {
+    margin-left: 10px;
 }
 
 
@@ -476,6 +477,11 @@ button {
     background-color: #ffffff;
     border-radius: 5px;
     opacity: 0.95;
+    padding-top: 30px;
+}
+
+#login-section h1 {
+    padding: 0;
 }
 
 .center {
@@ -484,8 +490,16 @@ button {
 
 #ship-login {
     font-size: 75px;
-    color: #002039;
-    padding-top: 40px;
+    color: #ffffff;
+    margin-top: 35px;
+}
+
+.ship-circle {
+    border-radius: 50%;
+    background: #002039;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
 }
 
 .demo-info {
