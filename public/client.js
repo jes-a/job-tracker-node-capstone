@@ -280,7 +280,8 @@ function populateWorkerProfileScreen(worker) {
 // ----------- DOCUMENT READY FUNCTION ---------------------
 
 $(document).ready(function() {
-    $('#login-screen').show();
+    $('#landing-screen').show();
+    $('#login-screen').hide();
     $('html').removeClass('white-bg');
     $('.js-menu-btn').hide();
     $('.js-menu').hide();
@@ -301,6 +302,29 @@ $(document).ready(function() {
 
 
 // ----------- ADMIN SCREEN TRIGGERS ---------------------
+
+// Handle demo sign in link from Landing screen
+$('#js-landing-link').on('click', function(event) {
+    event.preventDefault();
+    $('#landing-screen').hide();
+    $('#login-screen').show();
+    $('html').removeClass('white-bg');
+    $('.js-menu-btn').hide();
+    $('.js-menu').hide();
+    $('#admin-home').hide();
+    $('#add-job-screen').hide();
+    $('#edit-job-screen').hide();
+    $('#job-list-screen-admin').hide();
+    $('#add-worker-screen').hide();
+    $('#worker-list-screen').hide();
+    $('#worker-detail-screen').hide();
+    $('#edit-worker-screen').hide();
+    $('#add-boat-details').hide();
+    $('.js-menu-btn').hide();
+    $('.js-worker-menu').hide();
+    $('#job-list-screen-worker').hide();
+    $('#worker-profile-screen').hide(); 
+});
 
 // Handle log in information
 $('#js-login-button').on('click', function(event) {

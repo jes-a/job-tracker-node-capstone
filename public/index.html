@@ -16,11 +16,30 @@
 </head>
 
 <body>
+    <!-- Landing Screen -->
+    <main role="main" id="landing-screen">
+        <div id="landing-section">
+            <div class="center landing-top"><i class="far fa-ship" id="ship-landing"></i>
+            <h1>Job Tracker</h1></div>
+            <section id="landing-content">
+                <p>The Job Tracker allows a manager to add workers, job types and set up a schedule of jobs for workers. It also allows workers to see a list of jobs they're assigned to. </p>
+                <p>This demo is set up to showcase a boat management company, but can be adapted for other service providers.</p>
+                <p id="demo-sign-in">To demo: <span tabindex="0" role="link" id="js-landing-link" class="landing-link">Sign In</button></p>
+            </section>
+
+        </div>
+    </main>
+
     <!-- Login Screen -->
     <main role="main" id="login-screen">
         <div id="login-section">
             <div class="center"><i class="far fa-ship" id="ship-login"></i></div>
             <h1>Job Tracker</h1>
+            <section class="demo-info">
+                <h6>Demo Log-in:</h6>
+                <p>Admin view: admin@email.com / admin</p>
+                <p>Worker view: worker@email.com / worker</p>
+            </section>
             <form role="form" id="login-form">
                 <span id="login-error"></span>
                 <label for="email">Email</label>
