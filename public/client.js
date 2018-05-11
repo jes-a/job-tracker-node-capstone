@@ -282,7 +282,7 @@ function populateWorkerProfileScreen(worker) {
 $(document).ready(function() {
     $('#landing-screen').show();
     $('#login-screen').hide();
-    $('html').removeClass('white-bg');
+    $('html').addClass('white-bg');
     $('.js-menu-btn').hide();
     $('.js-menu').hide();
     $('#admin-home').hide();
