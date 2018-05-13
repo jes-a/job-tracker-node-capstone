@@ -42,7 +42,7 @@ function populateJobList(jobs) {
         htmlContent += '<div class="job js-job-list">';
         htmlContent += `<i class="far fa-edit edit-btn js-edit-job-link" id="${item._id}""></i>`;
         htmlContent += `<h4 class="js-boat-name boat">${item.jobName}</h4>`;
-        htmlContent += `<a href=<p class="js-job-address">${item.boatFullAddress}</p>`;
+        htmlContent += `<p class="js-job-address">${item.boatFullAddress}</p>`;
         htmlContent += '<h5>Services</h5>';
         htmlContent += '<ul class="job-list-items">';
         $.each(item.services, function(key, value) {
